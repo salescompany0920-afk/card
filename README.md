@@ -33,6 +33,19 @@ CNAME             커스텀 도메인 지정 — 지우면 도메인 끊김!
 - **팀원 추가**: 기존 폴더(예: `park/`) 복사 → 이름·직함·연락처·vcf 수정 → push.
 - push 하면 1~2분 내 반영. **CNAME 파일은 절대 삭제 금지.**
 
+## Claude 코치 스킬 (사람 문제)
+
+`.claude/skills/people-skills/` 에 인간관계·무례한 사람 대처·카리스마 리더십 코칭 스킬이 들어 있다.
+이 저장소를 열고 Claude에게 "건물주가 반말해요", "직원한테 뭐라고 하죠", "미팅에서 기가 눌려요" 같은
+사람 문제를 물으면 자동으로 이 스킬을 써서 답한다. `/people-skills`로 직접 부를 수도 있다.
+
+- `SKILL.md` — 답변 방식(진단 → 이렇게 하세요 → 실전 대사 → 하지 마세요)
+- `references/relationships.md` — 관계 맺기·거절·사과·갈등 대화·손절
+- `references/rude-people.md` — 반말·갑질·비꼼·고함 등 유형별 대응 사다리
+- `references/charisma-leader.md` — 존재감·말투·결단·팀 장악·어려운 대화·협상
+
+내용 수정은 해당 .md 파일을 고치고 push 하면 된다.
+
 ## 인프라 메모
 
 - DNS: Spaceship(jungchongmoo.com)에 CNAME `card` → `salescompany0920-afk.github.io`
