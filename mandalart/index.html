@@ -40,7 +40,7 @@
   .goalbar{background:linear-gradient(135deg,#F0611F,#E84E1B 55%,#D2410F); color:#fff; border-radius:16px; padding:14px 18px; margin-bottom:12px; box-shadow:0 10px 28px rgba(232,78,27,.22); cursor:pointer}
   .goalbar .tag{font-size:11px; letter-spacing:.16em; font-weight:700; opacity:.9; text-transform:uppercase}
   .goalbar .goal{font-size:18px; font-weight:800; margin-top:2px}
-  .goalbar .goal.empty{opacity:.92; font-weight:600; font-size:15px}
+  .goalbar .goal.empty{color:#fff; opacity:.92; font-weight:600; font-size:15px}
 
   /* ---------- 보드 ---------- */
   .viewbar{display:flex; gap:6px; align-items:center; margin-bottom:8px; flex-wrap:wrap}
@@ -79,7 +79,7 @@
   .board.focus-mode .cell .t{font-size:15px}
   .board.focus-mode .cell.theme .t{font-size:17px}
   .board.focus-mode .cell .m{font-size:11.5px}
-  .focus-mode ~ .focusbar, .focusbar.on{display:flex}
+  .focusbar.on{display:flex}
 
   /* ---------- 편집 패널 ---------- */
   .panel{
@@ -124,9 +124,10 @@
   .todo .tx.done{color:var(--sub); text-decoration:line-through}
   .todo .pth{display:block; font-size:11.5px; color:var(--sub)}
   .todo .streak{font-size:11.5px; color:var(--accent-deep); font-weight:700; white-space:nowrap}
-  .empty{color:var(--sub); font-size:13.5px; padding:6px 0}
+  .cardx .empty, .acts .empty{color:var(--sub); font-size:13.5px; padding:6px 0}
   .bar{height:8px; background:#eee; border-radius:999px; overflow:hidden; margin-top:4px}
   .bar i{display:block; height:100%; background:var(--accent)}
+  .help-line{font-size:12px; color:var(--sub); margin:-4px 0 8px}
   .prog{list-style:none}
   .prog li{padding:7px 0; border-top:1px solid var(--line); font-size:13.5px}
   .prog li:first-child{border-top:0}
@@ -146,6 +147,7 @@
   footer{text-align:center; color:var(--sub); font-size:12px; margin-top:22px; line-height:1.7}
   footer a{color:var(--accent-deep); font-weight:700; text-decoration:none}
   .hidden{display:none !important}
+  .vh{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap}
 
   @media (max-width:720px){
     .tabs{margin-left:0}
@@ -155,6 +157,7 @@
     .cell .t{font-size:9px; line-height:1.2}
     .cell.theme .t{font-size:10px}
     .cell .m{display:none}
+    .board.focus-mode .cell .m{display:flex}
   }
   @media print{
     body{padding:0; background:#fff}
@@ -162,8 +165,14 @@
     .wrap{max-width:none}
     .board{grid-template-columns:repeat(3,1fr) !important; gap:6px}
     .board .block{display:grid !important}
+    #view-board{display:block !important}
+    .cell, .block{print-color-adjust:exact; -webkit-print-color-adjust:exact}
     .cell{min-height:60px; break-inside:avoid}
-    .cell .m{display:none}
+    .board.focus-mode .cell{min-height:60px}
+    .board.focus-mode .cell .t{font-size:12.5px}
+    .board.focus-mode .cell.theme .t{font-size:13.5px}
+    .cell.core{color:#fff; border:2px solid var(--accent)}
+    .cell .m{display:none !important}
     .print-goal{display:block !important; font-weight:800; font-size:14px; margin-bottom:8px}
     @page{size:A4 landscape; margin:10mm}
   }
@@ -182,7 +191,7 @@
     <div class="tools">
       <button id="btn-export" type="button">⬇ JSON 백업</button>
       <label for="file-import">⬆ 가져오기</label>
-      <input id="file-import" type="file" accept="application/json,.json" class="hidden">
+      <input id="file-import" type="file" accept="application/json,.json" class="vh">
       <button id="btn-print" type="button">🖨 인쇄</button>
       <button id="btn-reset" type="button">↺ 템플릿으로 초기화</button>
       <span class="spacer"></span>
@@ -219,13 +228,14 @@
     <div class="cards">
       <div class="cardx">
         <h2>이번 주 테마별 실천 <span id="week-label"></span></h2>
+        <p class="help-line">매일·매주 항목 기준. 아직 안 한 매월·1회 항목은 남은 일로 세고, 끝낸 것은 제외한다.</p>
         <ul class="prog" id="prog-list"></ul>
       </div>
       <div class="cardx">
         <h2>주간 리뷰 쓰기</h2>
-        <div class="field"><label>1. 이번 주 잘한 것</label><textarea id="rv-good" placeholder="체크 표시가 많았던 칸, 기분 좋았던 실천"></textarea></div>
-        <div class="field"><label>2. 막힌 것·안 한 이유</label><textarea id="rv-bad" placeholder="실천이 안 된 칸과 그 이유(시간? 의욕? 항목이 너무 큼?)"></textarea></div>
-        <div class="field"><label>3. 다음 주 바꿀 한 가지</label><textarea id="rv-next" placeholder="칸 하나를 더 잘게 쪼개거나, 버릴 항목 하나"></textarea></div>
+        <div class="field"><label for="rv-good">1. 이번 주 잘한 것</label><textarea id="rv-good" placeholder="체크 표시가 많았던 칸, 기분 좋았던 실천"></textarea></div>
+        <div class="field"><label for="rv-bad">2. 막힌 것·안 한 이유</label><textarea id="rv-bad" placeholder="실천이 안 된 칸과 그 이유(시간? 의욕? 항목이 너무 큼?)"></textarea></div>
+        <div class="field"><label for="rv-next">3. 다음 주 바꿀 한 가지</label><textarea id="rv-next" placeholder="칸 하나를 더 잘게 쪼개거나, 버릴 항목 하나"></textarea></div>
         <button class="btn" id="rv-save" type="button">리뷰 저장</button>
         <ul class="reviews" id="rv-list"></ul>
       </div>
@@ -366,14 +376,16 @@
   function load(){
     try{
       const raw = localStorage.getItem(KEY);
-      if(raw){ const d = JSON.parse(raw); if(valid(d)) return d; }
+      if(raw){ const d = JSON.parse(raw); if(valid(d)) return d; localStorage.setItem(KEY+'.bak', raw); }
     }catch(e){}
     return clone(TEMPLATE);
   }
   function valid(d){
     return d && d.version===2 && typeof d.goal==='string' && Array.isArray(d.themes) && d.themes.length===8 &&
+      (d.reviews===undefined || Array.isArray(d.reviews)) &&
       d.themes.every(t => t && typeof t.title==='string' && Array.isArray(t.cells) && t.cells.length===8 &&
-        t.cells.every(c => c && typeof c.title==='string' && Array.isArray(c.actions)));
+        t.cells.every(c => c && typeof c.title==='string' && Array.isArray(c.actions) &&
+          c.actions.every(a => a && typeof a.text==='string' && (a.freq in FREQ) && a.done && typeof a.done==='object')));
   }
   let saveTimer=null;
   function save(){
@@ -496,7 +508,8 @@
     const c = el('button',{type:'button',class:'cell s-'+cell.status+(ui.sel&&ui.sel.kind==='cell'&&ui.sel.t===t&&ui.sel.i===i?' sel':''), onclick:()=>openCell(t,i)});
     c.appendChild(el('div',{class:'t'+(cell.title?'':' empty'), text: cell.title || '비어 있음'}));
     const m = el('div',{class:'m'});
-    m.appendChild(el('span',{class:'dot', title:'상태'}));
+    const SL={todo:'미착수',doing:'진행 중',done:'완료'};
+    m.appendChild(el('span',{class:'dot', role:'img', 'aria-label':'상태: '+(SL[cell.status]||'미착수'), title:SL[cell.status]||'미착수'}));
     if(s.k) m.appendChild(el('span',{text: s.done+'/'+s.k}));
     c.appendChild(m);
     return c;
@@ -515,12 +528,15 @@
   scrim.onclick = closePanel;
   document.addEventListener('keydown', e => { if(e.key==='Escape' && panel.classList.contains('open')) closePanel(); });
 
+  let fid=0;
   function field(label, input, help){
-    const f = el('div',{class:'field'}); f.appendChild(el('label',{text:label})); f.appendChild(input);
+    const f = el('div',{class:'field'}); const lab = el('label',{text:label});
+    if(/^(INPUT|SELECT|TEXTAREA)$/.test(input.tagName)){ input.id = input.id || ('f-'+(++fid)); lab.setAttribute('for', input.id); }
+    f.appendChild(lab); f.appendChild(input);
     if(help) f.appendChild(el('div',{class:'help', text:help}));
     return f;
   }
-  function onInput(fn){ return e => { fn(e.target.value); save(); renderGoal(); renderBoard(); }; }
+  function onInput(fn){ return e => { fn(e.target.value); save(); renderGoal(); renderBoard(); renderToday(); renderReview(); if(ui.sel&&ui.sel.kind==='cell'){ const th=state.themes[ui.sel.t]; document.getElementById('p-path').textContent=(th.title||'테마')+' › '+(ui.sel.i+1)+'번 칸'; } }; }
 
   function openGoal(){
     ui.sel={kind:'goal'};
@@ -629,11 +645,11 @@
       th.cells.forEach(c=>c.actions.forEach(a=>{
         if(a.freq==='daily'){ expected+=days.length; days.forEach(k=>{ if(a.done[k]) done++; }); }
         else if(a.freq==='weekly'){ expected+=1; if(a.done[wk]) done++; }
-        else if(a.freq==='monthly'){ expected+=1; if(a.done[monthKey(now)]) done++; }
-        else { expected+=1; if(a.done.once) done++; }
+        else if(a.freq==='monthly'){ if(!a.done[monthKey(now)]) expected+=1; }
+        else { if(!a.done.once) expected+=1; }
       }));
       const pct = expected? Math.round(done/expected*100) : 0;
-      const li = el('li',{},[ el('b',{},[th.title||('테마 '+(t+1)), el('span',{text: expected? (done+'/'+expected+' · '+pct+'%') : '실천 항목 없음'})]) ]);
+      const li = el('li',{},[ el('b',{},[th.title||('테마 '+(t+1)), el('span',{text: expected? (done+'/'+expected+' · '+pct+'%') : '이번 주 항목 없음'})]) ]);
       const bar = el('div',{class:'bar'}); bar.appendChild(el('i',{style:'width:'+pct+'%;background:var(--t'+t+');filter:saturate(2) brightness(.85)'})); li.appendChild(bar);
       ul.appendChild(li);
     });
@@ -661,13 +677,16 @@
     const f = e.target.files[0]; if(!f) return;
     const r = new FileReader();
     r.onload = () => {
+      const prev = state;
       try{
         const d = JSON.parse(r.result);
         if(!valid(d)) throw new Error('형식이 다르다');
         if(!confirm('현재 데이터를 가져온 파일로 바꿀까? (되돌릴 수 없음)')) return;
-        state = d; save(); render();
-      }catch(err){ alert('가져오기 실패: 이 페이지에서 내보낸 JSON 파일만 읽을 수 있다.'); }
-      e.target.value='';
+        closePanel();
+        state = d; if(!state.reviews) state.reviews=[];
+        render(); save();
+      }catch(err){ state = prev; render(); alert('가져오기 실패: 이 페이지에서 내보낸 JSON 파일만 읽을 수 있다.'); }
+      finally{ e.target.value=''; }
     };
     r.readAsText(f);
   });
@@ -684,6 +703,9 @@
   gb.onclick = openGoal; gb.onkeydown = e => { if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openGoal(); } };
 
   render();
+  let shownDay = dayKey(new Date());
+  function dayCheck(){ const k = dayKey(new Date()); if(k!==shownDay){ shownDay=k; render(); } }
+  document.addEventListener('visibilitychange', dayCheck); window.addEventListener('focus', dayCheck); setInterval(dayCheck, 60000);
 })();
 </script>
 </body>
