@@ -23,6 +23,7 @@ docs/             사업소개서·견적서 PDF (3종 공용)
 og.png            카톡/SNS 미리보기 이미지 (공용)
 apple-touch-icon.png  아이폰 홈화면 아이콘 (공용)
 CNAME             커스텀 도메인 지정 — 지우면 도메인 끊김!
+mandalart/        개인 만다라트 관리 페이지(index.html) + 가이드(GUIDE.md) — 명함과 무관, /mandalart/ 로 접속
 ```
 
 ## 수정 방법

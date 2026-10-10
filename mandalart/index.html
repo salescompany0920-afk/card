@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>만다라트 관리</title>
+<meta name="description" content="9×9 만다라트를 보고, 고치고, 매일 실천으로 이어주는 개인 관리 페이지. 브라우저에 저장되고 JSON으로 백업할 수 있다.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#E84E1B">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23E84E1B'/><text x='50' y='68' font-size='52' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold'>만</text></svg>">
+<style>
+  :root{
+    --accent:#E84E1B; --accent-deep:#C43F12; --paper:#f8f7f4; --card:#ffffff;
+    --ink:#111111; --sub:#777777; --line:#e2e2e2; --soft:#fff0eb; --ok:#1f8a4c; --warn:#b7791f;
+    --t0:#fde2d4; --t1:#dcebfa; --t2:#e2f3e4; --t3:#fff1c9; --t4:#ece3fa; --t5:#d9f1f2; --t6:#fbe0ea; --t7:#e8e8e8;
+  }
+  *{box-sizing:border-box; margin:0; padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    background:var(--paper); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Pretendard','Malgun Gothic','Segoe UI',sans-serif;
+    -webkit-font-smoothing:antialiased; line-height:1.5; min-height:100vh; padding:16px 16px 56px; overflow-x:hidden;
+  }
+  button, input, select, textarea{font:inherit; color:inherit}
+  button{cursor:pointer}
+  .wrap{max-width:1180px; margin:0 auto}
+
+  header{display:flex; flex-wrap:wrap; align-items:center; gap:10px 14px; margin-bottom:12px}
+  header h1{font-size:20px; font-weight:800; letter-spacing:-.02em}
+  header h1 small{font-size:12px; color:var(--sub); font-weight:600; margin-left:6px}
+  .tabs{display:flex; gap:6px; margin-left:auto}
+  .tab{border:1px solid var(--line); background:var(--card); border-radius:999px; padding:7px 14px; font-weight:700; font-size:13.5px}
+  .tab[aria-selected="true"]{background:var(--accent); border-color:var(--accent); color:#fff}
+  .tools{display:flex; flex-wrap:wrap; gap:6px; width:100%}
+  .tools button, .tools label{border:1px solid var(--line); background:var(--card); border-radius:10px; padding:6px 11px; font-size:12.5px; font-weight:700; cursor:pointer}
+  .tools .spacer{flex:1}
+  .tools .saved{font-size:12px; color:var(--sub); align-self:center}
+
+  .goalbar{background:linear-gradient(135deg,#F0611F,#E84E1B 55%,#D2410F); color:#fff; border-radius:16px; padding:14px 18px; margin-bottom:12px; box-shadow:0 10px 28px rgba(232,78,27,.22); cursor:pointer}
+  .goalbar .tag{font-size:11px; letter-spacing:.16em; font-weight:700; opacity:.9; text-transform:uppercase}
+  .goalbar .goal{font-size:18px; font-weight:800; margin-top:2px}
+  .goalbar .goal.empty{opacity:.92; font-weight:600; font-size:15px}
+
+  /* ---------- 보드 ---------- */
+  .viewbar{display:flex; gap:6px; align-items:center; margin-bottom:8px; flex-wrap:wrap}
+  .viewbar .seg{display:inline-flex; border:1px solid var(--line); border-radius:10px; overflow:hidden; background:var(--card)}
+  .viewbar .seg button{border:0; padding:6px 12px; font-size:12.5px; font-weight:700; background:transparent}
+  .viewbar .seg button[aria-pressed="true"]{background:var(--ink); color:#fff}
+  .viewbar .hint{font-size:12px; color:var(--sub)}
+  .board{display:grid; grid-template-columns:repeat(3,1fr); gap:8px}
+  .block{display:grid; grid-template-columns:repeat(3,1fr); gap:3px; background:var(--card); border:2px solid #222; border-radius:8px; padding:3px}
+  .block.center{border-color:var(--accent)}
+  .cell{
+    min-height:54px; border-radius:5px; padding:6px 6px 5px; text-align:left; border:1px solid transparent;
+    background:#faf9f7; display:flex; flex-direction:column; justify-content:space-between; gap:4px; position:relative;
+    word-break:keep-all; overflow-wrap:anywhere;
+  }
+  .cell:hover{border-color:var(--accent)}
+  .cell:focus-visible{outline:2px solid var(--accent); outline-offset:1px}
+  .cell .t{font-size:12.5px; font-weight:600; line-height:1.3}
+  .cell .t.empty{color:#b5b5b5; font-weight:500}
+  .cell .m{display:flex; gap:4px; align-items:center; font-size:10px; color:var(--sub); min-height:12px}
+  .cell .dot{width:8px; height:8px; border-radius:50%; background:#d9d9d9; display:inline-block}
+  .cell.s-doing .dot{background:var(--warn)} .cell.s-done .dot{background:var(--ok)}
+  .cell.theme{font-weight:800; justify-content:center; text-align:center}
+  .cell.theme .t{font-size:13.5px; font-weight:800}
+  .cell.theme .m{justify-content:center}
+  .cell.core{background:var(--accent); color:#fff; justify-content:center; text-align:center}
+  .cell.core .t{font-size:13px; font-weight:800} .cell.core .t.empty{color:rgba(255,255,255,.8)}
+  .cell.sel{box-shadow:0 0 0 2px var(--accent) inset}
+  .focusbar{display:none; align-items:center; gap:8px; margin-bottom:8px}
+  .focusbar button{border:1px solid var(--line); background:var(--card); border-radius:10px; padding:6px 11px; font-size:12.5px; font-weight:700}
+  .focusbar b{font-size:15px}
+  .board.focus-mode{grid-template-columns:1fr}
+  .board.focus-mode .block{display:none}
+  .board.focus-mode .block.focused{display:grid}
+  .board.focus-mode .cell{min-height:92px}
+  .board.focus-mode .cell .t{font-size:15px}
+  .board.focus-mode .cell.theme .t{font-size:17px}
+  .board.focus-mode .cell .m{font-size:11.5px}
+  .focus-mode ~ .focusbar, .focusbar.on{display:flex}
+
+  /* ---------- 편집 패널 ---------- */
+  .panel{
+    position:fixed; right:0; top:0; bottom:0; width:min(420px,100%); background:var(--card); border-left:1px solid var(--line);
+    box-shadow:-10px 0 30px rgba(0,0,0,.08); transform:translateX(102%); transition:transform .2s; z-index:20; display:flex; flex-direction:column;
+  }
+  .panel.open{transform:none}
+  .panel header{padding:14px 16px; border-bottom:1px solid var(--line); margin:0; gap:8px}
+  .panel header .path{font-size:12px; color:var(--sub); font-weight:700; letter-spacing:.04em}
+  .panel header .x{margin-left:auto; border:1px solid var(--line); background:var(--card); border-radius:8px; width:32px; height:32px; font-size:16px}
+  .panel .body{padding:14px 16px; overflow:auto; flex:1}
+  .field{margin-bottom:12px}
+  .field label{display:block; font-size:12px; font-weight:800; color:var(--accent-deep); letter-spacing:.08em; margin-bottom:4px}
+  .field input[type=text], .field textarea, .field select{width:100%; border:1px solid var(--line); border-radius:10px; padding:9px 11px; background:#fff}
+  .field textarea{min-height:68px; resize:vertical}
+  .field .help{font-size:12px; color:var(--sub); margin-top:4px}
+  .acts{list-style:none}
+  .acts li{display:flex; gap:6px; align-items:center; padding:6px 0; border-top:1px solid var(--line)}
+  .acts li:first-child{border-top:0}
+  .acts input[type=text]{flex:1 1 0; width:0; min-width:0; border:1px solid var(--line); border-radius:8px; padding:7px 9px}
+  .acts select{flex:none; width:74px; border:1px solid var(--line); border-radius:8px; padding:7px 4px; font-size:12.5px}
+  .acts .del{border:0; background:transparent; color:var(--sub); font-size:16px; width:28px}
+  .acts .del:hover{color:var(--accent-deep)}
+  .addrow{display:flex; gap:6px; margin-top:8px}
+  .addrow input{flex:1 1 0; width:0; min-width:0; border:1px solid var(--line); border-radius:8px; padding:8px 10px}
+  .addrow select{flex:none; width:74px; border:1px solid var(--line); border-radius:8px; padding:8px 4px; font-size:12.5px}
+  .addrow button{flex:none; border:0; background:var(--accent); color:#fff; border-radius:8px; padding:8px 12px; font-weight:700; white-space:nowrap}
+  .panel .foot{padding:10px 16px; border-top:1px solid var(--line); display:flex; gap:8px; font-size:12px; color:var(--sub)}
+  .scrim{position:fixed; inset:0; background:rgba(0,0,0,.25); z-index:19; display:none}
+  .scrim.on{display:block}
+
+  /* ---------- 오늘 / 리뷰 ---------- */
+  .cards{display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:12px}
+  .cardx{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:14px 16px}
+  .cardx h2{font-size:12px; letter-spacing:.14em; color:var(--accent-deep); font-weight:800; text-transform:uppercase; margin-bottom:8px; display:flex; gap:8px; align-items:center}
+  .cardx h2 span{margin-left:auto; color:var(--sub); letter-spacing:0; font-weight:600; font-size:12px}
+  .todo{list-style:none}
+  .todo li{display:flex; gap:10px; align-items:flex-start; padding:8px 0; border-top:1px solid var(--line)}
+  .todo li:first-child{border-top:0}
+  .todo input{width:20px; height:20px; margin-top:1px; accent-color:var(--accent); flex:none}
+  .todo .tx{flex:1; font-size:14px}
+  .todo .tx.done{color:var(--sub); text-decoration:line-through}
+  .todo .pth{display:block; font-size:11.5px; color:var(--sub)}
+  .todo .streak{font-size:11.5px; color:var(--accent-deep); font-weight:700; white-space:nowrap}
+  .empty{color:var(--sub); font-size:13.5px; padding:6px 0}
+  .bar{height:8px; background:#eee; border-radius:999px; overflow:hidden; margin-top:4px}
+  .bar i{display:block; height:100%; background:var(--accent)}
+  .prog{list-style:none}
+  .prog li{padding:7px 0; border-top:1px solid var(--line); font-size:13.5px}
+  .prog li:first-child{border-top:0}
+  .prog li b{display:flex; justify-content:space-between}
+  .prog li b span{color:var(--sub); font-weight:600; font-size:12px}
+  .reviews{list-style:none; margin-top:10px}
+  .reviews li{border-top:1px solid var(--line); padding:8px 0; font-size:13.5px; white-space:pre-wrap}
+  .reviews li b{display:block; font-size:12px; color:var(--sub); margin-bottom:2px}
+  .btn{border:0; background:var(--accent); color:#fff; border-radius:10px; padding:9px 14px; font-weight:700}
+  .btn.ghost{background:var(--card); border:1px solid var(--line); color:var(--ink)}
+
+  details.help{margin-top:18px; background:var(--card); border:1px solid var(--line); border-radius:16px; padding:12px 16px; font-size:13.5px}
+  details.help summary{font-weight:800; cursor:pointer}
+  details.help ol{padding-left:18px; margin-top:8px}
+  details.help li{margin:4px 0}
+  details.help a{color:var(--accent-deep); font-weight:700}
+  footer{text-align:center; color:var(--sub); font-size:12px; margin-top:22px; line-height:1.7}
+  footer a{color:var(--accent-deep); font-weight:700; text-decoration:none}
+  .hidden{display:none !important}
+
+  @media (max-width:720px){
+    .tabs{margin-left:0}
+    .board{gap:5px}
+    .block{gap:2px; padding:2px; border-width:1.5px}
+    .cell{min-height:38px; padding:3px 3px 2px}
+    .cell .t{font-size:9px; line-height:1.2}
+    .cell.theme .t{font-size:10px}
+    .cell .m{display:none}
+  }
+  @media print{
+    body{padding:0; background:#fff}
+    header, .goalbar, .viewbar, .focusbar, .tools, details.help, footer, .panel, .scrim, #view-today, #view-review{display:none !important}
+    .wrap{max-width:none}
+    .board{grid-template-columns:repeat(3,1fr) !important; gap:6px}
+    .board .block{display:grid !important}
+    .cell{min-height:60px; break-inside:avoid}
+    .cell .m{display:none}
+    .print-goal{display:block !important; font-weight:800; font-size:14px; margin-bottom:8px}
+    @page{size:A4 landscape; margin:10mm}
+  }
+  .print-goal{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>만다라트 관리 <small id="today-label"></small></h1>
+    <nav class="tabs" role="tablist" aria-label="보기">
+      <button class="tab" role="tab" data-view="board" aria-selected="true">만다라트</button>
+      <button class="tab" role="tab" data-view="today" aria-selected="false">오늘 실천</button>
+      <button class="tab" role="tab" data-view="review" aria-selected="false">주간 리뷰</button>
+    </nav>
+    <div class="tools">
+      <button id="btn-export" type="button">⬇ JSON 백업</button>
+      <label for="file-import">⬆ 가져오기</label>
+      <input id="file-import" type="file" accept="application/json,.json" class="hidden">
+      <button id="btn-print" type="button">🖨 인쇄</button>
+      <button id="btn-reset" type="button">↺ 템플릿으로 초기화</button>
+      <span class="spacer"></span>
+      <span class="saved" id="saved-label">브라우저에 자동 저장</span>
+    </div>
+  </header>
+
+  <div class="goalbar" id="goalbar" role="button" tabindex="0" aria-label="핵심 목표 편집">
+    <div class="tag">핵심 목표 · Center</div>
+    <div class="goal" id="goal-text"></div>
+  </div>
+  <div class="print-goal" id="print-goal"></div>
+
+  <section id="view-board">
+    <div class="viewbar">
+      <div class="seg" role="group" aria-label="보드 보기 방식">
+        <button type="button" id="mode-full" aria-pressed="true">전체 9×9</button>
+        <button type="button" id="mode-focus" aria-pressed="false">블록 보기</button>
+      </div>
+      <span class="hint">칸을 누르면 오른쪽에서 편집창이 열린다. 블록 보기는 휴대폰에서 편하다.</span>
+    </div>
+    <div class="focusbar" id="focusbar">
+      <button type="button" id="focus-back">← 가운데 블록</button>
+      <b id="focus-title"></b>
+    </div>
+    <div class="board" id="board"></div>
+  </section>
+
+  <section id="view-today" class="hidden">
+    <div class="cards" id="today-cards"></div>
+  </section>
+
+  <section id="view-review" class="hidden">
+    <div class="cards">
+      <div class="cardx">
+        <h2>이번 주 테마별 실천 <span id="week-label"></span></h2>
+        <ul class="prog" id="prog-list"></ul>
+      </div>
+      <div class="cardx">
+        <h2>주간 리뷰 쓰기</h2>
+        <div class="field"><label>1. 이번 주 잘한 것</label><textarea id="rv-good" placeholder="체크 표시가 많았던 칸, 기분 좋았던 실천"></textarea></div>
+        <div class="field"><label>2. 막힌 것·안 한 이유</label><textarea id="rv-bad" placeholder="실천이 안 된 칸과 그 이유(시간? 의욕? 항목이 너무 큼?)"></textarea></div>
+        <div class="field"><label>3. 다음 주 바꿀 한 가지</label><textarea id="rv-next" placeholder="칸 하나를 더 잘게 쪼개거나, 버릴 항목 하나"></textarea></div>
+        <button class="btn" id="rv-save" type="button">리뷰 저장</button>
+        <ul class="reviews" id="rv-list"></ul>
+      </div>
+    </div>
+  </section>
+
+  <details class="help">
+    <summary>사용법 · 만다라트 규칙</summary>
+    <ol>
+      <li><b>가운데 칸</b>에 기한이 있는 핵심 목표 하나를 적는다. (오타니: "8구단 드래프트 1순위")</li>
+      <li><b>가운데 블록 8칸</b>은 핵심 목표를 떠받치는 8개 테마. 각 테마는 바깥 블록의 가운데에 자동으로 복사된다.</li>
+      <li><b>바깥 64칸</b>은 테마별 행동 키워드. 칸에는 짧게 쓰고, 구체적 실천(언제·몇 번·얼마나)은 칸을 눌러 <b>실천 항목</b>에 따로 적는다.</li>
+      <li>실천 항목에 주기(매일/매주/매월/1회)를 주면 <b>오늘 실천</b> 탭에 자동으로 나타난다. 체크하면 연속 일수가 쌓인다.</li>
+      <li>일요일마다 <b>주간 리뷰</b> 탭에서 3줄을 쓰고, 안 되는 칸은 더 잘게 쪼개거나 버린다.</li>
+      <li>데이터는 이 브라우저에만 저장된다. 기기를 바꾸거나 오래 쓸 거면 가끔 <b>JSON 백업</b>을 받아 두자.</li>
+    </ol>
+    <p style="margin-top:8px">자세한 역사·개선 근거는 저장소의 <a href="https://github.com/salescompany0920-afk/card/blob/main/mandalart/GUIDE.md">mandalart/GUIDE.md</a> 참고.</p>
+  </details>
+
+  <footer>만다라트 관리 · 개인용 · 데이터는 내 브라우저에만 저장</footer>
+</div>
+
+<div class="scrim" id="scrim"></div>
+<aside class="panel" id="panel" aria-label="편집">
+  <header>
+    <div>
+      <div class="path" id="p-path"></div>
+    </div>
+    <button class="x" id="p-close" type="button" aria-label="닫기">✕</button>
+  </header>
+  <div class="body" id="p-body"></div>
+  <div class="foot"><span>입력하면 바로 저장됨</span></div>
+</aside>
+
+<script>
+(function(){
+  'use strict';
+  const KEY = 'mandalart.v2';
+  const POS = [0,1,2,3,5,6,7,8]; // 3x3 블록 안에서 가운데(4)를 뺀 8칸 순서
+  const FREQ = {daily:'매일', weekly:'매주', monthly:'매월', once:'1회'};
+
+  // ---------- 기본 템플릿 (v2 개선안) ----------
+  function A(text, freq){ return {text, freq: freq||'daily', done:{}}; }
+  function C(title, actions, note){ return {title, note: note||'', status:'todo', actions: actions||[]}; }
+  const TEMPLATE = {
+    version: 2,
+    goal: '',
+    themes: [
+      {title:'건강', note:'', cells:[
+        C('수면',[A('23:30 전 취침, 7시간 확보','daily')]),
+        C('식사',[A('단백질 포함 아침 먹기','daily')]),
+        C('운동',[A('주 3회 근력 운동','weekly')]),
+        C('영양제·호르몬',[A('영양제 복용','daily'),A('호르몬·혈액 검사','once')],'원본: 영양제 + 호르몬 두 칸을 합침'),
+        C('정기 검진',[A('연 1회 종합검진 예약','once')],'원본: 루틴 검사'),
+        C('목소리',[A('발성·호흡 연습 5분','daily')]),
+        C('패션',[]),
+        C('섹시(체형·자세)',[A('거울 앞 자세 점검','daily')]),
+      ]},
+      {title:'정신·배움', note:'원본의 "정신"과 "인간" 두 테마를 하나로 합침. 바깥 칸은 공부 주제, 실천 항목은 독서·메모 단위로.', cells:[
+        C('종교·철학',[A('철학·종교 책 월 1권','monthly')]),
+        C('심리학·뇌과학',[A('심리학·뇌과학 책 월 1권','monthly')],'원본 "인간"의 뇌과학·감정 포함'),
+        C('역사·위인·집단',[A('위인전·역사 월 1권','monthly')],'원본 "인간"의 역사·위인·집단특성'),
+        C('우주·생물',[],'원본 "인간"의 우주·생물'),
+        C('언어·예술',[],'원본 "인간"의 언어·예술'),
+        C('나를 아는 목록',[A('좋아하는 것 / 싫어하는 것 / 영혼을 울리는 것 / 불필요한 것 목록 갱신','monthly')],'원본: 내가 좋아하는 것, 내가 싫어하는 것, 영혼을 울리는 것, 내게 불필요한 것들'),
+        C('달리고 싶을 때 루틴',[]),
+        C('멈추고 싶을 때 루틴',[]),
+      ]},
+      {title:'경제', note:'', cells:[
+        C('신발 사업',[]),
+        C('메디쏠라',[]),
+        C('중개',[]),
+        C('인테리어',[]),
+        C('차별화',[]),
+        C('재테크',[A('월 저축·투자 점검','monthly')]),
+        C('금융·샤홍후 공부',[A('금융 공부 30분','weekly')],'원본: 금융공부 + 샤홍후 공부 두 칸을 합침'),
+        C('민주 매니저',[]),
+      ]},
+      {title:'민주', note:'', cells:[
+        C('소통',[A('하루 10분 대화(폰 없이)','daily')]),
+        C('사랑 표현',[A('고맙다는 말 1번','daily')]),
+        C('깜짝 선물',[A('깜짝 선물·이벤트','monthly')]),
+        C('여행',[A('여행 계획 하나 잡기','monthly')]),
+        C('사우나',[A('함께 사우나','weekly')]),
+        C('수영·러닝',[A('함께 수영 또는 러닝','weekly')],'원본: 수영 + 러닝 두 칸을 합침'),
+        C('건강 체크',[A('서로 건강 상태 묻기','weekly')]),
+        C('선남선녀',[]),
+      ]},
+      {title:'관계', note:'원본의 "인간관계" 칸은 테마 이름과 같아 뺌.', cells:[
+        C('리더십',[]),
+        C('친구',[A('친구에게 먼저 연락 1명','weekly')]),
+        C('가족',[A('부모님 안부 전화','weekly')]),
+        C('일 사람',[]),
+        C('이익 관계',[]),
+        C('상류 집단',[]),
+        C('새로운 집단',[A('새 모임·커뮤니티 1곳 참여','monthly')]),
+        C('버릴 것(관계 정리)',[]),
+      ]},
+      {title:'민민', note:'', cells:[
+        C('유전 건강',[A('영양제·건강 관리','daily')],'원본: 유전건강 + 영양제'),
+        C('유전 정신',[]),
+        C('태교',[]),
+        C('인생 교육',[]),
+        C('경제 교육',[]),
+        C('육체 교육',[]),
+        C('습관',[]),
+        C('민민의 재능',[]),
+      ]},
+      {title:'골프', note:'각 챕터마다 발·무릎·골반·척추·광배·어깨·목·시선·팔·손목·손가락을 체크한다. 한 번에 고치는 게 아니라 앱 개발처럼 계속 디벨롭.', cells:[
+        C('그립',[A('체크: 손가락·손목','weekly')]),
+        C('볼 간 거리(스탠스)',[A('체크: 발·무릎·골반','weekly')],'원본: 불간거리'),
+        C('어드레스(하체·상체)',[A('체크: 척추·광배·어깨·목·시선','weekly')],'원본: 하체어드레스 + 상체어드레스 두 칸을 합침'),
+        C('백스윙',[A('체크: 어깨·팔·손목','weekly')]),
+        C('다운스윙',[A('체크: 골반·발','weekly')]),
+        C('임팩트',[A('체크: 시선·손가락','weekly')]),
+        C('피니시',[A('체크: 척추·목','weekly')]),
+        C('채별 세팅',[],'원본: 채마다'),
+      ]},
+      {title:'AI', note:'', cells:[
+        C('클로드 활용',[A('클로드로 일 하나 자동화','weekly')]),
+        C('다른 AI',[]),
+        C('기타 프로그램',[]),
+        C('내 생산성 루틴',[A('아침 AI 루틴 점검','daily')]),
+        C('AI × 신발',[]),
+        C('AI × 메디쏠라',[]),
+        C('AI × 골프',[]),
+        C('AI × 가족·민주',[],'원본: 민주 + 가족 두 칸을 합침'),
+      ]},
+    ],
+    reviews: []
+  };
+
+  // ---------- 상태 ----------
+  let state = load();
+  let ui = {view:'board', mode: (window.innerWidth < 720 ? 'focus' : 'full'), focus:'center', sel:null};
+
+  function clone(o){ return JSON.parse(JSON.stringify(o)); }
+  function load(){
+    try{
+      const raw = localStorage.getItem(KEY);
+      if(raw){ const d = JSON.parse(raw); if(valid(d)) return d; }
+    }catch(e){}
+    return clone(TEMPLATE);
+  }
+  function valid(d){
+    return d && d.version===2 && typeof d.goal==='string' && Array.isArray(d.themes) && d.themes.length===8 &&
+      d.themes.every(t => t && typeof t.title==='string' && Array.isArray(t.cells) && t.cells.length===8 &&
+        t.cells.every(c => c && typeof c.title==='string' && Array.isArray(c.actions)));
+  }
+  let saveTimer=null;
+  function save(){
+    try{ localStorage.setItem(KEY, JSON.stringify(state)); setSaved('저장됨 '+fmtTime(new Date())); }
+    catch(e){ setSaved('저장 실패: 브라우저 저장 공간을 확인'); }
+  }
+  function setSaved(t){ document.getElementById('saved-label').textContent = t; }
+  function fmtTime(d){ return d.toTimeString().slice(0,5); }
+
+  // ---------- 날짜 ----------
+  function pad(n){ return (n<10?'0':'')+n; }
+  function dayKey(d){ return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate()); }
+  function monthKey(d){ return d.getFullYear()+'-'+pad(d.getMonth()+1); }
+  function weekKey(d){ // ISO 주 (월요일 시작)
+    const x = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+    const day = x.getUTCDay() || 7; x.setUTCDate(x.getUTCDate() + 4 - day);
+    const y0 = new Date(Date.UTC(x.getUTCFullYear(),0,1));
+    const w = Math.ceil((((x - y0)/86400000) + 1)/7);
+    return x.getUTCFullYear()+'-W'+pad(w);
+  }
+  function keyFor(freq, d){
+    d = d || new Date();
+    if(freq==='daily') return dayKey(d);
+    if(freq==='weekly') return weekKey(d);
+    if(freq==='monthly') return monthKey(d);
+    return 'once';
+  }
+  function streak(action){ // 매일 항목의 연속 일수
+    if(action.freq!=='daily') return 0;
+    let d = new Date(); let n=0;
+    if(!action.done[dayKey(d)]) d.setDate(d.getDate()-1);
+    while(action.done[dayKey(d)]){ n++; d.setDate(d.getDate()-1); if(n>3650) break; }
+    return n;
+  }
+
+  // ---------- 렌더 ----------
+  const $ = s => document.querySelector(s);
+  function el(tag, attrs, children){
+    const e = document.createElement(tag);
+    if(attrs) for(const k in attrs){
+      if(k==='class') e.className = attrs[k];
+      else if(k==='text') e.textContent = attrs[k];
+      else if(k.startsWith('on')) e.addEventListener(k.slice(2), attrs[k]);
+      else e.setAttribute(k, attrs[k]);
+    }
+    (children||[]).forEach(c => { if(c!=null) e.appendChild(typeof c==='string' ? document.createTextNode(c) : c); });
+    return e;
+  }
+
+  function render(){
+    document.getElementById('today-label').textContent = dayKey(new Date());
+    renderGoal();
+    renderBoard();
+    renderToday();
+    renderReview();
+    document.querySelectorAll('.tab').forEach(t => t.setAttribute('aria-selected', String(t.dataset.view===ui.view)));
+    ['board','today','review'].forEach(v => document.getElementById('view-'+v).classList.toggle('hidden', v!==ui.view));
+  }
+
+  function renderGoal(){
+    const g = document.getElementById('goal-text');
+    g.textContent = state.goal || '핵심 목표를 아직 안 적었다 — 눌러서 한 줄로 (예: 2027년 ○○ 달성)';
+    g.classList.toggle('empty', !state.goal);
+    document.getElementById('print-goal').textContent = '핵심 목표: ' + (state.goal || '(미입력)');
+  }
+
+  function cellStats(cell){
+    const k = cell.actions.length;
+    let done=0;
+    cell.actions.forEach(a => { if(a.done[keyFor(a.freq)]) done++; });
+    return {k, done};
+  }
+
+  function renderBoard(){
+    const board = document.getElementById('board');
+    board.innerHTML = '';
+    board.classList.toggle('focus-mode', ui.mode==='focus');
+    document.getElementById('mode-full').setAttribute('aria-pressed', String(ui.mode==='full'));
+    document.getElementById('mode-focus').setAttribute('aria-pressed', String(ui.mode==='focus'));
+    const fb = document.getElementById('focusbar');
+    fb.classList.toggle('on', ui.mode==='focus');
+    document.getElementById('focus-back').classList.toggle('hidden', ui.focus==='center');
+    document.getElementById('focus-title').textContent = ui.focus==='center' ? '가운데 블록 · 8개 테마' : ('테마: ' + state.themes[ui.focus].title);
+
+    for(let b=0;b<9;b++){
+      const block = el('div',{class:'block'+(b===4?' center':'')});
+      const t = POS.indexOf(b); // 바깥 블록이면 테마 인덱스
+      if(ui.mode==='focus'){
+        if((ui.focus==='center' && b===4) || (ui.focus!=='center' && t===ui.focus)) block.classList.add('focused');
+      }
+      for(let p=0;p<9;p++){
+        if(b===4){
+          if(p===4) block.appendChild(coreCell());
+          else block.appendChild(themeCell(POS.indexOf(p), true));
+        }else{
+          if(p===4) block.appendChild(themeCell(t, false));
+          else block.appendChild(itemCell(t, POS.indexOf(p)));
+        }
+      }
+      board.appendChild(block);
+    }
+  }
+  function coreCell(){
+    const c = el('button',{type:'button',class:'cell core'+(ui.sel&&ui.sel.kind==='goal'?' sel':''), onclick:()=>openGoal()});
+    c.appendChild(el('div',{class:'t'+(state.goal?'':' empty'), text: state.goal || '핵심 목표'}));
+    return c;
+  }
+  function themeCell(t, inCenter){
+    const th = state.themes[t];
+    let done=0,k=0; th.cells.forEach(c=>{const s=cellStats(c); done+=s.done; k+=s.k;});
+    const c = el('button',{type:'button',class:'cell theme'+(ui.sel&&ui.sel.kind==='theme'&&ui.sel.t===t?' sel':''), style:'background:var(--t'+t+')',
+      onclick:()=>{ if(inCenter && ui.mode==='focus'){ ui.focus=t; ui.sel=null; closePanel(); render(); } else openTheme(t); }});
+    c.appendChild(el('div',{class:'t'+(th.title?'':' empty'), text: th.title || '테마 '+(t+1)}));
+    c.appendChild(el('div',{class:'m', text: k? (done+'/'+k+' 실천') : ''}));
+    return c;
+  }
+  function itemCell(t, i){
+    const cell = state.themes[t].cells[i];
+    const s = cellStats(cell);
+    const c = el('button',{type:'button',class:'cell s-'+cell.status+(ui.sel&&ui.sel.kind==='cell'&&ui.sel.t===t&&ui.sel.i===i?' sel':''), onclick:()=>openCell(t,i)});
+    c.appendChild(el('div',{class:'t'+(cell.title?'':' empty'), text: cell.title || '비어 있음'}));
+    const m = el('div',{class:'m'});
+    m.appendChild(el('span',{class:'dot', title:'상태'}));
+    if(s.k) m.appendChild(el('span',{text: s.done+'/'+s.k}));
+    c.appendChild(m);
+    return c;
+  }
+
+  // ---------- 편집 패널 ----------
+  const panel = document.getElementById('panel'), scrim = document.getElementById('scrim');
+  function openPanel(path, body){
+    document.getElementById('p-path').textContent = path;
+    const b = document.getElementById('p-body'); b.innerHTML=''; b.appendChild(body);
+    panel.classList.add('open'); scrim.classList.add('on');
+    const first = b.querySelector('input,textarea'); if(first && window.innerWidth>720) first.focus();
+  }
+  function closePanel(){ panel.classList.remove('open'); scrim.classList.remove('on'); ui.sel=null; renderBoard(); }
+  document.getElementById('p-close').onclick = closePanel;
+  scrim.onclick = closePanel;
+  document.addEventListener('keydown', e => { if(e.key==='Escape' && panel.classList.contains('open')) closePanel(); });
+
+  function field(label, input, help){
+    const f = el('div',{class:'field'}); f.appendChild(el('label',{text:label})); f.appendChild(input);
+    if(help) f.appendChild(el('div',{class:'help', text:help}));
+    return f;
+  }
+  function onInput(fn){ return e => { fn(e.target.value); save(); renderGoal(); renderBoard(); }; }
+
+  function openGoal(){
+    ui.sel={kind:'goal'};
+    const inp = el('input',{type:'text', value:state.goal, placeholder:'예: 2027년 12월까지 ○○ 달성', oninput:onInput(v=>state.goal=v)});
+    openPanel('핵심 목표', el('div',{},[
+      field('한 줄 목표', inp, '기한 + 측정 가능한 상태. 오타니의 "8구단 드래프트 1순위"처럼 달성 여부를 바로 알 수 있게.'),
+    ]));
+    renderBoard();
+  }
+  function openTheme(t){
+    ui.sel={kind:'theme',t};
+    const th = state.themes[t];
+    const inp = el('input',{type:'text', value:th.title, oninput:onInput(v=>th.title=v)});
+    const note = el('textarea',{oninput:onInput(v=>th.note=v)}); note.value=th.note||'';
+    const list = el('ul',{class:'acts'});
+    th.cells.forEach((c,i)=>{
+      const s=cellStats(c);
+      list.appendChild(el('li',{},[ el('button',{type:'button',class:'btn ghost',style:'flex:1;text-align:left', text:(i+1)+'. '+(c.title||'비어 있음')+(s.k?'  ('+s.done+'/'+s.k+')':''), onclick:()=>openCell(t,i)}) ]));
+    });
+    openPanel('테마 '+(t+1), el('div',{},[
+      field('테마 이름', inp, '가운데 블록과 바깥 블록 가운데에 같이 표시된다.'),
+      field('메모', note),
+      field('8칸', list),
+    ]));
+    renderBoard();
+  }
+  function openCell(t,i){
+    ui.sel={kind:'cell',t,i};
+    const th = state.themes[t], cell = th.cells[i];
+    const title = el('input',{type:'text', value:cell.title, placeholder:'짧은 키워드', oninput:onInput(v=>cell.title=v)});
+    const status = el('select',{onchange:onInput(v=>cell.status=v)});
+    [['todo','미착수'],['doing','진행 중'],['done','완료']].forEach(([v,l])=>{ const o=el('option',{value:v,text:l}); if(cell.status===v) o.selected=true; status.appendChild(o); });
+    const note = el('textarea',{placeholder:'왜 이 칸이 중요한지, 기준, 참고', oninput:onInput(v=>cell.note=v)}); note.value=cell.note||'';
+
+    const list = el('ul',{class:'acts'});
+    function drawActs(){
+      list.innerHTML='';
+      if(!cell.actions.length) list.appendChild(el('li',{class:'empty', text:'아직 실천 항목이 없다. 아래에 "언제·몇 번·얼마나"가 들어간 문장으로 추가.'}));
+      cell.actions.forEach((a,ai)=>{
+        const tx = el('input',{type:'text', value:a.text, oninput:e=>{a.text=e.target.value; save(); renderToday();}});
+        const fq = el('select',{onchange:e=>{a.freq=e.target.value; save(); renderBoard(); renderToday(); renderReview();}});
+        for(const k in FREQ){ const o=el('option',{value:k,text:FREQ[k]}); if(a.freq===k) o.selected=true; fq.appendChild(o); }
+        const del = el('button',{type:'button',class:'del','aria-label':'삭제', text:'✕', onclick:()=>{ cell.actions.splice(ai,1); save(); drawActs(); renderBoard(); renderToday(); renderReview(); }});
+        list.appendChild(el('li',{},[tx,fq,del]));
+      });
+    }
+    drawActs();
+    const addInp = el('input',{type:'text', placeholder:'예: 주 3회 30분 러닝'});
+    const addFq = el('select',{}); for(const k in FREQ){ addFq.appendChild(el('option',{value:k,text:FREQ[k]})); }
+    function add(){ const v=addInp.value.trim(); if(!v) return; cell.actions.push(A(v, addFq.value)); addInp.value=''; save(); drawActs(); renderBoard(); renderToday(); renderReview(); addInp.focus(); }
+    addInp.addEventListener('keydown', e=>{ if(e.key==='Enter'){ e.preventDefault(); add(); } });
+    const addrow = el('div',{class:'addrow'},[addInp, addFq, el('button',{type:'button',text:'추가',onclick:add})]);
+
+    openPanel((th.title||'테마')+' › '+(i+1)+'번 칸', el('div',{},[
+      field('칸 제목(키워드)', title),
+      field('상태', status),
+      field('실천 항목', el('div',{},[list, addrow]), '주기를 주면 "오늘 실천" 탭에 자동으로 뜬다.'),
+      field('메모', note),
+    ]));
+    renderBoard();
+  }
+
+  // ---------- 오늘 실천 ----------
+  function allActions(){
+    const out=[];
+    state.themes.forEach((th,t)=> th.cells.forEach((c,i)=> c.actions.forEach((a,ai)=> out.push({a, t, i, ai, path:(th.title||'테마')+' › '+(c.title||'칸')}))));
+    return out;
+  }
+  function renderToday(){
+    const wrap = document.getElementById('today-cards'); wrap.innerHTML='';
+    const acts = allActions();
+    const groups = [['daily','매일', dayKey(new Date())],['weekly','이번 주', weekKey(new Date())],['monthly','이번 달', monthKey(new Date())],['once','1회성', '']];
+    groups.forEach(([freq,label,k])=>{
+      const items = acts.filter(x=>x.a.freq===freq);
+      const card = el('div',{class:'cardx'});
+      const done = items.filter(x=>x.a.done[keyFor(freq)]).length;
+      card.appendChild(el('h2',{},[label, el('span',{text: items.length? (done+'/'+items.length+(k?' · '+k:'')) : ''})]));
+      if(!items.length){ card.appendChild(el('div',{class:'empty', text:'항목 없음. 만다라트 칸을 눌러 실천 항목에 주기를 "'+FREQ[freq]+'"로 추가하면 여기 뜬다.'})); }
+      else{
+        const ul = el('ul',{class:'todo'});
+        items.forEach(x=>{
+          const key = keyFor(freq); const checked = !!x.a.done[key];
+          const cb = el('input',{type:'checkbox', id:'cb-'+x.t+'-'+x.i+'-'+x.ai, onchange:e=>{ if(e.target.checked) x.a.done[key]=true; else delete x.a.done[key]; save(); renderBoard(); renderToday(); renderReview(); }});
+          if(checked) cb.checked=true;
+          const lab = el('label',{class:'tx'+(checked?' done':''), for:cb.id},[x.a.text || '(내용 없음)', el('span',{class:'pth', text:x.path})]);
+          const li = el('li',{},[cb, lab]);
+          if(freq==='daily'){ const s=streak(x.a); if(s>0) li.appendChild(el('span',{class:'streak', text:'🔥 '+s+'일'})); }
+          ul.appendChild(li);
+        });
+        card.appendChild(ul);
+      }
+      wrap.appendChild(card);
+    });
+  }
+
+  // ---------- 주간 리뷰 ----------
+  function renderReview(){
+    const now = new Date(); const wk = weekKey(now);
+    document.getElementById('week-label').textContent = wk;
+    const ul = document.getElementById('prog-list'); ul.innerHTML='';
+    // 이번 주 날짜 7개
+    const monday = new Date(now); const dow = (monday.getDay()+6)%7; monday.setDate(monday.getDate()-dow);
+    const days = []; for(let d=0; d<7; d++){ const x=new Date(monday); x.setDate(monday.getDate()+d); if(x<=now) days.push(dayKey(x)); }
+    state.themes.forEach((th,t)=>{
+      let expected=0, done=0;
+      th.cells.forEach(c=>c.actions.forEach(a=>{
+        if(a.freq==='daily'){ expected+=days.length; days.forEach(k=>{ if(a.done[k]) done++; }); }
+        else if(a.freq==='weekly'){ expected+=1; if(a.done[wk]) done++; }
+        else if(a.freq==='monthly'){ expected+=1; if(a.done[monthKey(now)]) done++; }
+        else { expected+=1; if(a.done.once) done++; }
+      }));
+      const pct = expected? Math.round(done/expected*100) : 0;
+      const li = el('li',{},[ el('b',{},[th.title||('테마 '+(t+1)), el('span',{text: expected? (done+'/'+expected+' · '+pct+'%') : '실천 항목 없음'})]) ]);
+      const bar = el('div',{class:'bar'}); bar.appendChild(el('i',{style:'width:'+pct+'%;background:var(--t'+t+');filter:saturate(2) brightness(.85)'})); li.appendChild(bar);
+      ul.appendChild(li);
+    });
+    const rl = document.getElementById('rv-list'); rl.innerHTML='';
+    (state.reviews||[]).slice().reverse().forEach(r=>{
+      rl.appendChild(el('li',{},[ el('b',{text:r.date+' · '+r.week}), '잘한 것: '+r.good+'\n막힌 것: '+r.bad+'\n다음 주: '+r.next ]));
+    });
+  }
+  document.getElementById('rv-save').onclick = () => {
+    const good=$('#rv-good').value.trim(), bad=$('#rv-bad').value.trim(), next=$('#rv-next').value.trim();
+    if(!good && !bad && !next) return;
+    state.reviews = state.reviews||[];
+    state.reviews.push({date:dayKey(new Date()), week:weekKey(new Date()), good, bad, next});
+    $('#rv-good').value=''; $('#rv-bad').value=''; $('#rv-next').value='';
+    save(); renderReview();
+  };
+
+  // ---------- 도구 ----------
+  document.getElementById('btn-export').onclick = () => {
+    const blob = new Blob([JSON.stringify(state,null,2)],{type:'application/json'});
+    const a = el('a',{href:URL.createObjectURL(blob), download:'mandalart-'+dayKey(new Date()).replace(/-/g,'')+'.json'});
+    document.body.appendChild(a); a.click(); setTimeout(()=>{ URL.revokeObjectURL(a.href); a.remove(); }, 500);
+  };
+  document.getElementById('file-import').addEventListener('change', e => {
+    const f = e.target.files[0]; if(!f) return;
+    const r = new FileReader();
+    r.onload = () => {
+      try{
+        const d = JSON.parse(r.result);
+        if(!valid(d)) throw new Error('형식이 다르다');
+        if(!confirm('현재 데이터를 가져온 파일로 바꿀까? (되돌릴 수 없음)')) return;
+        state = d; save(); render();
+      }catch(err){ alert('가져오기 실패: 이 페이지에서 내보낸 JSON 파일만 읽을 수 있다.'); }
+      e.target.value='';
+    };
+    r.readAsText(f);
+  });
+  document.getElementById('btn-print').onclick = () => window.print();
+  document.getElementById('btn-reset').onclick = () => {
+    if(!confirm('모든 내용을 기본 템플릿(v2 개선안)으로 되돌릴까? 먼저 JSON 백업을 받아 두는 게 안전하다.')) return;
+    state = clone(TEMPLATE); save(); ui.sel=null; closePanel(); render();
+  };
+  document.querySelectorAll('.tab').forEach(t => t.onclick = () => { ui.view=t.dataset.view; render(); });
+  document.getElementById('mode-full').onclick = () => { ui.mode='full'; render(); };
+  document.getElementById('mode-focus').onclick = () => { ui.mode='focus'; ui.focus='center'; render(); };
+  document.getElementById('focus-back').onclick = () => { ui.focus='center'; render(); };
+  const gb = document.getElementById('goalbar');
+  gb.onclick = openGoal; gb.onkeydown = e => { if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openGoal(); } };
+
+  render();
+})();
+</script>
+</body>
+</html>
