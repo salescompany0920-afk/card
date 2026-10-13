@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>오픈 준비 연결 신청 · 정총무</title>
+<meta name="description" content="인테리어 마무리 후 오픈 준비, 필요한 것만 체크해 주세요. 카드단말기·배달·정수기·인터넷·세무까지 정총무가 대신 알아보고 연결해 드립니다.">
+<meta property="og:title" content="오픈 준비, 체크만 해 주세요 — 정총무가 연결해 드립니다">
+<meta property="og:description" content="카드단말기·배달·정수기·인터넷·세무… 알아보는 건 정총무가. 필요한 것만 체크하시면 됩니다.">
+<meta property="og:image" content="https://card.jungchongmoo.com/og.png">
+<meta name="theme-color" content="#E84E1B">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23E84E1B'/><text x='50' y='68' font-size='52' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold'>정</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@600;700&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root{
+  --paper:#F7F3EC; --surface:#FFFFFF; --ink:#1C1714; --sub:#6E6258; --faint:#A69B90;
+  --line:#E6DDD2; --line-strong:#D3C8BB;
+  --accent:#E84E1B; --accent-deep:#B8390E; --tint:#FFF2EB; --tint-strong:#FFE3D4;
+  --ok:#2E6B47; --kakao:#FEE500;
+  --serif:'Noto Serif KR','Apple SD Gothic Neo','Malgun Gothic',serif;
+  --sans:'Pretendard Variable',Pretendard,-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Malgun Gothic','Segoe UI',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6;font-weight:500;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility;
+  min-height:100vh;padding:14px 14px calc(118px + env(safe-area-inset-bottom))}
+main{max-width:520px;margin:0 auto}
+:focus-visible{outline:3px solid var(--accent-deep);outline-offset:3px;border-radius:6px}
+button,input{font:inherit;color:inherit}
+a{color:var(--accent-deep)}
+
+/* 인사 카드 */
+.hero{position:relative;border-radius:24px;padding:30px 26px 28px;color:#fff;overflow:hidden;
+  background:radial-gradient(120% 90% at 12% 0%,rgba(255,255,255,.34),rgba(255,255,255,0) 52%),linear-gradient(126deg,#F26A2B 0%,#E84E1B 48%,#C9400F 100%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.45),0 18px 44px rgba(190,70,20,.26)}
+.hero .mark{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:700;letter-spacing:.02em;opacity:.95}
+.hero .mark i{width:26px;height:26px;border-radius:8px;background:rgba(255,255,255,.95);color:var(--accent-deep);font-style:normal;font-weight:800;font-size:13px;display:grid;place-items:center}
+.hero h1{font-family:var(--serif);font-weight:700;font-size:27px;word-break:keep-all;overflow-wrap:anywhere;line-height:1.38;letter-spacing:-.015em;margin-top:22px;text-wrap:balance;text-shadow:0 1px 0 rgba(0,0,0,.06)}
+.hero h1 small{display:block;font-family:var(--sans);font-weight:600;font-size:14.5px;opacity:.92;letter-spacing:0;margin-bottom:6px}
+.promise{margin-top:22px;display:grid;gap:9px}
+.promise li{list-style:none;display:flex;gap:10px;align-items:flex-start;font-size:14.5px;font-weight:600;line-height:1.5}
+.promise li i{flex:none;width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.22);display:grid;place-items:center;margin-top:1px}
+
+/* 누구인지 (링크에 정보 없을 때만) */
+.who{margin-top:16px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px 18px;display:none}
+.who.show{display:block}
+.who h2{font-size:15px;font-weight:700;color:var(--sub)}
+.who .row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.who input{width:100%;height:48px;border:1.5px solid var(--line-strong);border-radius:12px;padding:0 13px;font-size:16px;font-weight:600;background:#fff}
+.who input:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px rgba(232,78,27,.14)}
+.who input[aria-invalid="true"]{border-color:#C8352B}
+
+/* 체크 목록 */
+.sheet{margin-top:22px}
+.sheet-head{display:flex;align-items:baseline;justify-content:space-between;padding:0 6px 12px}
+.sheet-head h2{font-family:var(--serif);font-weight:700;font-size:21px;letter-spacing:-.01em}
+.sheet-head span{font-size:13px;color:var(--sub);font-weight:600}
+.list{background:var(--surface);border:1px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:0 6px 24px rgba(60,35,20,.06)}
+.item{position:relative;display:flex;gap:14px;align-items:center;width:100%;text-align:left;background:none;border:0;border-top:1px solid var(--line);padding:17px 18px 17px 20px;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background .12s}
+.item:first-child{border-top:0}
+.item::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .15s}
+.item[aria-checked="true"]{background:var(--tint)}
+.item[aria-checked="true"]::before{transform:scaleX(1)}
+.item .n{flex:none;width:28px;font-family:var(--serif);font-weight:700;font-size:15px;color:var(--faint);letter-spacing:.02em;font-variant-numeric:tabular-nums;transition:color .12s}
+.item[aria-checked="true"] .n{color:var(--accent-deep)}
+.item .tx{flex:1;min-width:0}
+.item .tx b{display:block;font-size:17px;font-weight:700;letter-spacing:-.012em;line-height:1.35}
+.item .tx span{display:block;font-size:13.5px;color:var(--sub);margin-top:2px;line-height:1.45}
+.item .tx .perk{display:inline-flex;align-items:center;gap:5px;margin-top:5px;font-size:12.5px;font-weight:700;color:var(--ok)}
+.item .tx .perk::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--ok)}
+.item .chk{flex:none;width:28px;height:28px;border-radius:50%;border:1.5px solid var(--line-strong);display:grid;place-items:center;background:#fff;transition:background .12s,border-color .12s,transform .12s}
+.item .chk svg{opacity:0;transform:scale(.5);transition:opacity .12s,transform .15s}
+.item[aria-checked="true"] .chk{background:var(--accent);border-color:var(--accent);transform:scale(1.04)}
+.item[aria-checked="true"] .chk svg{opacity:1;transform:scale(1)}
+@media (hover:hover){.item:hover{background:#FCF9F5}.item[aria-checked="true"]:hover{background:var(--tint)}}
+
+.unsure{margin-top:14px;background:var(--surface);border:1.5px dashed var(--line-strong);border-radius:20px;padding:3px}
+.unsure .item{border-top:0;padding:15px 16px 15px 18px;border-radius:17px}
+.unsure .item::before{display:none}
+.unsure .item .n{display:none}
+
+.note{margin:22px 8px 0;font-size:13px;color:var(--sub);line-height:1.65;text-align:center;text-wrap:pretty}
+footer{text-align:center;color:var(--faint);font-size:12px;margin-top:28px;line-height:1.7}
+footer a{color:var(--sub);font-weight:600;text-decoration:none}
+
+/* 하단 바 */
+.bar{position:fixed;left:0;right:0;bottom:0;padding:10px 14px calc(12px + env(safe-area-inset-bottom));background:linear-gradient(to top,rgba(247,243,236,1) 70%,rgba(247,243,236,0));z-index:10;pointer-events:none}
+.bar .in{max-width:520px;margin:0 auto;display:flex;gap:10px;align-items:center;pointer-events:auto}
+.bar .sum{flex:1;min-width:0;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:10px 15px;min-height:58px;display:flex;flex-direction:column;justify-content:center;box-shadow:0 8px 24px rgba(60,35,20,.12)}
+.bar .sum b{font-size:15.5px;font-weight:800;letter-spacing:-.01em}
+.bar .sum span{font-size:12.5px;color:var(--sub);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar .go{flex:none;height:58px;padding:0 24px;border:0;border-radius:18px;background:var(--ink);color:#fff;font-size:16.5px;font-weight:800;letter-spacing:-.01em;cursor:pointer;box-shadow:0 10px 24px rgba(28,23,20,.28);transition:transform .1s,background .15s,box-shadow .15s;-webkit-tap-highlight-color:transparent}
+.bar .go:active{transform:scale(.97)}
+.bar .go[disabled]{background:#D8D0C6;box-shadow:none;cursor:default}
+
+/* 동의 시트 */
+.veil{position:fixed;inset:0;background:rgba(28,23,20,.45);backdrop-filter:blur(2px);z-index:20;display:none;align-items:flex-end;justify-content:center;padding:0}
+.veil.open{display:flex}
+.modal{width:100%;max-width:560px;background:var(--surface);border-radius:26px 26px 0 0;padding:22px 22px calc(22px + env(safe-area-inset-bottom));box-shadow:0 -10px 40px rgba(0,0,0,.18);animation:up .28s cubic-bezier(.2,.9,.3,1)}
+@keyframes up{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+.modal .grip{width:40px;height:4px;border-radius:2px;background:var(--line-strong);margin:0 auto 18px}
+.modal h2{font-family:var(--serif);font-size:21px;font-weight:700;letter-spacing:-.01em;line-height:1.35}
+.modal p{font-size:14.5px;color:var(--sub);margin-top:10px;line-height:1.6}
+.modal p b{color:var(--ink);font-weight:700}
+.modal .items{margin-top:14px;display:flex;flex-wrap:wrap;gap:6px}
+.modal .items span{font-size:13px;font-weight:700;background:var(--tint);color:var(--accent-deep);border-radius:999px;padding:5px 12px}
+.modal details{margin-top:12px;font-size:13px;color:var(--sub)}
+.modal summary{cursor:pointer;font-weight:700;color:var(--accent-deep);text-decoration:underline;text-underline-offset:2px;list-style:none}
+.modal details div{margin-top:8px;background:var(--paper);border-radius:12px;padding:10px 12px;line-height:1.6}
+.modal .acts{display:grid;grid-template-columns:1fr 2fr;gap:10px;margin-top:18px}
+.modal .acts button{height:56px;border-radius:16px;border:0;font-size:16px;font-weight:800;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.modal .back{background:var(--paper);color:var(--sub)}
+.modal .ok{background:var(--accent);color:#fff;box-shadow:0 10px 24px rgba(232,78,27,.3)}
+.modal .ok[disabled]{opacity:.7;pointer-events:none}
+
+/* 완료 */
+.done{display:none;padding:40px 6px 20px;text-align:center}
+.done .mark{width:76px;height:76px;border-radius:50%;background:var(--ok);margin:0 auto;display:grid;place-items:center;animation:pop .45s cubic-bezier(.2,1.4,.4,1)}
+@keyframes pop{from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}
+.done h2{font-family:var(--serif);font-size:27px;font-weight:700;letter-spacing:-.015em;margin-top:20px;line-height:1.35}
+.done>p{color:var(--sub);margin-top:10px;font-size:15.5px;line-height:1.6}
+.done .list{margin-top:22px;text-align:left}
+.done .list div{padding:13px 18px;border-top:1px solid var(--line);font-weight:700;font-size:15px;display:flex;gap:10px;align-items:center}
+.done .list div:first-child{border-top:0}
+.done .primary{display:flex;align-items:center;justify-content:center;margin-top:20px;height:56px;border-radius:16px;background:var(--accent);color:#fff;text-decoration:none;font-weight:800;font-size:16.5px;box-shadow:0 10px 24px rgba(232,78,27,.3)}
+.done .kakao{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:10px;height:54px;border-radius:16px;background:var(--kakao);color:#191919;text-decoration:none;font-weight:800;font-size:15.5px}
+.done .alt{margin-top:14px;font-size:13.5px;color:var(--sub)}
+.done .alt a,.done .alt button{font-weight:700;color:var(--accent-deep);border:0;background:none;text-decoration:underline;text-underline-offset:2px;cursor:pointer;font-size:inherit}
+body.finished .bar,body.finished .ask{display:none}
+body.finished .done{display:block}
+
+@media (min-width:560px){body{padding-top:28px}.hero{padding:36px 32px 32px}.hero h1{font-size:31px}}
+</style>
+</head>
+<body>
+<main>
+  <div class="ask">
+  <header class="hero">
+    <div class="mark"><i aria-hidden="true">정</i>정총무 인테리어팀</div>
+    <h1 id="hello"><small>공사 마무리 고생 많으셨습니다</small>오픈 준비는<br>체크만 해 주세요.</h1>
+    <ul class="promise" aria-label="약속">
+      <li><i><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i>연결 비용은 받지 않습니다.</li>
+      <li><i><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i>조건 들어보시고 안 맞으면 안 하셔도 됩니다.</li>
+      <li><i><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i>여러 곳 비교해서 조건 좋은 쪽으로 안내합니다.</li>
+    </ul>
+  </header>
+
+  <section class="who" id="who" aria-labelledby="who-h">
+    <h2 id="who-h">어느 매장이세요?</h2>
+    <div class="row">
+      <input id="store" placeholder="매장명 (예: 컴포즈커피 다산점)" autocomplete="organization" style="grid-column:1/-1" aria-label="매장명">
+      <input id="name" placeholder="성함" autocomplete="name" aria-label="성함">
+      <input id="phone" type="tel" inputmode="numeric" placeholder="휴대폰" autocomplete="tel" aria-label="휴대폰">
+    </div>
+  </section>
+
+  <section class="sheet" aria-labelledby="sheet-h">
+    <div class="sheet-head"><h2 id="sheet-h">필요한 것만 체크</h2><span id="sheet-cnt">여러 개 선택 가능</span></div>
+    <div class="list" id="list" role="group" aria-labelledby="sheet-h"></div>
+  </section>
+
+  <div class="unsure">
+    <button type="button" class="item" role="checkbox" aria-checked="false" id="unsure">
+      <span class="tx"><b>뭐가 필요한지 잘 모르겠어요</b><span>매장 보고 정총무가 꼭 필요한 것만 골라 추천해 드릴게요.</span></span>
+      <span class="chk" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+    </button>
+  </div>
+
+  <p class="note">신청하시면 담당자가 한 번 전화드려 일정과 조건을 안내합니다.<br>결정은 그때 하셔도 됩니다.</p>
+
+  <footer>
+    정총무 · 경기도 남양주시 다산중앙로145번길 17, 메트로타워1 601호<br>
+    <a href="https://card.jungchongmoo.com">card.jungchongmoo.com</a>
+  </footer>
+  </div>
+
+  <section class="done" aria-live="polite">
+    <div class="mark" aria-hidden="true"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+    <h2 id="done-h">접수됐습니다.<br>이제 신경 안 쓰셔도 돼요.</h2>
+    <p id="done-msg"></p>
+    <div class="list" id="done-list"></div>
+    <div id="done-primary"></div>
+    <a class="kakao" id="done-kakao" href="https://open.kakao.com/o/syDEmKni"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.5 2 10.8c0 2.8 1.9 5.2 4.7 6.6-.2.7-.7 2.6-.8 3-.1.5.2.5.4.4.2-.1 2.6-1.8 3.7-2.5.6.1 1.3.1 2 .1 5.5 0 10-3.5 10-7.6S17.5 3 12 3z"/></svg><span>급하시면 카카오톡으로 바로 문의</span></a>
+    <p class="alt" id="done-alt"></p>
+  </section>
+</main>
+
+<div class="bar" id="bar">
+  <div class="in">
+    <div class="sum"><b id="sum-n">아직 선택한 게 없어요</b><span id="sum-t">필요한 것만 가볍게 체크해 주세요</span></div>
+    <button type="button" class="go" id="go" disabled>신청하기</button>
+  </div>
+</div>
+
+<div class="veil" id="veil" role="dialog" aria-modal="true" aria-labelledby="m-h">
+  <div class="modal">
+    <div class="grip" aria-hidden="true"></div>
+    <h2 id="m-h">이대로 신청할까요?</h2>
+    <p id="m-p"></p>
+    <div class="items" id="m-items"></div>
+    <details><summary>연락처는 어떻게 쓰이나요</summary><div>체크하신 항목의 제휴 업체에만 매장명·성함·휴대폰을 상담 연결 목적으로 전달합니다. 다른 용도로 쓰지 않고, 연결이 끝나면 1년 뒤 삭제하며 요청하시면 즉시 삭제합니다. 정총무는 제휴 업체로부터 소개 수수료를 받을 수 있으며, 점주님께 받는 비용은 없습니다.</div></details>
+    <div class="acts"><button type="button" class="back" id="m-back">다시 볼게요</button><button type="button" class="ok" id="m-ok">동의하고 신청</button></div>
+  </div>
+</div>
+
+<script>
+/* ======================================================================
+   설정 — 운영자가 고치는 곳
+   ====================================================================== */
+const CONFIG = {
+  ENDPOINT: "",                                   // Google Apps Script 웹앱 /exec URL. 비우면 문자 폴백
+  KAKAO: "https://open.kakao.com/o/syDEmKni",
+  SMS_TO: "01084030829",
+};
+/* 항목. perk(초록 점 문구)는 확정된 혜택만, 과장 금지. */
+const ITEMS = [
+  { id:"van",      name:"카드 VAN · 단말기",              desc:"VAN 가입, 단말기 설치, 포스 세팅",         perk:"단말기 무상 조건 안내" },
+  { id:"kiosk",    name:"키오스크 · 테이블오더",           desc:"주문 자동화, 스마트상점 정부 지원 확인",     perk:"정부 지원금 안내" },
+  { id:"delivery", name:"배달앱 입점 · 배달대행",          desc:"배민·쿠팡이츠·요기요 입점, 배달대행 연결" },
+  { id:"rental",   name:"정수기 · 커피머신 · 식기세척기 렌탈", desc:"코웨이·SK매직·LG 등 조건 비교",            perk:"사은품·제휴 할인 안내" },
+  { id:"internet", name:"인터넷 · 전화 · IPTV · CCTV",     desc:"사업자 회선, 오픈 전 개통 일정 맞춤",        perk:"개통 사은품 안내" },
+  { id:"security", name:"출동보안",                        desc:"에스원·캡스 등 야간 침입 감지와 출동",        perk:"소상공인 할인 안내" },
+  { id:"tax",      name:"세무 기장",                       desc:"매달 기장, 부가세·종소세 신고",             perk:"제휴 할인 안내" },
+  { id:"labor",    name:"노무 · 4대보험",                  desc:"근로계약서, 4대보험 신고, 두루누리 지원" },
+  { id:"clean",    name:"상가 청소",                       desc:"정기 청소, 후드·덕트 청소" },
+  { id:"waste",    name:"음식물쓰레기",                    desc:"음식물 수거 계약, 종량제 안내" },
+  { id:"uniform",  name:"유니폼",                          desc:"앞치마·티셔츠 제작, 로고 인쇄" },
+  { id:"supply",   name:"식자재 · 포장재",                 desc:"식자재 유통, 배달 포장용기 공급처" },
+];
+
+/* ======================================================================
+   동작
+   ====================================================================== */
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const $ = s => document.querySelector(s);
+const qs = new URLSearchParams(location.search);
+const selected = new Set();
+const BY = Object.fromEntries(ITEMS.map(i => [i.id, i]));
+const chk = '<span class="chk" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>';
+
+$("#list").innerHTML = ITEMS.map((it, i) => `
+  <button type="button" class="item" role="checkbox" aria-checked="false" data-id="${it.id}">
+    <span class="n" aria-hidden="true">${String(i + 1).padStart(2, "0")}</span>
+    <span class="tx"><b>${esc(it.name)}</b><span>${esc(it.desc)}</span>${it.perk ? `<span class="perk">${esc(it.perk)}</span>` : ""}</span>
+    ${chk}
+  </button>`).join("");
+
+/* 점주 정보: 링크에 실어 보낸다 (?s=매장&n=성함&p=전화&pm=담당). 없으면 입력칸을 연다 */
+const who = { store: qs.get("s") || qs.get("store") || "", name: qs.get("n") || qs.get("name") || "", phone: qs.get("p") || qs.get("phone") || "", pm: qs.get("pm") || "" };
+if (!who.store && !who.phone) $("#who").classList.add("show");
+else {
+  const label = who.store ? `${who.store} 사장님,` : `${who.name} 사장님,`;
+  $("#hello").innerHTML = `<small>공사 마무리 고생 많으셨습니다</small>${esc(label)}<br>오픈 준비는<br>체크만 해 주세요.`;
+}
+$("#store").value = who.store; $("#name").value = who.name; $("#phone").value = who.phone;
+$("#phone").addEventListener("input", e => {
+  const d = e.target.value.replace(/\D/g, "").slice(0, 11);
+  e.target.value = d.length > 7 ? `${d.slice(0,3)}-${d.slice(3,7)}-${d.slice(7)}` : d.length > 3 ? `${d.slice(0,3)}-${d.slice(3)}` : d;
+});
+
+function render(){
+  const n = selected.size, unsure = $("#unsure").getAttribute("aria-checked") === "true";
+  $("#sheet-cnt").textContent = n ? `${n}개 선택` : "여러 개 선택 가능";
+  const names = [...selected].map(id => BY[id].name);
+  if (!n && !unsure) { $("#sum-n").textContent = "아직 선택한 게 없어요"; $("#sum-t").textContent = "필요한 것만 가볍게 체크해 주세요"; }
+  else if (!n) { $("#sum-n").textContent = "추천 요청"; $("#sum-t").textContent = "정총무가 보고 골라 드릴게요"; }
+  else { $("#sum-n").textContent = `${n}개 선택했어요`; $("#sum-t").textContent = names.join(", ") + (unsure ? " + 추천 요청" : ""); }
+  $("#go").disabled = !(n || unsure);
+}
+document.addEventListener("click", e => {
+  const b = e.target.closest(".item"); if (!b) return;
+  const on = b.getAttribute("aria-checked") !== "true";
+  b.setAttribute("aria-checked", on);
+  if (b.dataset.id) on ? selected.add(b.dataset.id) : selected.delete(b.dataset.id);
+  render();
+});
+document.addEventListener("keydown", e => {
+  if ((e.key === " " || e.key === "Enter") && e.target.classList.contains("item")) { e.preventDefault(); e.target.click(); }
+  if (e.key === "Escape" && $("#veil").classList.contains("open")) closeSheet();
+});
+
+function current(){
+  return {
+    ts: new Date().toISOString(),
+    store: $("#store").value.trim(), name: $("#name").value.trim(), phone: $("#phone").value.trim(), pm: who.pm,
+    items: [...selected].map(id => BY[id].name), item_ids: [...selected],
+    unsure: $("#unsure").getAttribute("aria-checked") === "true", ua: navigator.userAgent,
+  };
+}
+function toText(p){
+  const L = ["[오픈 준비 연결 신청]"];
+  if (p.store) L.push(`매장: ${p.store}`); if (p.name) L.push(`성함: ${p.name}`); if (p.phone) L.push(`휴대폰: ${p.phone}`);
+  L.push(`신청 항목: ${p.items.length ? p.items.join(", ") : "(없음)"}${p.unsure ? " + 추천 요청" : ""}`);
+  if (p.pm) L.push(`담당: ${p.pm}`);
+  return L.join("\n");
+}
+const maskPhone = p => p.replace(/\D/g, "").replace(/^(\d{3})(\d{3,4})(\d{4})$/, "$1-****-$3");
+const smsHref = (to, body) => `sms:${to}${/iPhone|iPad|iPod/.test(navigator.userAgent) ? "&" : "?"}body=${encodeURIComponent(body)}`;
+
+/* 신청하기 → 동의 시트 */
+function openSheet(){
+  const p = current();
+  if ($("#who").classList.contains("show")) {
+    const okStore = !!p.store, okPhone = /^01[016789]\d{7,8}$/.test(p.phone.replace(/\D/g, ""));
+    $("#store").setAttribute("aria-invalid", !okStore); $("#phone").setAttribute("aria-invalid", !okPhone);
+    if (!okStore || !okPhone) { (okStore ? $("#phone") : $("#store")).focus(); $("#who").scrollIntoView({block:"center"}); return; }
+  }
+  const whoTxt = p.store || p.name || "점주님";
+  const contact = p.phone ? ` <span style="white-space:nowrap">(${maskPhone(p.phone)})</span>` : "";
+  $("#m-p").innerHTML = p.items.length
+    ? `체크하신 <b>${p.items.length}개 항목</b>의 업체에 <b>${esc(whoTxt)}</b>${contact} 연락처를 전달하고, 담당자가 한 번 전화드립니다.`
+    : `<b>${esc(whoTxt)}</b>${contact} 매장에 맞는 항목을 정총무가 골라, 담당자가 한 번 전화드립니다.`;
+  $("#m-items").innerHTML = p.items.map(n => `<span>${esc(n)}</span>`).join("") + (p.unsure ? "<span>추천 요청</span>" : "");
+  $("#veil").classList.add("open"); $("#m-ok").focus();
+}
+function closeSheet(){ $("#veil").classList.remove("open"); $("#go").focus(); }
+$("#go").addEventListener("click", openSheet);
+$("#m-back").addEventListener("click", closeSheet);
+$("#veil").addEventListener("click", e => { if (e.target === $("#veil")) closeSheet(); });
+
+async function submit(){
+  const p = current(), text = toText(p);
+  $("#m-ok").disabled = true; $("#m-ok").textContent = "보내는 중…";
+  let sent = false;
+  if (CONFIG.ENDPOINT) {
+    try { await fetch(CONFIG.ENDPOINT, { method:"POST", mode:"no-cors", headers:{"Content-Type":"text/plain;charset=utf-8"}, body: JSON.stringify(p) }); sent = true; }
+    catch (e) { sent = false; }
+  }
+  try { localStorage.setItem("jcm_open_apply", JSON.stringify(p)); } catch (e) {}
+  const row = n => `<div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2E6B47" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>${esc(n)}</div>`;
+  $("#done-list").innerHTML = p.items.map(row).join("") + (p.unsure ? row("매장에 맞는 항목 추천 요청") : "");
+  const whoTxt = p.store || p.name || "점주님";
+  if (sent) {
+    $("#done-h").innerHTML = "접수됐습니다.<br>이제 신경 안 쓰셔도 돼요.";
+    $("#done-msg").textContent = `${whoTxt} 사장님, 담당자가 영업일 기준 1일 안에 전화드립니다.`;
+    $("#done-alt").innerHTML = `문자로도 남기시려면 <a href="${smsHref(CONFIG.SMS_TO, text)}">여기를 눌러 주세요</a>.`;
+  } else {
+    $("#done-h").innerHTML = "거의 다 됐어요.<br>버튼 한 번만 눌러 주세요.";
+    $("#done-msg").textContent = `${whoTxt} 사장님, 아래 내용이 문자로 열립니다. 보내기만 누르시면 접수 끝이에요.`;
+    $("#done-primary").innerHTML = `<a class="primary" href="${smsHref(CONFIG.SMS_TO, text)}">신청 내용 문자로 보내기</a>`;
+    $("#done-kakao span").textContent = "문자가 안 되면 카카오톡으로";
+    $("#done-alt").innerHTML = `카톡으로 보내실 땐 <button type="button" id="copy">내용 복사</button> 후 붙여넣어 주세요.`;
+    $("#copy").addEventListener("click", async () => { try { await navigator.clipboard.writeText(text); $("#copy").textContent = "복사됐어요"; } catch (e) { prompt("아래 내용을 복사해 주세요", text); } });
+  }
+  $("#veil").classList.remove("open");
+  document.body.classList.add("finished");
+  window.scrollTo({ top: 0 });
+}
+$("#m-ok").addEventListener("click", submit);
+render();
+</script>
+</body>
+</html>
