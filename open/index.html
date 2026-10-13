@@ -85,32 +85,37 @@ a{color:var(--accent-deep)}
 .unsure .item::before{display:none}
 .unsure .item .ic{background:var(--tint)}
 
-/* ───── 연락처 ───── */
-.contact{margin-top:30px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px 18px 18px;box-shadow:var(--shadow)}
-.contact h2{font-size:19px;font-weight:800;letter-spacing:-.02em}
-.contact>p{font-size:13.5px;color:var(--sub);margin-top:4px}
-.field{margin-top:14px}
-.field label{display:block;font-size:13.5px;font-weight:700;color:var(--sub);margin-bottom:6px}
-.field label i{font-style:normal;color:var(--accent);margin-left:2px}
-.field input{width:100%;height:52px;border:1.5px solid var(--line-strong);border-radius:var(--radius-s);padding:0 14px;font-size:17px;font-weight:600;background:#fff;transition:border-color .12s}
-.field input::placeholder{color:var(--faint);font-weight:500}
-.field input:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px rgba(232,78,27,.14)}
-.field input[aria-invalid="true"]{border-color:#C8352B}
-.field .err{display:none;font-size:13px;color:#C8352B;margin-top:5px;font-weight:600}
-.field.bad .err{display:block}
-.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.chips{display:flex;flex-wrap:wrap;gap:8px}
-.chip{border:1.5px solid var(--line-strong);background:#fff;border-radius:999px;padding:8px 14px;font-size:14px;font-weight:600;cursor:pointer;transition:all .12s;-webkit-tap-highlight-color:transparent}
-.chip[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
-.agree{margin-top:18px;display:flex;gap:10px;align-items:flex-start;font-size:13.5px;color:var(--sub);line-height:1.5;cursor:pointer}
-.agree input{flex:none;width:20px;height:20px;accent-color:var(--accent);margin-top:1px}
-.agree b{color:var(--ink);font-weight:700}
-.agree-err{display:none;margin-top:8px;font-size:13px;color:#C8352B;font-weight:700}
-.contact.bad-agree .agree-err{display:block}
-.contact.bad-agree .agree input{outline:2px solid #C8352B;outline-offset:2px;border-radius:3px}
-.agree details{display:inline}
-.agree summary{display:inline;color:var(--accent-deep);font-weight:700;cursor:pointer;text-decoration:underline;text-underline-offset:2px}
-.agree details p{margin-top:8px;font-size:12.5px;background:var(--paper);border-radius:10px;padding:10px 12px;line-height:1.55}
+/* ───── 매장 확인 (링크에 정보 없을 때만) ───── */
+.who{margin-top:26px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;display:none}
+.who.show{display:block}
+.who h2{font-size:15px;font-weight:700;color:var(--sub)}
+.who .row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.who #store{grid-column:1/-1}
+.who input{width:100%;height:50px;border:1.5px solid var(--line-strong);border-radius:var(--radius-s);padding:0 13px;font-size:16px;font-weight:600;background:#fff}
+.who input::placeholder{color:var(--faint);font-weight:500}
+.who input:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px rgba(232,78,27,.14)}
+.who input[aria-invalid="true"]{border-color:#C8352B}
+.note{margin:24px 8px 0;font-size:13.5px;color:var(--sub);line-height:1.65;text-align:center;text-wrap:pretty}
+
+/* ───── 동의 시트 ───── */
+.veil{position:fixed;inset:0;background:rgba(17,17,17,.42);backdrop-filter:blur(2px);z-index:20;display:none;align-items:flex-end;justify-content:center}
+.veil.open{display:flex}
+.modal{width:100%;max-width:560px;background:var(--surface);border-radius:24px 24px 0 0;padding:20px 22px calc(22px + env(safe-area-inset-bottom));box-shadow:0 -10px 40px rgba(0,0,0,.18);animation:up .28s cubic-bezier(.2,.9,.3,1)}
+@keyframes up{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+.modal .grip{width:40px;height:4px;border-radius:2px;background:var(--line-strong);margin:0 auto 16px}
+.modal h2{font-size:20px;font-weight:800;letter-spacing:-.02em;line-height:1.35}
+.modal p{font-size:14.5px;color:var(--sub);margin-top:8px;line-height:1.6}
+.modal p b{color:var(--ink);font-weight:700}
+.modal .items{margin-top:12px;display:flex;flex-wrap:wrap;gap:6px}
+.modal .items span{font-size:13px;font-weight:700;background:var(--tint);color:var(--accent-deep);border-radius:999px;padding:5px 12px}
+.modal details{margin-top:12px;font-size:13px;color:var(--sub)}
+.modal summary{cursor:pointer;font-weight:700;color:var(--accent-deep);text-decoration:underline;text-underline-offset:2px;list-style:none}
+.modal details div{margin-top:8px;background:var(--paper);border-radius:10px;padding:10px 12px;line-height:1.6}
+.modal .acts{display:grid;grid-template-columns:1fr 2fr;gap:10px;margin-top:16px}
+.modal .acts button{height:56px;border-radius:16px;border:0;font-size:16px;font-weight:800;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.modal .back{background:var(--paper);color:var(--sub)}
+.modal .ok{background:var(--accent);color:#fff;box-shadow:0 8px 22px rgba(232,78,27,.3)}
+.modal .ok[disabled]{opacity:.7;pointer-events:none}
 
 /* ───── 하단 고정 바 ───── */
 .bar{position:fixed;left:0;right:0;bottom:0;padding:10px 16px calc(12px + env(safe-area-inset-bottom));background:linear-gradient(to top,rgba(251,248,243,1) 70%,rgba(251,248,243,0));z-index:10;pointer-events:none}
@@ -156,15 +161,14 @@ footer a{color:var(--sub);font-weight:600;text-decoration:none}
   <header class="greet">
     <div class="from"><span class="logo" aria-hidden="true">정</span><span>정총무 인테리어팀이 드리는 안내</span></div>
     <h1 id="hello">공사 마무리 고생 많으셨어요.<br>오픈 준비, <em>체크만</em> 해 주세요.</h1>
-    <p>카드단말기, 배달앱, 정수기, 인터넷, 세무… 알아볼 게 한둘이 아니죠. 교육 받고 집기 들이느라 바쁘실 텐데, <b>필요한 것만 체크해 두시면 정총무가 대신 알아보고 연결해 드립니다.</b></p>
     <ul class="promise" aria-label="약속">
-      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D7A3E" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>연결 비용은 점주님께 받지 않습니다. 제휴사에서 소개비를 받는 구조라 점주님 부담은 없어요.</li>
+      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D7A3E" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>연결 비용은 점주님께 받지 않습니다.</li>
       <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D7A3E" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>조건 들어보시고 안 맞으면 안 하셔도 됩니다.</li>
       <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D7A3E" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>여러 곳 비교해서 조건 좋은 쪽으로 안내합니다.</li>
     </ul>
     <div class="howto" aria-label="진행 순서">
       <div><b>1</b><span>필요한 것<br>체크</span></div>
-      <div><b>2</b><span>연락처<br>남기기</span></div>
+      <div><b>2</b><span>신청하기<br>한 번</span></div>
       <div><b>3</b><span>정총무가<br>연락·연결</span></div>
     </div>
   </header>
@@ -179,24 +183,16 @@ footer a{color:var(--sub);font-weight:600;text-decoration:none}
     </button>
   </div>
 
-  <section class="contact" aria-labelledby="ct">
-    <h2 id="ct">연락받으실 분</h2>
-    <p>담당자가 한 번만 전화드려 일정과 조건을 안내합니다.</p>
-    <div class="field" id="f-name"><label for="name">성함<i aria-hidden="true">*</i></label><input id="name" name="name" autocomplete="name" placeholder="홍길동" required><div class="err">성함을 적어 주세요.</div></div>
-    <div class="field" id="f-phone"><label for="phone">휴대폰<i aria-hidden="true">*</i></label><input id="phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel" placeholder="010-0000-0000" required><div class="err">휴대폰 번호를 확인해 주세요.</div></div>
-    <div class="field"><label for="store">매장 (브랜드 · 지점)</label><input id="store" name="store" placeholder="예: 컴포즈커피 다산점"></div>
-    <div class="row2">
-      <div class="field"><label for="open">오픈 예정일</label><input id="open" name="open" placeholder="예: 11월 초"></div>
-      <div class="field"><label for="time">통화 편한 시간</label><input id="time" name="time" placeholder="예: 오후 3시 이후"></div>
+  <section class="who" id="who" aria-labelledby="who-h">
+    <h2 id="who-h">어느 매장이세요?</h2>
+    <div class="row">
+      <input id="store" placeholder="매장명 (예: 컴포즈커피 다산점)" autocomplete="organization" aria-label="매장명">
+      <input id="name" placeholder="성함" autocomplete="name" aria-label="성함">
+      <input id="phone" type="tel" inputmode="numeric" placeholder="휴대폰" autocomplete="tel" aria-label="휴대폰">
     </div>
-    <label class="agree">
-      <input type="checkbox" id="agree">
-      <span><b>개인정보 수집·제휴사 전달에 동의합니다.</b> 체크하신 항목의 제휴사에만 성함·연락처·매장명을 전달합니다.
-        <details><summary>자세히</summary><p>수집 항목: 성함, 휴대폰, 매장명, 오픈 예정일, 통화 가능 시간. 수집 목적: 선택하신 서비스의 상담 연결. 제공 대상: 선택 항목의 제휴 업체(상담 연결 목적에 한함). 보유 기간: 연결 완료 후 1년, 요청 시 즉시 삭제. 동의를 거부하실 수 있으며, 거부 시 연결 서비스를 이용하실 수 없습니다.</p></details>
-      </span>
-    </label>
-    <div class="agree-err" id="agree-err">제휴사에 연락처를 전달하려면 동의가 필요해요. 체크하신 항목의 업체에만 전달됩니다.</div>
   </section>
+
+  <p class="note">신청하시면 담당자가 한 번 전화드려 일정과 조건을 안내합니다.<br>결정은 그때 하셔도 됩니다.</p>
 
   <footer>
     정총무 · 경기도 남양주시 다산중앙로145번길 17, 메트로타워1 601호<br>
@@ -210,7 +206,7 @@ footer a{color:var(--sub);font-weight:600;text-decoration:none}
     <p id="done-msg">담당자가 영업일 기준 1일 안에 연락드립니다.</p>
     <div class="list" id="done-list"></div>
     <div id="done-primary"></div>
-    <a class="kakao" id="done-kakao" href="https://open.kakao.com/o/syDEmKni"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.5 2 10.8c0 2.8 1.9 5.2 4.7 6.6-.2.7-.7 2.6-.8 3-.1.5.2.5.4.4.2-.1 2.6-1.8 3.7-2.5.6.1 1.3.1 2 .1 5.5 0 10-3.5 10-7.6S17.5 3 12 3z"/></svg>급하시면 카카오톡으로 바로 문의</a>
+    <a class="kakao" id="done-kakao" href="https://open.kakao.com/o/syDEmKni"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.5 2 10.8c0 2.8 1.9 5.2 4.7 6.6-.2.7-.7 2.6-.8 3-.1.5.2.5.4.4.2-.1 2.6-1.8 3.7-2.5.6.1 1.3.1 2 .1 5.5 0 10-3.5 10-7.6S17.5 3 12 3z"/></svg><span>급하시면 카카오톡으로 바로 문의</span></a>
     <p class="alt" id="done-alt"></p>
   </section>
 </main>
@@ -219,6 +215,17 @@ footer a{color:var(--sub);font-weight:600;text-decoration:none}
   <div class="in">
     <div class="sum"><b id="sum-n">아직 선택한 게 없어요</b><span id="sum-t">필요한 것만 가볍게 체크해 주세요</span></div>
     <button type="button" class="go" id="go" disabled>신청하기</button>
+  </div>
+</div>
+
+<div class="veil" id="veil" role="dialog" aria-modal="true" aria-labelledby="m-h">
+  <div class="modal">
+    <div class="grip" aria-hidden="true"></div>
+    <h2 id="m-h">이대로 신청할까요?</h2>
+    <p id="m-p"></p>
+    <div class="items" id="m-items"></div>
+    <details><summary>연락처는 어떻게 쓰이나요</summary><div>체크하신 항목의 제휴 업체에만 매장명·성함·휴대폰을 상담 연결 목적으로 전달합니다. 다른 용도로 쓰지 않고, 연결이 끝나면 1년 뒤 삭제하며 요청하시면 즉시 삭제합니다. 정총무는 제휴 업체로부터 소개 수수료를 받을 수 있으며, 점주님께 받는 비용은 없습니다.</div></details>
+    <div class="acts"><button type="button" class="back" id="m-back">다시 볼게요</button><button type="button" class="ok" id="m-ok">동의하고 신청</button></div>
   </div>
 </div>
 
@@ -265,8 +272,8 @@ const GROUPS = [
   { id:"ops", title:"운영·마케팅", desc:"오픈 뒤 손님이 찾아오게 하는 것들", items:[
     { id:"music", name:"매장 음악 (저작권 포함)", desc:"저작권 문제 없는 매장용 음악 서비스", perk:"제휴 조건 안내" },
     { id:"place", name:"네이버 플레이스 · 지도 등록", desc:"검색하면 바로 나오게. 사진·메뉴·영업시간 세팅" },
-    { id:"sign", name:"간판 · 현수막 · 오픈 이벤트물", desc:"오픈 현수막, 배너, 메뉴판", perk:"제휴 조건 안내" },
-    { id:"clean", name:"방역 · 청소 · 음식물쓰레기 수거", desc:"정기 방역, 후드 청소, 음식물 수거 계약" },
+    { id:"clean", name:"상가 청소 · 방역", desc:"정기 청소, 후드·덕트 청소, 방역" },
+    { id:"waste", name:"음식물쓰레기 수거", desc:"음식물 수거 계약, 종량제 안내" },
     { id:"supply", name:"식자재 · 포장용기 공급", desc:"본사 지정 외 물품, 배달 포장재 공급처" },
     { id:"hire", name:"직원 · 알바 채용", desc:"오픈 전 인력 모집 플랫폼 세팅" },
   ]},
@@ -327,86 +334,85 @@ document.addEventListener("keydown", e => {
   if ((e.key === " " || e.key === "Enter") && e.target.classList.contains("item")) { e.preventDefault(); e.target.click(); }
 });
 
-/* URL 프리필: ?store=컴포즈커피 다산점&name=홍길동&pm=담당자명 */
-["store","name","phone","open"].forEach(k => { if (qs.get(k)) $("#" + k).value = qs.get(k); });
-if (qs.get("store")) $("#hello").innerHTML = `${esc(qs.get("store"))} 공사 마무리<br>고생 많으셨어요. 오픈 준비, <em>체크만</em> 해 주세요.`;
-
-/* 전화번호 자동 하이픈 */
+/* 점주 정보: 링크에 실어 보낸다 (?s=매장&n=성함&p=전화&pm=담당). 없으면 입력칸을 연다 */
+const who = { store: qs.get("s") || qs.get("store") || "", name: qs.get("n") || qs.get("name") || "", phone: qs.get("p") || qs.get("phone") || "", pm: qs.get("pm") || "" };
+if (!who.store && !who.phone) $("#who").classList.add("show");
+else $("#hello").innerHTML = `${esc(who.store || who.name)} 사장님,<br>공사 마무리 고생 많으셨어요.<br>오픈 준비, <em>체크만</em> 해 주세요.`;
+$("#store").value = who.store; $("#name").value = who.name; $("#phone").value = who.phone;
 $("#phone").addEventListener("input", e => {
   const d = e.target.value.replace(/\D/g, "").slice(0, 11);
   e.target.value = d.length > 7 ? `${d.slice(0,3)}-${d.slice(3,7)}-${d.slice(7)}` : d.length > 3 ? `${d.slice(0,3)}-${d.slice(3)}` : d;
 });
-
-function validate(){
-  let ok = true;
-  const name = $("#name").value.trim(), phone = $("#phone").value.replace(/\D/g, "");
-  $("#f-name").classList.toggle("bad", !name); $("#name").setAttribute("aria-invalid", !name);
-  const pOk = /^01[016789]\d{7,8}$/.test(phone);
-  $("#f-phone").classList.toggle("bad", !pOk); $("#phone").setAttribute("aria-invalid", !pOk);
-  if (!name || !pOk) ok = false;
-  const agreeOk = $("#agree").checked; $(".contact").classList.toggle("bad-agree", !agreeOk); if (!agreeOk) ok = false;
-  if (!ok) { const bad = document.querySelector(".field.bad input") || $("#agree"); bad.focus(); bad.scrollIntoView({block:"center"}); }
-  return ok;
-}
+document.addEventListener("keydown", e => { if (e.key === "Escape" && $("#veil").classList.contains("open")) closeSheet(); });
 
 function payload(){
-  const unsure = $("#unsure").getAttribute("aria-checked") === "true";
   return {
     ts: new Date().toISOString(),
-    name: $("#name").value.trim(), phone: $("#phone").value.trim(), store: $("#store").value.trim(),
-    open: $("#open").value.trim(), time: $("#time").value.trim(),
+    store: $("#store").value.trim(), name: $("#name").value.trim(), phone: $("#phone").value.trim(), pm: who.pm,
     items: [...selected].map(id => ITEMS[id].name), item_ids: [...selected],
-    unsure, pm: qs.get("pm") || "", ref: qs.get("ref") || "", ua: navigator.userAgent,
+    unsure: $("#unsure").getAttribute("aria-checked") === "true", ua: navigator.userAgent,
   };
 }
 function toText(p){
-  const lines = [`[오픈 준비 연결 신청]`, `성함: ${p.name}`, `휴대폰: ${p.phone}`];
-  if (p.store) lines.push(`매장: ${p.store}`);
-  if (p.open) lines.push(`오픈 예정: ${p.open}`);
-  if (p.time) lines.push(`통화 가능: ${p.time}`);
-  lines.push(`신청 항목: ${p.items.length ? p.items.join(", ") : "(없음)"}${p.unsure ? " + 추천 요청" : ""}`);
-  if (p.pm) lines.push(`담당: ${p.pm}`);
-  return lines.join("\n");
+  const L = ["[오픈 준비 연결 신청]"];
+  if (p.store) L.push(`매장: ${p.store}`); if (p.name) L.push(`성함: ${p.name}`); if (p.phone) L.push(`휴대폰: ${p.phone}`);
+  L.push(`신청 항목: ${p.items.length ? p.items.join(", ") : "(없음)"}${p.unsure ? " + 추천 요청" : ""}`);
+  if (p.pm) L.push(`담당: ${p.pm}`);
+  return L.join("\n");
 }
-function smsHref(to, body){
-  const ios = /iPhone|iPad|iPod/.test(navigator.userAgent);
-  return `sms:${to}${ios ? "&" : "?"}body=${encodeURIComponent(body)}`;
+const maskPhone = p => p.replace(/\D/g, "").replace(/^(\d{3})(\d{3,4})(\d{4})$/, "$1-****-$3");
+const smsHref = (to, body) => `sms:${to}${/iPhone|iPad|iPod/.test(navigator.userAgent) ? "&" : "?"}body=${encodeURIComponent(body)}`;
+
+/* 신청하기 → 동의 시트 */
+function openSheet(){
+  const p = payload();
+  if ($("#who").classList.contains("show")) {
+    const okStore = !!p.store, okPhone = /^01[016789]\d{7,8}$/.test(p.phone.replace(/\D/g, ""));
+    $("#store").setAttribute("aria-invalid", !okStore); $("#phone").setAttribute("aria-invalid", !okPhone);
+    if (!okStore || !okPhone) { (okStore ? $("#phone") : $("#store")).focus(); $("#who").scrollIntoView({block:"center"}); return; }
+  }
+  const whoTxt = p.store || p.name || "점주님";
+  const contact = p.phone ? ` <span style="white-space:nowrap">(${maskPhone(p.phone)})</span>` : "";
+  $("#m-p").innerHTML = p.items.length
+    ? `체크하신 <b>${p.items.length}개 항목</b>의 업체에 <b>${esc(whoTxt)}</b>${contact} 연락처를 전달하고, 담당자가 한 번 전화드립니다.`
+    : `<b>${esc(whoTxt)}</b>${contact} 매장에 맞는 항목을 정총무가 골라, 담당자가 한 번 전화드립니다.`;
+  $("#m-items").innerHTML = p.items.map(n => `<span>${esc(n)}</span>`).join("") + (p.unsure ? "<span>추천 요청</span>" : "");
+  $("#veil").classList.add("open"); $("#m-ok").focus();
 }
+function closeSheet(){ $("#veil").classList.remove("open"); $("#go").focus(); }
+$("#go").addEventListener("click", openSheet);
+$("#m-back").addEventListener("click", closeSheet);
+$("#veil").addEventListener("click", e => { if (e.target === $("#veil")) closeSheet(); });
 
 async function submit(){
-  if (!validate()) return;
   const p = payload(), text = toText(p);
-  document.body.classList.add("sending"); $("#go").textContent = "보내는 중…";
+  $("#m-ok").disabled = true; $("#m-ok").textContent = "보내는 중…";
   let sent = false;
   if (CONFIG.ENDPOINT) {
-    try {
-      await fetch(CONFIG.ENDPOINT, { method:"POST", mode:"no-cors", headers:{"Content-Type":"text/plain;charset=utf-8"}, body: JSON.stringify(p) });
-      sent = true;
-    } catch (e) { sent = false; }
+    try { await fetch(CONFIG.ENDPOINT, { method:"POST", mode:"no-cors", headers:{"Content-Type":"text/plain;charset=utf-8"}, body: JSON.stringify(p) }); sent = true; }
+    catch (e) { sent = false; }
   }
   try { localStorage.setItem("jcm_open_apply", JSON.stringify(p)); } catch (e) {}
-
-  $("#done-list").innerHTML = (p.items.length ? p.items : []).map(n => `<div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1D7A3E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>${esc(n)}</div>`).join("")
-    + (p.unsure ? `<div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1D7A3E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>매장에 맞는 항목 추천 요청</div>` : "");
+  const row = n => `<div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1D7A3E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>${esc(n)}</div>`;
+  $("#done-list").innerHTML = p.items.map(row).join("") + (p.unsure ? row("매장에 맞는 항목 추천 요청") : "");
+  const whoTxt = p.store || p.name || "점주님";
   if (sent) {
     $("#done-h").innerHTML = "접수됐습니다.<br>이제 신경 안 쓰셔도 돼요.";
-    $("#done-msg").textContent = `${p.name} 점주님, 담당자가 영업일 기준 1일 안에 ${p.phone}로 연락드립니다.`;
-    $("#done-kakao").firstChild.nextSibling.textContent = "급하시면 카카오톡으로 바로 문의";
+    $("#done-msg").textContent = `${whoTxt} 사장님, 담당자가 영업일 기준 1일 안에 전화드립니다.`;
     $("#done-alt").innerHTML = `문자로도 남기시려면 <a href="${smsHref(CONFIG.SMS_TO, text)}">여기를 눌러 주세요</a>.`;
   } else {
-    // 서버 없이 쓰는 폴백: 신청 내용을 문자로 보내게 유도 + 카톡 복사
     $("#done-h").innerHTML = "거의 다 됐어요.<br>버튼 한 번만 눌러 주세요.";
-    $("#done-msg").textContent = `${p.name} 점주님, 아래 내용이 문자로 열립니다. 보내기만 누르시면 접수 끝이에요.`;
+    $("#done-msg").textContent = `${whoTxt} 사장님, 아래 내용이 문자로 열립니다. 보내기만 누르시면 접수 끝이에요.`;
     $("#done-primary").innerHTML = `<a class="primary" href="${smsHref(CONFIG.SMS_TO, text)}">신청 내용 문자로 보내기</a>`;
-    $("#done-kakao").lastChild.textContent = "문자가 안 되면 카카오톡으로 (복사됨)";
+    $("#done-kakao span").textContent = "문자가 안 되면 카카오톡으로";
     $("#done-alt").innerHTML = `카톡으로 보내실 땐 <button type="button" id="copy">내용 복사</button> 후 붙여넣어 주세요.`;
     $("#copy").addEventListener("click", async () => { try { await navigator.clipboard.writeText(text); $("#copy").textContent = "복사됐어요"; } catch (e) { prompt("아래 내용을 복사해 주세요", text); } });
   }
-  document.body.classList.add("finished"); document.body.classList.remove("sending");
+  $("#veil").classList.remove("open");
+  document.body.classList.add("finished");
   window.scrollTo({ top: 0 });
 }
-$("#go").addEventListener("click", submit);
-$("#agree").addEventListener("change", () => $(".contact").classList.remove("bad-agree"));
+$("#m-ok").addEventListener("click", submit);
 render();
 </script>
 </body>
