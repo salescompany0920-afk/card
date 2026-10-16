@@ -223,12 +223,13 @@
   .cards.sys{grid-template-columns:repeat(auto-fill,minmax(340px,1fr))}
   .cardx.wide{grid-column:1 / -1}
   .princ{list-style:none; counter-reset:p}
-  .princ li{display:flex; gap:8px; align-items:center; padding:5px 0; border-top:1px solid var(--line-2)}
+  .princ li{display:flex; gap:8px; align-items:flex-start; padding:5px 0; border-top:1px solid var(--line-2)}
+  .princ li::before{margin-top:6px}
   .princ li:first-child{border-top:0}
   .princ li::before{counter-increment:p; content:counter(p); flex:none; width:24px; height:24px; border-radius:50%; background:var(--soft); color:var(--accent-deep); font-weight:800; font-size:12px; display:flex; align-items:center; justify-content:center}
   .princ li.empty{display:block} .princ li.empty::before{display:none}
-  .princ input{flex:1 1 0; width:0; min-width:0; border:1px solid transparent; border-radius:8px; padding:7px 8px; background:transparent; font-size:14px}
-  .princ input:focus{border-color:var(--line); background:var(--card-2); outline:none}
+  .princ textarea{flex:1 1 0; width:0; min-width:0; border:1px solid transparent; border-radius:8px; padding:7px 8px; background:transparent; font-size:14px; line-height:1.45; resize:none; overflow:hidden; field-sizing:content}
+  .princ textarea:focus{border-color:var(--line); background:var(--card-2); outline:none}
   .princ + .addrow{margin-top:8px}
   .chk{display:grid; grid-template-columns:1fr; gap:10px}
   .chk .q{display:grid; grid-template-columns:1fr 48px; gap:10px; align-items:center}
@@ -604,6 +605,140 @@
     practices: []     // 테마 인덱스별 [{text, freq, cell, why, ev:'s'|'m'|'w', src}]
   };
   /*KNOWLEDGE_START*/
+KNOWLEDGE.principlesLead = '만다라트 중심 8칸의 후보이자, 중요한 결정 전과 주간 리뷰 때 되묻는 8가지 질문이다.';
+KNOWLEDGE.principles = [
+  '행복은 상태가 아니라 활동이다, 매일 반복하는 행위가 나다 (아리스토텔레스)',
+  '통제할 수 있는 것에만 힘을 쓴다, 매출·스코어가 아니라 제안·루틴·태도 (에픽테토스)',
+  '욕망은 계약이다, 헛된 욕망(비교·명성)은 서명 전에 심문한다 (에피쿠로스·나발)',
+  '적게, 끝까지, 천천히, 핵심 프로젝트는 한 번에 하나, 추정은 2배 (버크먼·뉴포트)',
+  '수신 → 제가 → 사업, 집이 흔들리면 사업도 흔들린다 (대학·논어)',
+  '관계는 1급 자산이다, 거래 친구 아닌 진짜 친구, 아이의 성장기는 환불 불가 (브룩스·웨어)',
+  '의미는 발견된다, 만든 것·사랑한 것·바꿀 수 없는 것에 취한 태도 (프랭클)',
+  '오늘 죽을 수도 있다, 그러니 미룰 수 없는 사람에게 먼저 (마르쿠스·세네카)'
+];
+KNOWLEDGE.rituals = [
+  {text:'아침 3분: 명상록 2.1 예행연습 + if-then 한 줄 + 오늘 첫 행동', freq:'daily'},
+  {text:'저녁 5분: 세네카 3문 + 증자 3문 + done 3줄 + 내일 첫 행동', freq:'daily'},
+  {text:'셧다운 의식: 업무 알림 끄고 식사·취침 전 폰 격리 50분', freq:'daily'},
+  {text:'일요일 30분 주간 리뷰 + WHO-5·캔트릴 사다리 행복 체크 2분', freq:'weekly'},
+  {text:'번아웃 3문항(소진·냉소·효능감) 점검 → 다음 주 모드 선택', freq:'weekly'},
+  {text:'파트너와 State of the Union 60분(잘된 것 5·감사·이슈 1)', freq:'weekly'},
+  {text:'월말 돈 점검: 저축률·비상금 개월 수·세금 적립률 3지표', freq:'monthly'},
+  {text:'월초 15분: 15명 층 안부 메시지 + 체인 유지 여부 1문', freq:'monthly'},
+  {text:'분기 30분: Bull\'s Eye X표 + 계절 선언 + 만다라트 5칸 교체', freq:'quarterly'},
+  {text:'분기 1회 관계 에너지 감사 1시간(+/−/±) + 가난 연습 날짜 지정', freq:'quarterly'},
+  {text:'생일·연말 90분: 과거 1년 리뷰 + 리버스 버킷리스트 10개', freq:'yearly'},
+  {text:'연 1회 가치 체크리스트 V/Q/N 재실행 + 인생 철학 한 장 개정', freq:'yearly'}
+];
+KNOWLEDGE.checkin = [
+  {key:'ladder', label:'삶의 사다리', hint:'0 최악~10 최선, 지금 어디에 서 있나 (캔트릴)'},
+  {key:'energy', label:'에너지·건강', hint:'활력 있고 푹 자고 일어난 날이 많았나'},
+  {key:'relations', label:'관계', hint:'가까운 사람과 대면·공유 식사가 충분했나'},
+  {key:'meaning', label:'의미·몰입', hint:'흥미로운 일로 채워지고 몰입한 시간이 있었나'},
+  {key:'calm', label:'평온', hint:'차분하고 긴장이 풀린 상태였나(스트레스 낮음)'}
+];
+KNOWLEDGE.routines = {
+  push:{
+    lead:'소수의 레버리지 프로젝트를 천천히 끝까지. 상한선을 넘으면 자동으로 멈춤 루틴으로 전환한다.',
+    steps:[
+      '일요일 2분: 번아웃 3문항(소진·냉소·효능감) 점검, 2개 이상 예면 이번 주는 멈춤 루틴',
+      '전날 밤 1분: if-then 한 줄 "내일 [시각] [장소]에서 [단서]가 보이면 → [행동]" (d=0.65)',
+      '아침 2분: 명상록 2.1 예행연습, 진행 프로젝트는 1개만(serialize), 납기 추정은 직감×2',
+      '딥워크 90분: 알림·폰 물리 격리(중단 복귀 23분), 블록 끝 2분 3문장 인출 메모',
+      '유혹 묶기: 좋아하는 오디오북·팟캐스트는 통근·운동 중에만, 새 과목 첫 4~6주 집중',
+      '주 1회 5분 레버리지 점검: 시간 임대 vs 자산 축적 비율, 공개 마감 1건 선언(나발·뉴포트)',
+      '상한선: 가족 저녁 주 3회↑·셧다운 매일·친구 연락 주 1회, 2주 연속 위반 시 멈춤 루틴 전환',
+      '카페인은 취침 6시간 전부터 0, 심리적 분리 60분+ 주 1회 보장(달리기는 회복 대체재 아님)'
+    ]
+  },
+  stop:{
+    lead:'번아웃·의욕 저하기: 신규 수락 0, 회복 4경험(분리·이완·숙달·통제)을 채우고 기준 충족 시 전문가로.',
+    steps:[
+      '즉시 5분: ICD-11 3차원 + REQ 16문항으로 지난주 회복 경험 중 0이었던 것 확인',
+      '즉시: Hell yeah 필터 역적용, 신규 수락 0, 새 요청은 전부 Holding Tank로(시버스·뉴포트)',
+      '매일 5분 순환 한숨 호흡(코 들숨→짧은 들숨→입 긴 날숨), 28일 지속 시 효과 증가',
+      '매일 저녁 사업 알림 OFF(심리적 분리) + done list 3줄만, 13분 명상 또는 산책',
+      '주 3회 자연 40분(=주 120분), 그중 1회는 15분 경외 산책(코스모스 읽은 주에 배치)',
+      '주 1~2회 업무 무관 배움(우주·예술·미술관)으로 숙달 경험 유지, 배움은 끊지 말고 종류만 바꿈',
+      '주 1회 30분 통제 회복: 반나절은 내가 일정 결정 + 20-10 과제로 그만둘 것 1개',
+      '3차원 2개↑ 또는 수면·식욕 변화 2주↑ → 1577-0199·정신건강의학과; 죽음·자해 생각 → 즉시 109'
+    ]
+  }
+};
+KNOWLEDGE.practices = [
+  [
+    {text:'기상 시각 주 7일 ±30분 고정, 7시간+, 커피는 취침 9시간 전까지', freq:'daily', cell:0, why:'수면 규칙성이 수면 시간보다 사망률을 더 잘 예측(UK Biobank 6만 명, Windred 2023); 커피 1잔은 취침 8.8시간 전까지(메타 24편)', ev:'m', src:'https://www.ukbiobank.ac.uk/publications/sleep-regularity-is-a-stronger-predictor-of-mortality-risk-than-sleep-duration-a-prospective-cohort-study/'},
+    {text:'주 2회 30분 근력운동 + 중강도 유산소 주 150분(걷는 라운드 포함)', freq:'weekly', cell:2, why:'WHO 2020 강력 권고(유산소 150~300분, 근력 주 2일+); 근력 주 30~60분에서 사망 10~20%↓, 병행 시 전체사망 RR 0.60(Momma 2022)', ev:'s', src:'https://pmc.ncbi.nlm.nih.gov/articles/PMC7719906/'},
+    {text:'단백질 하루 1.2~1.6 g/kg(끼니당 25~40 g), 술은 주 2잔 이하', freq:'daily', cell:1, why:'근력운동 시 제지방 증가는 1.6 g/kg 부근에서 정체(Morton 2018, 49 RCT); 캐나다 2023 지침 주 2잔 이하 = 저위험, WHO "안전한 양 없음"', ev:'m', src:'https://pubmed.ncbi.nlm.nih.gov/28698222/'},
+    {text:'크레아틴 3~5 g/일; 비타민D·오메가3는 측정 후 결핍 시만', freq:'daily', cell:3, why:'크레아틴은 근력·제지방 근거가 가장 강함(ISSN 2017); 비타민D·오메가3 예방 보충은 심혈관·암 효과 없음(VITAL 25,871명 RCT)', ev:'s', src:'https://pubmed.ncbi.nlm.nih.gov/28615996/'},
+    {text:'국가검진 날 HbA1c·비타민D·페리틴·ApoB 추가, 40세부터 위내시경 2년', freq:'once', cell:4, why:'국가검진은 공복혈당만·지질은 4년 1회; 40세↑ 위암 내시경 2년마다(국가암검진); 치과는 6~24개월 차이 없음(Cochrane 2020)', ev:'m', src:'https://kbthink.com/life/wellness/healthcheck.html'},
+    {text:'매일 아침 SPF30+ 자외선차단제, 밤 레티노이드 주 2~3회→매일', freq:'daily', cell:6, why:'매일 자외선차단제 사용군은 4.5년 후 피부 노화 진행 24% 감소(Hughes 2013 RCT 903명); 트레티노인 주름 개선 메타(8 RCT)', ev:'s', src:'https://doi.org/10.7326/0003-4819-158-11-201306040-00002'},
+    {text:'월 1회 허리둘레 측정(배꼽 높이) 90 cm 미만 + 매일 5분 자세 운동', freq:'monthly', cell:7, why:'한국 남성 복부비만 기준 허리둘레 ≥90 cm(KSSO 2022); chin tuck·견갑 안정화 운동은 두개척추각 개선(Sheikhhoseini 2018 메타 7 RCT)', ev:'s', src:'https://pmc.ncbi.nlm.nih.gov/articles/PMC10088549/'}
+  ],
+  [
+    {text:'매일 20분: 읽기 15분 + 덮고 3문장 인출 메모, 주 1회 20분 복습', freq:'daily', cell:6, why:'연습 시험(인출)은 g=0.61~0.70, 1~6일 지연에서 최대(Adesope 2017, 118편); 분산 연습과 함께 최고 유용성(Dunlosky 2013)', ev:'s', src:'https://www.learningscientists.org/blog/2017/2/9-1'},
+    {text:'『코스모스』 읽은 주말에 15분 경외 산책(새로움·규모에 시선), 8주', freq:'weekly', cell:3, why:'주 1회 15분 경외 산책 8주 RCT: 일반 산책 대비 긍정정서↑·일상 고통↓(Sturm 2020); 경외감 5경로(Monroy & Keltner 2023)', ev:'m', src:'https://www.ucsf.edu/news/2020/09/418551/awe-walks-boost-emotional-well-being'},
+    {text:'『서양미술사』 장별 읽기 + 월 1회 미술관·공연 감상', freq:'monthly', cell:4, why:'예술 참여(감상 포함)가 예방·치료 양면에서 건강·웰빙에 기여, 3,000여 연구 종합(WHO 2019 스코핑 리뷰)', ev:'m', src:'https://www.jameelartshealthlab.org/research/research-projects/2019-who-report'},
+    {text:'VIA 강점검사 12분 + 상위 5개 강점을 지난 1년 사례와 연결(20분)', freq:'once', cell:5, why:'서명 강점 개입은 삶의 만족 g=0.42, 행복 g=0.32, 우울 −0.21(Schutte & Malouff 2019 메타 14편)', ev:'m', src:'https://www.viacharacter.org/'},
+    {text:'콜린스 20-10 과제로 그만둘 목록 작성, 분기 20분 복습', freq:'once', cell:5, why:'세 원(열정·적합·생계) 밖에 시간 절반 이상이면 그만둘 목록이 최중요 도구(콜린스); 버핏 25/5는 출처 불명', ev:'w', src:'https://www.jimcollins.com/article_topics/articles/best-new-years.html'},
+    {text:'매일 5분 순환 한숨 호흡, 28일 블록', freq:'daily', cell:7, why:'하루 5분×28일 원격 RCT(108명): 명상 대비 긍정정서 증가 더 큼, 불안 감소는 비슷, 연습 일수↑→효과↑(Balban 2023)', ev:'m', src:'https://pmc.ncbi.nlm.nih.gov/articles/PMC9873947/'},
+    {text:'『사피엔스』→『총 균 쇠』 8주씩, 통근 중 비문학은 오디오북 허용', freq:'weekly', cell:2, why:'책 독자는 비독자 대비 사망위험 약 20%↓, 인지점수가 매개(Bavishi 2016, 3,635명 12년); 오디오북=텍스트 동등(Rogowsky 2016)', ev:'m', src:'https://pmc.ncbi.nlm.nih.gov/articles/PMC5105607'}
+  ],
+  [
+    {text:'매월 1일 기준 월급 정액 이체, 비상금 생활비 6개월→12개월 적립', freq:'monthly', cell:5, why:'자영업자는 평균 월수입을 기준 월급으로 먼저 옮기라(토스·금감원); 폐업자 68.5%가 평균 8,531만 원 부채(2025 중기부·국세청)', ev:'m', src:'https://www.tossbank.com/articles/split-bankbook'},
+    {text:'세금통장 적립 후 노란우산 50만→연금 900만→ISA 순 자동이체', freq:'monthly', cell:5, why:'노란우산 소득공제 최대 600만(2026 한도 연 1,800만); 연금저축+IRP 900만 세액공제 16.5%=148.5만 환급; 연금 내 ETF 과세이연', ev:'m', src:'https://taxly.kr/post/1721'},
+    {text:'부부 공동계좌 전면 합산(용돈만 각자) + 월 1회 민주 리뷰 3지표', freq:'monthly', cell:7, why:'신혼 230쌍 2년 무작위 실험: 공동계좌만 관계 만족 하락 없음, 부분 합산은 효과 없음(Olson et al. 2023 JCR)', ev:'m', src:'https://insight.kellogg.northwestern.edu/article/key-to-happy-marriage-joint-bank-account'},
+    {text:'컴플라이언스 체크리스트(14일 숙고·서면 예상매출·특약) 모든 가맹 계약에 첨부', freq:'once', cell:4, why:'경기도 2026-08 경고: 정보공개서 14일·서면 예상매출 누락이 분쟁 핵심; 가맹사업법 개정 2026-12-31 시행(점주단체 협의 의무)', ev:'w', src:'https://www.sidae.com/article/2026080507120572196'},
+    {text:'양면 보상 추천 프로그램 + 계약 완료 30일 후 후기·소개 요청 표준화', freq:'monthly', cell:2, why:'추천 유입 고객은 약 16% 더 수익성·25% 더 가치(Schmitt et al.); 피추천자 혜택형이 1.41~1.79배 전환(Gershon 2020); 지인 추천 신뢰 88%', ev:'m', src:'https://en.wikipedia.org/wiki/Referral_marketing'},
+    {text:'주 30분 금융 학습(독서10·계좌10·기록10) + 투교협 연금·ETF스쿨 수료', freq:'weekly', cell:6, why:'48주 커리큘럼: 돈의 심리학→연금스쿨→모든 주식을 소유하라+ETF스쿨→법인·리스크; 월말 3지표(저축률·비상금·세금 적립률) 갱신', ev:'w', src:'https://www.kcie.or.kr/mobile/guide/3/26/'},
+    {text:'신발·메디쏠라는 월 순이익 10% 이내 실험 예산, 소량·선주문 테스트', freq:'monthly', cell:0, why:'소매 폐업률 15.40%로 업종 최고, 3년 내 폐업 50.9%(2025); 하우절 Room for Error — 본업 현금흐름과 재고 리스크 분리(10%는 제안)', ev:'w', src:'https://www.newsis.com/view/NISX20260630_0003688944'}
+  ],
+  [
+    {text:'퇴근 후 20분 스트레스 완화 대화(조언 금지) + 식사·취침 전 폰 격리 50분', freq:'daily', cell:0, why:'한국 기혼여성 결혼만족 1위 요인은 대화 증감(여성가족패널, 남국현 2022); 파트너 phubbing은 관계만족 r=−0.22·갈등 +0.57(메타 52편)', ev:'m', src:'https://pmc.ncbi.nlm.nih.gov/articles/PMC12106345'},
+    {text:'[출산 후 24개월] 아기 재운 뒤 10분×2 대화 + 주간 회의에 육아 분담 1문항', freq:'daily', cell:0, why:'첫 아이 출산 시 만족 급락(아버지 d=−0.45·어머니 −0.71, Doss 2009 8년 추적)이 둘째 해까지 지속(Bogdan 2022 메타 14.5만 명)', ev:'s', src:'https://pmc.ncbi.nlm.nih.gov/articles/PMC2702669'},
+    {text:'매일 구체 감사 1문장(행동+의미) + 주 1회 7칸 식단 비는 칸 채우기', freq:'daily', cell:1, why:'사랑의 언어 매칭 효과 근거 없음, 어떤 표현이든 많이 받을수록 행복(Impett 2024 리뷰); 감사는 관계 유지 예측(Gordon 2012)', ev:'s', src:'https://www.utoronto.ca/news/little-evidence-linking-five-love-languages-healthy-relationships-researchers-say'},
+    {text:'월 1회 경험 쿠폰 서프라이즈(새 클래스·공연·식당), 물건 대신 경험', freq:'monthly', cell:2, why:'실제 선물 교환 실험: 경험 선물이 물질 선물보다 관계 강화, 기제는 소비 시 감정 강도(Chan & Mogilner 2017 JCR)', ev:'m', src:'https://academic.oup.com/jcr/article/43/6/913/2939516'},
+    {text:'분기 1박 2일 처음 가는 곳 + 월 1회 반나절 마이크로 어드벤처(폰·업무 차단)', freq:'monthly', cell:3, why:'새롭고 흥분되는 활동을 함께 한 커플만 관계만족 상승, 즐겁기만 한 활동은 무효(Aron 2000 실험); 여행 리뷰는 이혼 감소 가능성(Durko 2013)', ev:'m', src:'https://ggia.berkeley.edu/practice/practice_as_pdf/exciting_activities_for_couples'},
+    {text:'화·목 저녁 함께 걷기/러닝 30~40분(대화 가능 속도), 분기 공동 목표 1개', freq:'weekly', cell:5, why:'1,693쌍: 함께 운동하는 부부가 소통·갈등 해결 더 좋음, 최다 공동 운동은 걷기(BYU 2026); 14일 일기연구 공동 운동일 관계만족↑(2021)', ev:'m', src:'https://doi.org/10.1177/02654075211012086'},
+    {text:'금연·절주·체중 목표를 내가 먼저 공개하고 같이 시작; 연 1회 같은 날 검진', freq:'monthly', cell:6, why:'파트너가 금연으로 바뀐 남성의 금연률 48% vs 8%, 조정 OR 11.8; 운동·체중감소도 동일(ELSA 3,722쌍, Jackson 2015 JAMA IM)', ev:'s', src:'https://discovery.ucl.ac.uk/id/eprint/1460730/'}
+  ],
+  [
+    {text:'직원·핵심 프리랜서 주 1회 1:1 15~30분(인정→우선순위→장애물) + 7일 인정', freq:'weekly', cell:0, why:'지난 1주 의미 있는 피드백 받은 직원 80%가 완전 몰입, 주 1회 15~30분이면 충분(Gallup, 상관); 심리적 안전이 팀 성과 1위(Project Aristotle)', ev:'m', src:'https://www.gallup.com/workplace/505370/great-manager-important-habit.aspx'},
+    {text:'핵심 친구 5명 명단, 매주 1명 10분 통화 + 월 1회 활동 친구 3시간', freq:'weekly', cell:1, why:'성인은 가벼운 친구까지 94시간·친구까지 +164시간, 업무 시간은 불인정(Hall 2018); 남성은 함께하는 활동이 관계 유지에 중요(Roberts & Dunbar 2015)', ev:'m', src:'https://greatergood.berkeley.edu/article/item/how_long_does_it_take_to_make_a_friend'},
+    {text:'일요일 저녁 부모 각각 15분 통화 + 월 1회 식사, 아버지와 분기 단둘 활동', freq:'weekly', cell:2, why:'자녀와 접촉 없는 노부모는 만족·건강·외로움 모두 나쁨(Kalmijn 2023, N=4,641); 한국 60대 남성이 고독사 단일 최대 집단(27.8%)', ev:'m', src:'https://www.demographic-research.org/volumes/vol48/21/default.htm'},
+    {text:'주 1회 6개월+ 연락 없던 약한 유대 1명에게 정보·축하·질문 메시지', freq:'weekly', cell:4, why:'LinkedIn 2,000만 명 무작위 실험: 공통 지인 10명 미만·저빈도 유대가 새 기회를 가장 많이 전달(Rajkumar 2022 Science)', ev:'s', src:'https://www.science.org/doi/10.1126/science.abl4476'},
+    {text:'연 1개 새 집단 가입(러닝·등산 우선), 6개월 주 1회 출석, 총 3개 유지', freq:'weekly', cell:6, why:'소속 집단 0→1개 가입 시 우울 재발 위험 24%↓, 3개 가입 시 63%↓(Cruwys 2013, N=5,055 종단); 효과는 출석보다 동일시', ev:'s', src:'https://ideas.repec.org/a/eee/socmed/v98y2013icp179-186.html'},
+    {text:'교차 계층 모임 1개(최고위과정·협회·조찬) + 모임당 위로 1명 2주 내 1:1 커피', freq:'monthly', cell:5, why:'교차 계층 친구(경제적 연결성)는 상향 이동의 최강 예측변수, 저소득 아동 성인 소득 +20%(Chetty 2022, FB 210억 관계)', ev:'m', src:'https://opportunityinsights.org/paper/social-capital-i-measurement-and-associations-with-economic-mobility/'},
+    {text:'분기 1회 에너지 감사 1시간(+/−/±), ±·−는 접촉 주기 한 단계 늘리기', freq:'monthly', cell:7, why:'양가적 관계가 중요 네트워크의 거의 절반, 일상 혈압·염증·관상동맥 석회화와 연관(Uchino 연구 프로그램); 절연 대신 페이드', ev:'m', src:'https://psych.utah.edu/people/faculty/uchino-bert.php'}
+  ],
+  [
+    {text:'[임신 전] 사우나 중단·금연·절주·정상 BMI, 남성 엽산·아연 영양제 사지 않기', freq:'once', cell:0, why:'남성 엽산+아연 6개월 RCT 2,370쌍에서 정액 질·출생률 개선 없음(FAZST, JAMA 2020); 사우나 3개월 후 정자 수↓, 중단 6개월 뒤 회복(Garolla 2013)', ev:'s', src:'https://jamanetwork.com/journals/jama/article-abstract/2758450'},
+    {text:'[임신 전~12주] 배우자 엽산 400µg/일 + 다랑어·새치류 주 100g 이하', freq:'daily', cell:2, why:'WHO: 임신 시도 시작부터 12주까지 엽산 400µg(Cochrane 근거); 식약처: 임신부 다랑어·새치·심해어 주 100g 이하(2015 지침)', ev:'s', src:'https://www.who.int/tools/elena/interventions/folate-periconceptional'},
+    {text:'[0–3세] 그림책 매일 1~2권 + 2세 미만 화면 0, 아기 신호에 5초 내 반응', freq:'daily', cell:3, why:'하루 1권만 읽어줘도 5세까지 약 29만 단어 더 노출(Logan 2019); WHO 1세 미만 화면 비권장·2~4세 1시간 이하; serve & return(Harvard)', ev:'m', src:'https://news.osu.edu/a-million-word-gap-for-children-who-arent-read-to-at-home/'},
+    {text:'[0–3세] 생후 2~3개월부터 취침 루틴(목욕→책→불 끄기) 주 7일 같은 순서', freq:'daily', cell:6, why:'13개국 10,085명(한국 포함): 취침 루틴 빈도↑ → 이른 취침·적은 야간 각성·긴 수면, 아시아·서구 동일(Mindell 2015 Sleep)', ev:'s', src:'https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=%22Bedtime%20routines%20for%20young%20children%22%20AND%20AUTH:%22Mindell%22&resultType=core&format=json'},
+    {text:'[0–3세] 체벌·소리 지르기·죄책감 유발 금지; 아버지 고정 역할 1~2개', freq:'daily', cell:1, why:'1,435편 메타: 가혹·심리적 통제가 외현화 문제와 최강 연관(Pinquart 2017); 아버지 관여 종단 24편 중 22편 긍정(Sarkadi 2008)', ev:'s', src:'https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:28459276&resultType=core&format=json'},
+    {text:'[3–7세] 하루 활동 180분(60분 숨 차게) + 야외 시간 최대화, 종목 샘플링', freq:'daily', cell:5, why:'WHO 3~4세 180분(중·고강도 60분+); 야외 시간 증가로 근시 발병 RR 0.54~0.57(Xiong 2017 메타 25편); 조기 전문화 비권고(AOSSM 2016)', ev:'s', src:'https://www.who.int/news/item/24-04-2019-to-grow-up-healthy-children-need-to-sit-less-and-play-more'},
+    {text:'[3–7세] 학습형 사교육 보류, 신체·예술·만들기 샘플링 + 흥미 신호 노트', freq:'monthly', cell:7, why:'한국아동패널 2,150명: 3~5세 사교육은 장기 학업 효과 없거나 미미, 학습형은 자존감에 부정적·체육형은 성실성↑(육아정책연구소)', ev:'m', src:'https://www.hankyung.com/article/2025031668085'}
+  ],
+  [
+    {text:'라운드·연습 전 동적+클럽 워밍업 5~10분, 정적 스트레칭 선행 금지', freq:'weekly', cell:2, why:'동적+클럽 워밍업은 클럽헤드 속도 +1.1%·샷 품질 +40%(Coughlan 2018); 정적 스트레칭 선행 시 CHS −4.2%; 2018 국제 합의문 100% 합의', ev:'m', src:'https://repository.essex.ac.uk/23236/1/ijspt-13-828.pdf'},
+    {text:'주 2회 15분 오버헤드 딥 스쿼트·고관절 회전·사이드브리지(좌우 대칭)', freq:'weekly', cell:4, why:'얼리 익스텐션(골반이 공 쪽으로)은 아마추어 67%(TPI 9만 명), 최다 원인은 풀 딥 스쿼트 불가; 사이드브리지 비대칭이 허리통증 예측(Smith 2018)', ev:'m', src:'https://www.mytpi.com/articles/swing/early-extension-swing-characteristic'},
+    {text:'백스윙 체크: 어드레스 척추각 유지, 스웨이·플랫 숄더 플레인·역척추각 금지', freq:'weekly', cell:3, why:'TPI 16개 스윙 결함 목록(자세 상실·스웨이·플랫 숄더 플레인·역척추각); 역척추각은 TPI가 허리통증 1위 원인으로 기술(업계 데이터)', ev:'w', src:'https://www.mytpi.com/improve-my-game/swing-characteristics'},
+    {text:'스윙 생각은 1개만, 몸이 아닌 클럽·타깃 효과(외적 초점)로 표현', freq:'weekly', cell:5, why:'외적 주의초점이 초보·숙련자 모두 샷 정확도↑(Wulf & Su 2007); 단 저숙련자는 내적 초점이 더 일관됐다는 상충 결과(Perkins-Ceccato 2003)', ev:'m', src:'https://pubmed.ncbi.nlm.nih.gov/17941543/'},
+    {text:'150야드 클럽의 남은 거리 중앙값 추적 + 랜덤 연습(클럽·거리 매 샷 교대)', freq:'weekly', cell:7, why:'80 vs 90타 격차 최대 원인은 100야드 밖 샷(퍼팅 15% vs 65%, Broadie); 랜덤 연습은 연습 성적↓ 파지↑(맥락간섭, Fazeli 2019)', ev:'m', src:'https://content.schwab.com/web/retail/public/corporatesponsorships/challengers-video-mark-broadie.html'},
+    {text:'라운드 전 DECADE 체크: 더블보기·3퍼트 금지, 9번 이하로 보기 금지', freq:'weekly', cell:7, why:'Fawcett 5규칙(파5 6타·더블보기·3퍼트·9번 이하 보기·쉬운 세이브 실패 금지); 3퍼트는 최대 비강제 오류(대중 매체, 독립 검증 없음)', ev:'w', src:'https://golf.com/instruction/5-golden-scoring-rules-scott-fawcett/'},
+    {text:'필드는 가능한 홀 도보(18홀≈11,948보) + 주 1회 15분 영상 리뷰', freq:'weekly', cell:6, why:'스웨덴 골퍼 30만 명 표준화 사망비 0.60(Farahmand 2009, 관찰); 18홀 도보 평균 11,948보(Kobriger 2006); 자기통제 영상 피드백 전이 효과(Post)', ev:'s', src:'https://doi.org/10.1111/j.1600-0838.2008.00814.x'}
+  ],
+  [
+    {text:'Projects 3개 + 견적서 Skill + Routines 2개(초안·발송 금지)', freq:'once', cell:0, why:'경계 안 과업(초안·글쓰기)은 시간 −37%·품질 +0.45 SD(Noy & Zhang 444명 RCT); Routines는 승인 없이 자율 실행되므로 쓰기 권한 제한', ev:'s', src:'https://economics.mit.edu/sites/default/files/inline-files/Noy_Zhang_1.pdf'},
+    {text:'하루 2회 25분 초안 위임 블록; 숫자·고유명사·법조문은 출처 링크로 검증', freq:'daily', cell:3, why:'경계 밖 과업에서 AI 사용 시 정답률 84.5%→60~70%, 원인은 과신(BCG 758명 RCT, Dell\'Acqua); AI 신뢰↑→비판적 사고↓(Lee 2025)', ev:'s', src:'https://aiinstitute.hbs.edu/?p=29980'},
+    {text:'금요일 16:07 주간 AI 리뷰 + 월 1회 타이머로 AI 유/무 실측', freq:'weekly', cell:3, why:'숙련 개발자 RCT: 체감 +20% vs 실측 19% 느림(METR 2025); AI 사용자 77%가 업무량 증가, 추가 시간의 39%가 검토(Upwork 2024)', ev:'m', src:'https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/'},
+    {text:'수요일 신발·메디쏠라 블록: 재고 시트 분석 + Photoroom + 카나나 FAQ', freq:'weekly', cell:4, why:'소량 SKU는 구글시트+Claude 월 1회 분석이 비용 효율적(추론, 예측은 경계 밖); 카나나 상담매니저 2025-09 정식 출시, 주문·예약 자동 접수', ev:'w', src:'https://www.kakaocorp.com/page/detail/11719'},
+    {text:'가맹본부 정보공개서·계약서는 Gemini Notebook(출처 고정)에 넣고 질문', freq:'once', cell:1, why:'업로드 소스 기반 인용 답변, 무료 노트북 100개·소스 50개, 한국어 출력(Google 공식); 계약 해석은 경계 밖이라 결론은 사람이', ev:'w', src:'https://support.google.com/gemininotebook/answer/16213268?hl=en'},
+    {text:'약점 1개만 선정(스트로크 게인드) → Sportsbox 무료 → 월 1회 코치 검수', freq:'monthly', cell:6, why:'AI 스윙 앱 효과의 독립 연구 없음(모두 벤더 주장: Arccos 첫해 핸디캡 25%↓ 등); Strokes Gained가 교정 대상 선정 1순위 데이터', ev:'w', src:'https://www.sportsbox.ai/'},
+    {text:'일요일 15분 가족 캘린더 점검; 임신·육아·부부 문제는 AI가 결론 내지 않기', freq:'weekly', cell:7, why:'임신 관련 의료 질문의 LLM 정답률 61~78% 편차·유해 응답 발생(2026 연구); 치료 챗봇은 대체 불가, 저위험 용도만(Stanford HAI 2025)', ev:'m', src:'https://hai.stanford.edu/news/exploring-the-dangers-of-ai-in-mental-health-care'}
+  ]
+];
   /*KNOWLEDGE_END*/
 
   function defaultSystem(){
@@ -970,7 +1105,8 @@
     const pl = document.getElementById('princ-list'); pl.innerHTML='';
     if(!sy.principles.length) pl.appendChild(el('li',{class:'empty', text:'아직 원칙이 없다. 아래에 한 줄 추가.'}));
     sy.principles.forEach((ptxt,i)=>{
-      const inp = el('input',{type:'text', value:ptxt, 'aria-label':'원칙 '+(i+1), oninput:e=>{ sy.principles[i]=e.target.value; save(); }});
+      const inp = el('textarea',{rows:'1', 'aria-label':'원칙 '+(i+1), oninput:e=>{ sy.principles[i]=e.target.value; save(); autoGrow(e.target); }}); inp.value = ptxt;
+      requestAnimationFrame(()=>autoGrow(inp));
       const del = el('button',{type:'button',class:'del','aria-label':'삭제',text:'✕', onclick:()=>{ sy.principles.splice(i,1); save(); renderSystem(); }});
       pl.appendChild(el('li',{},[inp,del]));
     });
@@ -1043,6 +1179,7 @@
     });
     if(!sl.children.length) sl.appendChild(el('div',{class:'empty', text:'제안이 아직 없다.'}));
   }
+  function autoGrow(t){ t.style.height='auto'; t.style.height=(t.scrollHeight)+'px'; }
   function hasAction(th, pr){ return th.cells.some(c => c.actions.some(a => a.text===pr.text)); }
   function renderCheckChart(checkins, wk){
     const svg = document.getElementById('chk-chart'); while(svg.firstChild) svg.removeChild(svg.firstChild);
