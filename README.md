@@ -43,6 +43,8 @@ CNAME             커스텀 도메인 지정 — 지우면 도메인 끊김!
 - `references/relationships.md` — 관계 맺기·거절·사과·갈등 대화·손절
 - `references/rude-people.md` — 반말·갑질·비꼼·고함 등 유형별 대응 사다리
 - `references/charisma-leader.md` — 존재감·말투·결단·팀 장악·어려운 대화·협상
+- `references/consequences.md` — 참교육: 대가 사다리·상대별 합법 경로·맞대응 시 법적 위험·통보문 템플릿
+- `references/history.md` — 역사 인물·고사성어에서 사료로 검증한 사람 원칙 18가지와 통념 주의 목록
 
 내용 수정은 해당 .md 파일을 고치고 push 하면 된다.
 
