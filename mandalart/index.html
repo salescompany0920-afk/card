@@ -226,6 +226,7 @@
   .princ li{display:flex; gap:8px; align-items:center; padding:5px 0; border-top:1px solid var(--line-2)}
   .princ li:first-child{border-top:0}
   .princ li::before{counter-increment:p; content:counter(p); flex:none; width:24px; height:24px; border-radius:50%; background:var(--soft); color:var(--accent-deep); font-weight:800; font-size:12px; display:flex; align-items:center; justify-content:center}
+  .princ li.empty{display:block} .princ li.empty::before{display:none}
   .princ input{flex:1 1 0; width:0; min-width:0; border:1px solid transparent; border-radius:8px; padding:7px 8px; background:transparent; font-size:14px}
   .princ input:focus{border-color:var(--line); background:var(--card-2); outline:none}
   .princ + .addrow{margin-top:8px}
