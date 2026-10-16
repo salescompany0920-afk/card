@@ -17,10 +17,10 @@
   /* 레이아웃: 상단 앱바(데스크톱 탭) + 한 열 콘텐츠(최대 1180px) + 모바일 하단 탭바 + 편집은 사이드시트/바텀시트.
      분위기: 종이 위 격자. 따뜻한 회색 종이, 잉크 글자, 정총무 주황 한 점, 테마 8색은 옅게. */
   :root{
-    --bg:#f5f3ee; --card:#ffffff; --card-2:#faf8f4; --ink:#1a1814; --sub:#6e685e; --mute:#a29b8f;
+    --bg:#f5f3ee; --card:#ffffff; --card-2:#faf8f4; --ink:#1a1814; --sub:#6e685e; --mute:#8a8377;
     --line:#e4e0d7; --line-2:#efece5;
     --accent:#E84E1B; --accent-deep:#C43F12; --soft:#fdeee7; --on-accent:#ffffff;
-    --ok:#1f8a4c; --warn:#b7791f; --ok-bg:#e6f4ea; --warn-bg:#fbf0d9;
+    --ok:#1f8a4c; --warn:#b7791f; --ok-bg:#e6f4ea; --warn-bg:#fbf0d9; --ok-ink:#166b3b; --warn-ink:#8a5a12;
     --h0:#E8743B; --h1:#3B82C4; --h2:#3AA06B; --h3:#D9A520; --h4:#8B6CC9; --h5:#2BA3A6; --h6:#D65C8A; --h7:#6B7280;
     --t0:color-mix(in oklab, var(--h0) 18%, var(--card)); --t1:color-mix(in oklab, var(--h1) 18%, var(--card));
     --t2:color-mix(in oklab, var(--h2) 18%, var(--card)); --t3:color-mix(in oklab, var(--h3) 18%, var(--card));
@@ -37,19 +37,19 @@
   }
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
-      --bg:#15130f; --card:#1e1b16; --card-2:#24211b; --ink:#f0ece4; --sub:#aaa397; --mute:#7c766b;
+      --bg:#15130f; --card:#1e1b16; --card-2:#24211b; --ink:#f0ece4; --sub:#aaa397; --mute:#9b9488;
       --line:#302c25; --line-2:#29251f;
       --accent:#F0613A; --accent-deep:#F5875F; --soft:#3a2419; --on-accent:#ffffff;
-      --ok:#4fc27e; --warn:#e2a93f; --ok-bg:#1c3326; --warn-bg:#3a2d14;
+      --ok:#4fc27e; --warn:#e2a93f; --ok-bg:#1c3326; --warn-bg:#3a2d14; --ok-ink:#8fdcae; --warn-ink:#f3c56a;
       --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px rgba(0,0,0,.35); --shadow-lg:0 20px 60px rgba(0,0,0,.6);
       color-scheme:dark;
     }
   }
   :root[data-theme="dark"]{
-    --bg:#15130f; --card:#1e1b16; --card-2:#24211b; --ink:#f0ece4; --sub:#aaa397; --mute:#7c766b;
+    --bg:#15130f; --card:#1e1b16; --card-2:#24211b; --ink:#f0ece4; --sub:#aaa397; --mute:#9b9488;
     --line:#302c25; --line-2:#29251f;
     --accent:#F0613A; --accent-deep:#F5875F; --soft:#3a2419; --on-accent:#ffffff;
-    --ok:#4fc27e; --warn:#e2a93f; --ok-bg:#1c3326; --warn-bg:#3a2d14;
+    --ok:#4fc27e; --warn:#e2a93f; --ok-bg:#1c3326; --warn-bg:#3a2d14; --ok-ink:#8fdcae; --warn-ink:#f3c56a;
     --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px rgba(0,0,0,.35); --shadow-lg:0 20px 60px rgba(0,0,0,.6);
     color-scheme:dark;
   }
@@ -86,24 +86,26 @@
   .menu summary::-webkit-details-marker{display:none}
   .menu summary:hover{color:var(--ink); border-color:var(--mute)}
   .menu[open] summary{background:var(--card-2); color:var(--ink)}
-  .menu-list{position:absolute; right:0; top:44px; width:240px; background:var(--card); border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow-lg); padding:6px; z-index:20}
+  .menu-list{position:absolute; right:0; top:44px; width:240px; max-width:calc(100vw - 32px); background:var(--card); border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow-lg); padding:6px; z-index:20}
   .menu-list button, .menu-list label{display:flex; align-items:center; gap:10px; width:100%; text-align:left; padding:10px 10px; border-radius:9px; font-size:13.5px; font-weight:600; color:var(--ink); cursor:pointer}
   .menu-list button:hover, .menu-list label:hover{background:var(--card-2)}
   .menu-list .danger{color:var(--accent-deep)}
   .menu-list .saved{display:block; padding:8px 10px 4px; font-size:11.5px; color:var(--mute); border-top:1px solid var(--line-2); margin-top:4px}
 
   /* ---------- 핵심 목표 ---------- */
-  .goalbar{display:flex; align-items:stretch; gap:16px; background:linear-gradient(135deg,#F0611F 0%,#E84E1B 55%,#CF3F10 100%); color:#fff; border-radius:var(--r); padding:18px 20px; box-shadow:0 12px 34px color-mix(in srgb, #E84E1B 28%, transparent); cursor:pointer; position:relative; overflow:hidden; text-align:left; width:100%}
+  .goalbar{display:flex; align-items:stretch; gap:16px; background:linear-gradient(135deg,#EE5B1A 0%,#E04A17 55%,#C83B0E 100%); color:#fff; border-radius:var(--r); padding:18px 20px; box-shadow:0 12px 34px color-mix(in srgb, #E84E1B 28%, transparent); position:relative; overflow:hidden; text-align:left; width:100%}
   .goalbar::after{content:""; position:absolute; inset:-40% auto auto 55%; width:60%; aspect-ratio:1; border-radius:50%; background:radial-gradient(closest-side, rgba(255,255,255,.18), rgba(255,255,255,0)); pointer-events:none}
-  .goalbar .main{flex:1 1 auto; min-width:0; display:flex; flex-direction:column; gap:4px}
-  .goalbar .tag{font-size:11px; letter-spacing:.14em; font-weight:700; opacity:.9; text-transform:uppercase}
+  .goalbar .main{flex:1 1 auto; min-width:0; display:flex; flex-direction:column; gap:4px; color:inherit; text-align:left; padding:0; border-radius:10px; cursor:pointer; position:relative; z-index:1}
+  .goalbar .main:focus-visible{outline:2px solid #fff; outline-offset:6px}
+  .goalbar .main > span{display:block}
+  .goalbar .tag{font-size:11.5px; letter-spacing:.14em; font-weight:700; text-transform:uppercase}
   .goalbar .goal{font-family:var(--serif); font-size:22px; font-weight:700; line-height:1.3; letter-spacing:-.01em; text-wrap:balance; word-break:keep-all; overflow-wrap:anywhere}
-  .goalbar .goal.empty{font-family:var(--font); font-size:15px; font-weight:600; color:#fff; opacity:.92}
-  .goalbar .hint{font-size:12px; opacity:.85; margin-top:auto; padding-top:6px}
-  .goalbar .stats{display:flex; gap:8px; flex:none; align-self:flex-start}
-  .goalbar .stat{min-width:92px; background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.22); border-radius:12px; padding:10px 12px; text-align:left}
+  .goalbar .goal.empty{font-family:var(--font); font-size:15px; font-weight:600; color:#fff}
+  .goalbar .hint{font-size:12.5px; margin-top:auto; padding-top:6px}
+  .goalbar .stats{display:flex; gap:8px; flex:none; align-self:flex-start; position:relative; z-index:1}
+  .goalbar .stat{min-width:92px; background:rgba(70,22,4,.24); border:1px solid rgba(255,255,255,.28); border-radius:12px; padding:10px 12px; text-align:left}
   .goalbar .stat b{display:block; font-size:20px; font-weight:800; font-variant-numeric:tabular-nums; line-height:1.1; letter-spacing:-.02em}
-  .goalbar .stat span{font-size:11px; opacity:.9; display:block; margin-top:3px; white-space:nowrap}
+  .goalbar .stat span{font-size:12px; display:block; margin-top:3px; white-space:nowrap}
   .print-goal{display:none}
 
   /* ---------- 보드 ---------- */
@@ -189,7 +191,7 @@
   /* ---------- 카드 공통 ---------- */
   .cards{display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:14px}
   .cardx{background:var(--card); border:1px solid var(--line); border-radius:var(--r); padding:18px 20px; box-shadow:var(--shadow); min-width:0}
-  .cardx h2{font-size:14px; font-weight:800; color:var(--ink); margin-bottom:10px; display:flex; gap:10px; align-items:center}
+  .cardx h2{font-size:14px; font-weight:800; color:var(--ink); margin-bottom:10px; display:flex; gap:10px; align-items:center; word-break:keep-all}
   .cardx h2 span{margin-left:auto; color:var(--sub); font-weight:600; font-size:12px; font-variant-numeric:tabular-nums; white-space:nowrap}
   .ring{width:26px; height:26px; flex:none; transform:rotate(-90deg)}
   .ring circle{fill:none; stroke-width:3.5}
@@ -268,7 +270,7 @@
   .sugg .tx{flex:1; font-size:13.5px; min-width:0}
   .sugg .why{display:block; font-size:12px; color:var(--sub); margin-top:3px; line-height:1.5}
   .sugg .ev{font-size:10.5px; font-weight:800; border-radius:6px; padding:1px 6px; margin-right:6px; vertical-align:1px}
-  .sugg .ev.s{background:var(--ok-bg); color:var(--ok)} .sugg .ev.m{background:var(--warn-bg); color:var(--warn)} .sugg .ev.w{background:var(--line-2); color:var(--sub)}
+  .sugg .ev.s{background:var(--ok-bg); color:var(--ok-ink)} .sugg .ev.m{background:var(--warn-bg); color:var(--warn-ink)} .sugg .ev.w{background:var(--line-2); color:var(--sub)}
   .sugg .add{flex:none; border:1px solid var(--line); background:var(--card); border-radius:8px; padding:6px 10px; font-size:12px; font-weight:700; white-space:nowrap; min-height:32px}
   .sugg .add:hover{border-color:var(--accent); color:var(--accent-deep)}
   .sugg .add:disabled{color:var(--ok); border-color:transparent; background:var(--ok-bg); cursor:default}
@@ -306,6 +308,8 @@
     .tab{flex-direction:column; gap:3px; padding:6px 2px; font-size:11px; border-radius:10px; justify-content:center}
     .tab .icon{width:20px; height:20px}
     .tab[aria-selected="true"]{background:var(--soft); color:var(--accent-deep); box-shadow:none}
+    .menu{margin-left:auto}
+    .cardx h2 span{white-space:normal; text-align:right; max-width:58%}
     .goalbar{padding:16px}
     .goalbar .goal{font-size:19px}
     .goalbar .stat{padding:8px 10px} .goalbar .stat b{font-size:17px}
@@ -320,7 +324,7 @@
     .board.focus-mode .cell.theme .m{display:flex}
     .cards{grid-template-columns:1fr}
     .cardx{padding:16px}
-    .panel{top:auto; left:0; right:0; bottom:0; width:100%; height:min(88dvh, 100%); border-left:0; border-top:1px solid var(--line); border-radius:20px 20px 0 0; transform:translateY(104%); padding-top:0; padding-left:env(safe-area-inset-left, 0px)}
+    .panel{top:auto; left:0; right:0; bottom:0; width:100%; height:88vh; height:min(88dvh, 100%); max-height:100%; border-left:0; border-top:1px solid var(--line); border-radius:20px 20px 0 0; transform:translateY(104%); padding-top:0; padding-left:env(safe-area-inset-left, 0px)}
     .panel::before{content:""; display:block; width:40px; height:4px; border-radius:2px; background:var(--line); margin:10px auto 0}
     .panel.open{transform:none}
   }
@@ -329,6 +333,7 @@
 
   /* ---------- 인쇄 ---------- */
   @media print{
+    :root, :root:not([data-theme="light"]), :root[data-theme="dark"]{--bg:#fff; --card:#fff; --card-2:#fafafa; --ink:#000; --sub:#444; --mute:#666; --line:#ddd; --line-2:#eee; --soft:#fdeee7; color-scheme:light}
     body{padding:0; background:#fff; color:#000}
     .topbar, .goalbar, .viewbar, .focusbar, details.help, footer, .panel, .scrim, #view-today, #view-review, #view-system{display:none !important}
     .wrap{max-width:none; padding:0}
@@ -375,7 +380,7 @@
       <button class="tab" role="tab" data-view="system" aria-selected="false"><svg class="icon"><use href="#i-compass"/></svg>시스템</button>
     </nav>
     <details class="menu" id="menu">
-      <summary aria-label="더보기"><svg class="icon"><use href="#i-more"/></svg></summary>
+      <summary aria-label="더보기" aria-haspopup="menu" aria-expanded="false"><svg class="icon"><use href="#i-more"/></svg></summary>
       <div class="menu-list tools">
         <button id="btn-export" type="button"><svg class="icon"><use href="#i-down"/></svg>JSON 백업 받기</button>
         <label for="file-import"><svg class="icon"><use href="#i-up"/></svg>백업 가져오기</label>
@@ -388,14 +393,14 @@
   </div>
 </header>
 <main class="wrap">
-  <button class="goalbar" id="goalbar" type="button" aria-label="핵심 목표 편집">
-    <div class="main">
-      <div class="tag">핵심 목표 · Center</div>
-      <div class="goal" id="goal-text"></div>
-      <div class="hint">눌러서 편집</div>
-    </div>
-    <div class="stats" id="goal-stats"></div>
-  </button>
+  <section class="goalbar" aria-label="핵심 목표">
+    <button class="main" id="goalbar" type="button">
+      <span class="tag">핵심 목표 · Center</span>
+      <span class="goal" id="goal-text"></span>
+      <span class="hint">눌러서 편집</span>
+    </button>
+    <div class="stats" id="goal-stats" aria-label="이번 주 요약"></div>
+  </section>
   <div class="print-goal" id="print-goal"></div>
 
   <section id="view-board">
@@ -445,10 +450,10 @@
       </div>
       <div class="cardx">
         <h2>주간 행복 체크 <span id="chk-week"></span></h2>
-        <p class="help-line">일요일에 1분. 0은 최악, 10은 최고. 숫자보다 추세를 본다.</p>
+        <p class="help-line">일요일에 1분. 0은 최악, 10은 최고. 5문항 평균의 4주 추세를 본다. 평균이 0.5 이상 움직이면 주간 리뷰에 원인을 적는다.</p>
         <div class="chk" id="chk-form"></div>
         <div class="hero"><b id="chk-hero">–</b><span id="chk-hero-sub"></span></div>
-        <svg class="chart" id="chk-chart" viewBox="0 0 320 120" role="img" aria-label="최근 12주 행복 점수 추세"></svg>
+        <svg class="chart" id="chk-chart" viewBox="0 0 320 120" role="img" aria-label="최근 행복 체크 기록 12건의 추세"></svg>
         <details class="tbl"><summary>표로 보기</summary><table id="chk-table"></table></details>
       </div>
       <div class="cardx">
@@ -485,7 +490,7 @@
 </main>
 
 <div class="scrim" id="scrim"></div>
-<aside class="panel" id="panel" aria-label="편집">
+<aside class="panel" id="panel" role="dialog" aria-modal="true" aria-label="편집" inert>
   <header>
     <div>
       <div class="path" id="p-path"></div>
@@ -620,7 +625,7 @@ KNOWLEDGE.rituals = [
   {text:'아침 3분: 명상록 2.1 예행연습 + if-then 한 줄 + 오늘 첫 행동', freq:'daily'},
   {text:'저녁 5분: 세네카 3문 + 증자 3문 + done 3줄 + 내일 첫 행동', freq:'daily'},
   {text:'셧다운 의식: 업무 알림 끄고 식사·취침 전 폰 격리 50분', freq:'daily'},
-  {text:'일요일 30분 주간 리뷰 + WHO-5·캔트릴 사다리 행복 체크 2분', freq:'weekly'},
+  {text:'일요일 30분 주간 리뷰 + 사다리·5문항 행복 체크 2분', freq:'weekly'},
   {text:'번아웃 3문항(소진·냉소·효능감) 점검 → 다음 주 모드 선택', freq:'weekly'},
   {text:'파트너와 State of the Union 60분(잘된 것 5·감사·이슈 1)', freq:'weekly'},
   {text:'월말 돈 점검: 저축률·비상금 개월 수·세금 적립률 3지표', freq:'monthly'},
@@ -648,7 +653,7 @@ KNOWLEDGE.routines = {
       '유혹 묶기: 좋아하는 오디오북·팟캐스트는 통근·운동 중에만, 새 과목 첫 4~6주 집중',
       '주 1회 5분 레버리지 점검: 시간 임대 vs 자산 축적 비율, 공개 마감 1건 선언(나발·뉴포트)',
       '상한선: 가족 저녁 주 3회↑·셧다운 매일·친구 연락 주 1회, 2주 연속 위반 시 멈춤 루틴 전환',
-      '카페인은 취침 6시간 전부터 0, 심리적 분리 60분+ 주 1회 보장(달리기는 회복 대체재 아님)'
+      '카페인은 취침 9시간 전까지만(400mg은 6시간 전이라도 수면 1시간↓), 심리적 분리 60분+ 주 1회 보장(달리기는 회복 대체재 아님)'
     ]
   },
   stop:{
@@ -671,7 +676,7 @@ KNOWLEDGE.practices = [
     {text:'주 2회 30분 근력운동 + 중강도 유산소 주 150분(걷는 라운드 포함)', freq:'weekly', cell:2, why:'WHO 2020 강력 권고(유산소 150~300분, 근력 주 2일+); 근력 주 30~60분에서 사망 10~20%↓, 병행 시 전체사망 RR 0.60(Momma 2022)', ev:'s', src:'https://pmc.ncbi.nlm.nih.gov/articles/PMC7719906/'},
     {text:'단백질 하루 1.2~1.6 g/kg(끼니당 25~40 g), 술은 주 2잔 이하', freq:'daily', cell:1, why:'근력운동 시 제지방 증가는 1.6 g/kg 부근에서 정체(Morton 2018, 49 RCT); 캐나다 2023 지침 주 2잔 이하 = 저위험, WHO "안전한 양 없음"', ev:'m', src:'https://pubmed.ncbi.nlm.nih.gov/28698222/'},
     {text:'크레아틴 3~5 g/일; 비타민D·오메가3는 측정 후 결핍 시만', freq:'daily', cell:3, why:'크레아틴은 근력·제지방 근거가 가장 강함(ISSN 2017); 비타민D·오메가3 예방 보충은 심혈관·암 효과 없음(VITAL 25,871명 RCT)', ev:'s', src:'https://pubmed.ncbi.nlm.nih.gov/28615996/'},
-    {text:'국가검진 날 HbA1c·비타민D·페리틴·ApoB 추가, 40세부터 위내시경 2년', freq:'once', cell:4, why:'국가검진은 공복혈당만·지질은 4년 1회; 40세↑ 위암 내시경 2년마다(국가암검진); 치과는 6~24개월 차이 없음(Cochrane 2020)', ev:'m', src:'https://kbthink.com/life/wellness/healthcheck.html'},
+    {text:'국가검진 날 HbA1c·비타민D·페리틴·ApoB 추가, 40세부터 위내시경 2년', freq:'once', cell:4, why:'국가검진은 공복혈당만·지질은 4년 1회; 40세↑ 위암 내시경 2년마다(국가암검진); 치과는 6~24개월 차이 없음(Cochrane 2020)', ev:'w', src:'https://kbthink.com/life/wellness/healthcheck.html'},
     {text:'매일 아침 SPF30+ 자외선차단제, 밤 레티노이드 주 2~3회→매일', freq:'daily', cell:6, why:'매일 자외선차단제 사용군은 4.5년 후 피부 노화 진행 24% 감소(Hughes 2013 RCT 903명); 트레티노인 주름 개선 메타(8 RCT)', ev:'s', src:'https://doi.org/10.7326/0003-4819-158-11-201306040-00002'},
     {text:'월 1회 허리둘레 측정(배꼽 높이) 90 cm 미만 + 매일 5분 자세 운동', freq:'monthly', cell:7, why:'한국 남성 복부비만 기준 허리둘레 ≥90 cm(KSSO 2022); chin tuck·견갑 안정화 운동은 두개척추각 개선(Sheikhhoseini 2018 메타 7 RCT)', ev:'s', src:'https://pmc.ncbi.nlm.nih.gov/articles/PMC10088549/'}
   ],
@@ -695,7 +700,7 @@ KNOWLEDGE.practices = [
   ],
   [
     {text:'퇴근 후 20분 스트레스 완화 대화(조언 금지) + 식사·취침 전 폰 격리 50분', freq:'daily', cell:0, why:'한국 기혼여성 결혼만족 1위 요인은 대화 증감(여성가족패널, 남국현 2022); 파트너 phubbing은 관계만족 r=−0.22·갈등 +0.57(메타 52편)', ev:'m', src:'https://pmc.ncbi.nlm.nih.gov/articles/PMC12106345'},
-    {text:'[출산 후 24개월] 아기 재운 뒤 10분×2 대화 + 주간 회의에 육아 분담 1문항', freq:'daily', cell:0, why:'첫 아이 출산 시 만족 급락(아버지 d=−0.45·어머니 −0.71, Doss 2009 8년 추적)이 둘째 해까지 지속(Bogdan 2022 메타 14.5만 명)', ev:'s', src:'https://pmc.ncbi.nlm.nih.gov/articles/PMC2702669'},
+    {text:'[출산 후 24개월] 아기 재운 뒤 10분×2 대화 + 주간 회의에 육아 분담 1문항', freq:'daily', cell:0, why:'첫 아이 출산 시 만족 급락(아버지 d=−0.45·어머니 −0.71, Doss 2009 8년 추적)이 둘째 해까지 지속(Bogdan 2022 메타 14.5만 명)', ev:'m', src:'https://pmc.ncbi.nlm.nih.gov/articles/PMC2702669'},
     {text:'매일 구체 감사 1문장(행동+의미) + 주 1회 7칸 식단 비는 칸 채우기', freq:'daily', cell:1, why:'사랑의 언어 매칭 효과 근거 없음, 어떤 표현이든 많이 받을수록 행복(Impett 2024 리뷰); 감사는 관계 유지 예측(Gordon 2012)', ev:'s', src:'https://www.utoronto.ca/news/little-evidence-linking-five-love-languages-healthy-relationships-researchers-say'},
     {text:'월 1회 경험 쿠폰 서프라이즈(새 클래스·공연·식당), 물건 대신 경험', freq:'monthly', cell:2, why:'실제 선물 교환 실험: 경험 선물이 물질 선물보다 관계 강화, 기제는 소비 시 감정 강도(Chan & Mogilner 2017 JCR)', ev:'m', src:'https://academic.oup.com/jcr/article/43/6/913/2939516'},
     {text:'분기 1박 2일 처음 가는 곳 + 월 1회 반나절 마이크로 어드벤처(폰·업무 차단)', freq:'monthly', cell:3, why:'새롭고 흥분되는 활동을 함께 한 커플만 관계만족 상승, 즐겁기만 한 활동은 무효(Aron 2000 실험); 여행 리뷰는 이혼 감소 가능성(Durko 2013)', ev:'m', src:'https://ggia.berkeley.edu/practice/practice_as_pdf/exciting_activities_for_couples'},
@@ -753,6 +758,9 @@ KNOWLEDGE.practices = [
     if(!Array.isArray(d.system.principles)) d.system.principles = KNOWLEDGE.principles.slice();
     if(!Array.isArray(d.system.rituals)) d.system.rituals = defaultSystem().rituals;
     if(!Array.isArray(d.system.checkins)) d.system.checkins = [];
+    const byWeek = new Map();
+    d.system.checkins.forEach(c => { if(c && typeof c.week==='string' && Array.isArray(c.s)) byWeek.set(c.week, c); });
+    d.system.checkins = [...byWeek.values()].sort((a,b)=> a.week<b.week?-1:1);
     if(!Array.isArray(d.reviews)) d.reviews = [];
     return d;
   }
@@ -765,7 +773,11 @@ KNOWLEDGE.practices = [
   function load(){
     try{
       const raw = localStorage.getItem(KEY);
-      if(raw){ const d = JSON.parse(raw); if(valid(d)) return migrate(d); localStorage.setItem(KEY+'.bak', raw); }
+      if(raw){
+        const d = JSON.parse(raw);
+        if(validCore(d)){ if(!validSystem(d.system)){ localStorage.setItem(KEY+'.bak', raw); d.system = undefined; } return migrate(d); }
+        localStorage.setItem(KEY+'.bak', raw);
+      }
     }catch(e){}
     return migrate(clone(TEMPLATE));
   }
@@ -773,16 +785,17 @@ KNOWLEDGE.practices = [
     if(sy===undefined) return true;
     if(!sy || typeof sy!=='object') return false;
     if(sy.principles!==undefined && !(Array.isArray(sy.principles) && sy.principles.every(x=>typeof x==='string'))) return false;
-    if(sy.rituals!==undefined && !(Array.isArray(sy.rituals) && sy.rituals.every(r=>r && typeof r.text==='string' && (r.freq in RFREQ) && r.done && typeof r.done==='object'))) return false;
+    if(sy.rituals!==undefined && !(Array.isArray(sy.rituals) && sy.rituals.every(r=>r && typeof r.text==='string' && Object.prototype.hasOwnProperty.call(RFREQ, r.freq) && r.done && typeof r.done==='object'))) return false;
     if(sy.checkins!==undefined && !(Array.isArray(sy.checkins) && sy.checkins.every(c=>c && typeof c.week==='string' && Array.isArray(c.s)))) return false;
     return true;
   }
-  function valid(d){
+  function valid(d){ return validCore(d) && validSystem(d.system); }
+  function validCore(d){
     return d && d.version===2 && typeof d.goal==='string' && Array.isArray(d.themes) && d.themes.length===8 &&
-      (d.reviews===undefined || Array.isArray(d.reviews)) && validSystem(d.system) &&
+      (d.reviews===undefined || Array.isArray(d.reviews)) &&
       d.themes.every(t => t && typeof t.title==='string' && Array.isArray(t.cells) && t.cells.length===8 &&
         t.cells.every(c => c && typeof c.title==='string' && Array.isArray(c.actions) &&
-          c.actions.every(a => a && typeof a.text==='string' && (a.freq in FREQ) && a.done && typeof a.done==='object')));
+          c.actions.every(a => a && typeof a.text==='string' && Object.prototype.hasOwnProperty.call(FREQ, a.freq) && a.done && typeof a.done==='object')));
   }
   let saveTimer=null;
   function save(){
@@ -919,7 +932,7 @@ KNOWLEDGE.practices = [
   function themeCell(t, inCenter){
     const th = state.themes[t];
     let done=0,k=0; th.cells.forEach(c=>{const s=cellStats(c); done+=s.done; k+=s.k;});
-    const c = el('button',{type:'button',class:'cell theme'+(ui.sel&&ui.sel.kind==='theme'&&ui.sel.t===t?' sel':''), style:'background:var(--t'+t+')',
+    const c = el('button',{type:'button',class:'cell theme'+(ui.sel&&ui.sel.kind==='theme'&&ui.sel.t===t?' sel':''), style:'background:var(--t'+t+')', 'data-t':String(t),
       onclick:()=>{ if(inCenter && ui.mode==='focus'){ ui.focus=t; ui.sel=null; closePanel(); render(); } else openTheme(t); }});
     c.appendChild(el('div',{class:'t'+(th.title?'':' empty'), text: th.title || '테마 '+(t+1)}));
     c.appendChild(el('div',{class:'m', text: k? (done+'/'+k+' 실천') : ''}));
@@ -928,7 +941,7 @@ KNOWLEDGE.practices = [
   function itemCell(t, i){
     const cell = state.themes[t].cells[i];
     const s = cellStats(cell);
-    const c = el('button',{type:'button',class:'cell s-'+cell.status+(ui.sel&&ui.sel.kind==='cell'&&ui.sel.t===t&&ui.sel.i===i?' sel':''), onclick:()=>openCell(t,i)});
+    const c = el('button',{type:'button',class:'cell s-'+cell.status+(ui.sel&&ui.sel.kind==='cell'&&ui.sel.t===t&&ui.sel.i===i?' sel':''), 'data-t':String(t), 'data-i':String(i), onclick:()=>openCell(t,i)});
     c.appendChild(el('div',{class:'t'+(cell.title?'':' empty'), text: cell.title || '비어 있음'}));
     const m = el('div',{class:'m'});
     const SL={todo:'미착수',doing:'진행 중',done:'완료'};
@@ -946,13 +959,30 @@ KNOWLEDGE.practices = [
   function openPanel(path, body){
     document.getElementById('p-path').textContent = path;
     const b = document.getElementById('p-body'); b.innerHTML=''; b.appendChild(body);
+    panel.inert = false; panel.removeAttribute('inert');
     panel.classList.add('open'); scrim.classList.add('on');
     const first = b.querySelector('input,textarea'); if(first && window.innerWidth>720) first.focus();
   }
-  function closePanel(){ panel.classList.remove('open'); scrim.classList.remove('on'); ui.sel=null; renderBoard(); }
+  function closePanel(){
+    const sel = ui.sel;
+    panel.classList.remove('open'); scrim.classList.remove('on'); panel.inert = true; panel.setAttribute('inert','');
+    ui.sel=null; renderBoard();
+    if(sel){
+      let target = null;
+      if(sel.kind==='goal') target = document.getElementById('goalbar');
+      else if(sel.kind==='theme') target = document.querySelector('.cell.theme[data-t="'+sel.t+'"]');
+      else if(sel.kind==='cell') target = document.querySelector('.cell[data-t="'+sel.t+'"][data-i="'+sel.i+'"]');
+      if(target && target.offsetParent!==null) target.focus({preventScroll:true});
+    }
+  }
   document.getElementById('p-close').onclick = closePanel;
   scrim.onclick = closePanel;
-  document.addEventListener('keydown', e => { if(e.key==='Escape' && panel.classList.contains('open')) closePanel(); });
+  document.addEventListener('keydown', e => {
+    if(e.key!=='Escape') return;
+    const mn = document.getElementById('menu');
+    if(mn.open){ mn.removeAttribute('open'); mn.querySelector('summary').focus(); }
+    else if(panel.classList.contains('open')) closePanel();
+  });
 
   let fid=0;
   function field(label, input, help){
@@ -1080,7 +1110,7 @@ KNOWLEDGE.practices = [
       }));
       const pct = expected? Math.round(done/expected*100) : 0;
       const li = el('li',{},[ el('b',{},[th.title||('테마 '+(t+1)), el('span',{text: expected? (done+'/'+expected+' · '+pct+'%') : '이번 주 항목 없음'})]) ]);
-      const bar = el('div',{class:'bar'}); bar.appendChild(el('i',{style:'width:'+pct+'%;background:var(--t'+t+');filter:saturate(2) brightness(.85)'})); li.appendChild(bar);
+      const bar = el('div',{class:'bar'}); bar.appendChild(el('i',{style:'width:'+pct+'%;background:var(--h'+t+')'})); li.appendChild(bar);
       ul.appendChild(li);
     });
     const rl = document.getElementById('rv-list'); rl.innerHTML='';
@@ -1115,19 +1145,22 @@ KNOWLEDGE.practices = [
     document.getElementById('chk-week').textContent = wk;
     const form = document.getElementById('chk-form'); form.innerHTML='';
     const cur = sy.checkins.find(c=>c.week===wk);
-    const vals = KNOWLEDGE.checkin.map((q,i)=> cur && typeof cur.s[i]==='number' ? cur.s[i] : 5);
+    const draft = (ui.chkDraft && ui.chkDraft.week===wk) ? ui.chkDraft : null;   // 저장 전 입력값은 재렌더에도 유지
+    const vals = KNOWLEDGE.checkin.map((q,i)=> draft ? draft.vals[i] : (cur && typeof cur.s[i]==='number' ? cur.s[i] : 5));
+    const keepDraft = () => { ui.chkDraft = {week:wk, vals:vals.slice(), note:note.value}; };
     KNOWLEDGE.checkin.forEach((q,i)=>{
       const out = el('output',{text:String(vals[i])});
-      const rng = el('input',{type:'range', min:'0', max:'10', step:'1', value:String(vals[i]), id:'chk-'+q.key, oninput:e=>{ vals[i]=+e.target.value; out.textContent=e.target.value; }});
+      const rng = el('input',{type:'range', min:'0', max:'10', step:'1', value:String(vals[i]), id:'chk-'+q.key, oninput:e=>{ vals[i]=+e.target.value; out.textContent=e.target.value; keepDraft(); }});
       form.appendChild(el('div',{class:'q'},[ el('label',{for:'chk-'+q.key},[q.label, el('small',{text:q.hint})]), out ]));
       form.appendChild(rng);
     });
-    const note = el('input',{type:'text', placeholder:'이번 주를 한 줄로(선택)', value: cur? (cur.note||'') : ''});
+    const note = el('input',{type:'text', id:'chk-note', placeholder:'이번 주를 한 줄로(선택)', value: draft ? draft.note : (cur? (cur.note||'') : ''), oninput:keepDraft});
     const saveBtn = el('button',{type:'button',class:'btn', text: cur? '이번 주 체크 갱신' : '이번 주 체크 저장', onclick:()=>{
       const entry = {week:wk, date:dayKey(new Date()), s:vals.slice(), note:note.value.trim()};
       const idx = sy.checkins.findIndex(c=>c.week===wk);
       if(idx>=0) sy.checkins[idx]=entry; else sy.checkins.push(entry);
       sy.checkins.sort((a,b)=> a.week<b.week?-1:1);
+      ui.chkDraft = null;
       save(); renderGoal(); renderSystem();
     }});
     form.appendChild(el('div',{class:'row'},[note, saveBtn]));
@@ -1155,23 +1188,29 @@ KNOWLEDGE.practices = [
       rc.appendChild(el('ol',{}, r.steps.map(st=>el('li',{text:st}))));
     });
     // 5) 테마별 제안
-    const sl = document.getElementById('sugg-list'); sl.innerHTML='';
+    const sl = document.getElementById('sugg-list');
+    const wasOpen = {}; sl.querySelectorAll('details.theme').forEach(d => { wasOpen[d.dataset.t] = d.open; });
+    sl.innerHTML='';
     state.themes.forEach((th,t)=>{
       const list = KNOWLEDGE.practices[t] || [];
       if(!list.length) return;
-      const added = list.filter(pr => hasAction(th, pr)).length;
-      const det = el('details',{class:'theme'});
-      det.appendChild(el('summary',{},[ el('span',{class:'sw', style:'background:var(--t'+t+');filter:saturate(2) brightness(.8)'}), th.title||('테마 '+(t+1)), el('span',{class:'n', text: added+'/'+list.length+' 추가됨'}) ]));
+      const added = list.filter((pr,idx) => hasAction(th, pr, t+':'+idx)).length;
+      const det = el('details',{class:'theme', 'data-t':String(t)});
+      if(wasOpen[t]) det.open = true;
+      det.appendChild(el('summary',{},[ el('span',{class:'sw', style:'background:var(--h'+t+')'}), th.title||('테마 '+(t+1)), el('span',{class:'n', text: added+'/'+list.length+' 추가됨'}) ]));
       const ul = el('ul',{class:'sugg'});
-      list.forEach(pr=>{
+      list.forEach((pr,idx)=>{
+        const pid = t+':'+idx;
         const cell = th.cells[pr.cell] || th.cells[0];
-        const exists = hasAction(th, pr);
+        const orig = (TEMPLATE.themes[t] && TEMPLATE.themes[t].cells[pr.cell]) ? TEMPLATE.themes[t].cells[pr.cell].title : '';
+        const exists = hasAction(th, pr, pid);
+        const where = (cell.title||'칸') + (orig && orig!==cell.title ? ' (원래 칸: '+orig+')' : '');
         const tx = el('div',{class:'tx'},[
           el('span',{class:'ev '+pr.ev, text: pr.ev==='s'?'강':pr.ev==='m'?'중':'약'}),
-          el('b',{text:pr.text}), ' ', el('span',{style:'color:var(--sub);font-size:12px', text:'· '+FREQ[pr.freq]+' · '+(cell.title||'칸')}),
+          el('b',{text:pr.text}), ' ', el('span',{style:'color:var(--sub);font-size:12px', text:'· '+FREQ[pr.freq]+' · '+where}),
           el('span',{class:'why'},[pr.why, pr.src? ' ' : '', pr.src? el('a',{href:pr.src, target:'_blank', rel:'noopener', text:'출처'}) : null])
         ]);
-        const btn = el('button',{type:'button',class:'add', text: exists? '✓ 추가됨' : '➕ 추가', onclick:()=>{ cell.actions.push(A(pr.text, pr.freq)); save(); renderGoal(); renderBoard(); renderToday(); renderReview(); renderSystem(); }});
+        const btn = el('button',{type:'button',class:'add', text: exists? '✓ 추가됨' : '➕ 추가', onclick:()=>{ const act = A(pr.text, pr.freq); act.pid = pid; cell.actions.push(act); save(); renderGoal(); renderBoard(); renderToday(); renderReview(); renderSystem(); }});
         if(exists) btn.disabled=true;
         ul.appendChild(el('li',{},[tx, btn]));
       });
@@ -1180,7 +1219,7 @@ KNOWLEDGE.practices = [
     if(!sl.children.length) sl.appendChild(el('div',{class:'empty', text:'제안이 아직 없다.'}));
   }
   function autoGrow(t){ t.style.height='auto'; t.style.height=(t.scrollHeight)+'px'; }
-  function hasAction(th, pr){ return th.cells.some(c => c.actions.some(a => a.text===pr.text)); }
+  function hasAction(th, pr, pid){ return th.cells.some(c => c.actions.some(a => (pid && a.pid===pid) || a.text===pr.text)); }
   function renderCheckChart(checkins, wk){
     const svg = document.getElementById('chk-chart'); while(svg.firstChild) svg.removeChild(svg.firstChild);
     const NS='http://www.w3.org/2000/svg';
@@ -1250,6 +1289,7 @@ KNOWLEDGE.practices = [
   document.getElementById('focus-back').onclick = () => { ui.focus='center'; render(); };
   document.getElementById('goalbar').onclick = openGoal;
   const menu = document.getElementById('menu');
+  menu.addEventListener('toggle', () => menu.querySelector('summary').setAttribute('aria-expanded', String(menu.open)));
   document.addEventListener('click', e => { if(menu.open && !menu.contains(e.target)) menu.removeAttribute('open'); });
   menu.querySelectorAll('button, label').forEach(b => b.addEventListener('click', () => setTimeout(()=>menu.removeAttribute('open'), 50)));
 
