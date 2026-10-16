@@ -139,6 +139,65 @@
   .btn{border:0; background:var(--accent); color:#fff; border-radius:10px; padding:9px 14px; font-weight:700}
   .btn.ghost{background:var(--card); border:1px solid var(--line); color:var(--ink)}
 
+  /* ---------- 시스템 탭 ---------- */
+  .cards.sys{grid-template-columns:repeat(auto-fill,minmax(340px,1fr))}
+  .cardx.wide{grid-column:1 / -1}
+  .princ{list-style:none; counter-reset:p}
+  .princ li{display:flex; gap:8px; align-items:center; padding:6px 0; border-top:1px solid var(--line)}
+  .princ li:first-child{border-top:0}
+  .princ li::before{counter-increment:p; content:counter(p); flex:none; width:22px; height:22px; border-radius:50%; background:var(--soft); color:var(--accent-deep); font-weight:800; font-size:12px; display:flex; align-items:center; justify-content:center}
+  .princ input{flex:1 1 0; width:0; min-width:0; border:1px solid transparent; border-radius:8px; padding:6px 8px; background:transparent}
+  .princ input:focus{border-color:var(--line); background:#fff; outline:none}
+  .princ .del, .rit .del{border:0; background:transparent; color:var(--sub); font-size:16px; width:28px; cursor:pointer}
+  .princ .del:hover, .rit .del:hover{color:var(--accent-deep)}
+  .chk{display:grid; grid-template-columns:1fr; gap:8px}
+  .chk .q{display:grid; grid-template-columns:1fr 56px; gap:10px; align-items:center}
+  .chk .q label{font-size:13.5px}
+  .chk .q label small{display:block; color:var(--sub); font-size:11.5px}
+  .chk .q input[type=range]{width:100%; accent-color:var(--accent)}
+  .chk .q output{font-weight:800; font-variant-numeric:tabular-nums; text-align:right; font-size:16px}
+  .chk .row{display:flex; gap:8px; align-items:center; margin-top:6px; flex-wrap:wrap}
+  .chk .row input[type=text]{flex:1 1 160px; min-width:0; border:1px solid var(--line); border-radius:8px; padding:8px 10px}
+  .hero{display:flex; align-items:baseline; gap:10px; margin:6px 0 2px}
+  .hero b{font-size:30px; font-weight:800; letter-spacing:-.02em; font-variant-numeric:tabular-nums}
+  .hero span{font-size:12.5px; color:var(--sub)}
+  .chart{width:100%; height:auto; display:block; margin-top:6px}
+  .chart .bar{fill:var(--accent)}
+  .chart .bar.this{fill:var(--accent-deep)}
+  .chart .grid{stroke:var(--line); stroke-width:1}
+  .chart .lbl{font-size:10px; fill:var(--sub); font-family:inherit}
+  .chart .val{font-size:11px; fill:var(--ink); font-weight:700; font-family:inherit}
+  details.tbl{margin-top:6px; font-size:12.5px; color:var(--sub)}
+  details.tbl table{width:100%; border-collapse:collapse; margin-top:4px}
+  details.tbl td{padding:3px 0; border-top:1px solid var(--line)}
+  details.tbl td:last-child{text-align:right; font-variant-numeric:tabular-nums; color:var(--ink)}
+  .rit{list-style:none}
+  .rit li{display:flex; gap:10px; align-items:flex-start; padding:7px 0; border-top:1px solid var(--line)}
+  .rit li:first-child{border-top:0}
+  .rit input[type=checkbox]{width:20px; height:20px; margin-top:1px; accent-color:var(--accent); flex:none}
+  .rit .tx{flex:1; font-size:14px}
+  .rit .tx.done{color:var(--sub); text-decoration:line-through}
+  .rit .fq{font-size:11px; color:var(--accent-deep); font-weight:700; background:var(--soft); border-radius:999px; padding:2px 8px; white-space:nowrap}
+  .rit .sub{display:block; font-size:11.5px; color:var(--sub)}
+  .sugg{list-style:none}
+  .sugg li{display:flex; gap:10px; align-items:flex-start; padding:8px 0; border-top:1px solid var(--line)}
+  .sugg li:first-child{border-top:0}
+  .sugg .tx{flex:1; font-size:13.5px}
+  .sugg .why{display:block; font-size:12px; color:var(--sub); margin-top:2px}
+  .sugg .ev{font-size:10.5px; font-weight:800; border-radius:6px; padding:1px 6px; margin-right:4px; vertical-align:1px}
+  .sugg .ev.s{background:#e2f3e4; color:#1f6b3a} .sugg .ev.m{background:#fff1c9; color:#8a5b00} .sugg .ev.w{background:#eee; color:#666}
+  .sugg .add{flex:none; border:1px solid var(--line); background:var(--card); border-radius:8px; padding:5px 9px; font-size:12px; font-weight:700; white-space:nowrap; cursor:pointer}
+  .sugg .add:disabled{color:var(--ok); border-color:transparent; background:#eef8f0; cursor:default}
+  .sugg a{color:var(--accent-deep); text-decoration:none; font-weight:700}
+  details.theme{border-top:1px solid var(--line); padding:8px 0}
+  details.theme:first-of-type{border-top:0}
+  details.theme summary{cursor:pointer; font-weight:800; font-size:14px; display:flex; align-items:center; gap:8px}
+  details.theme summary .sw{width:12px; height:12px; border-radius:3px; display:inline-block}
+  details.theme summary span.n{margin-left:auto; color:var(--sub); font-weight:600; font-size:12px}
+  .routine ol{padding-left:20px; font-size:13.5px}
+  .routine li{margin:5px 0}
+  .routine h3{font-size:13.5px; margin:10px 0 4px; color:var(--accent-deep)}
+  .routine p.lead{font-size:12.5px; color:var(--sub); margin-bottom:4px}
   details.help{margin-top:18px; background:var(--card); border:1px solid var(--line); border-radius:16px; padding:12px 16px; font-size:13.5px}
   details.help summary{font-weight:800; cursor:pointer}
   details.help ol{padding-left:18px; margin-top:8px}
@@ -161,7 +220,7 @@
   }
   @media print{
     body{padding:0; background:#fff}
-    header, .goalbar, .viewbar, .focusbar, .tools, details.help, footer, .panel, .scrim, #view-today, #view-review{display:none !important}
+    header, .goalbar, .viewbar, .focusbar, .tools, details.help, footer, .panel, .scrim, #view-today, #view-review, #view-system{display:none !important}
     .wrap{max-width:none}
     .board{grid-template-columns:repeat(3,1fr) !important; gap:6px}
     .board .block{display:grid !important}
@@ -187,6 +246,7 @@
       <button class="tab" role="tab" data-view="board" aria-selected="true">만다라트</button>
       <button class="tab" role="tab" data-view="today" aria-selected="false">오늘 실천</button>
       <button class="tab" role="tab" data-view="review" aria-selected="false">주간 리뷰</button>
+      <button class="tab" role="tab" data-view="system" aria-selected="false">시스템</button>
     </nav>
     <div class="tools">
       <button id="btn-export" type="button">⬇ JSON 백업</button>
@@ -238,6 +298,39 @@
         <div class="field"><label for="rv-next">3. 다음 주 바꿀 한 가지</label><textarea id="rv-next" placeholder="칸 하나를 더 잘게 쪼개거나, 버릴 항목 하나"></textarea></div>
         <button class="btn" id="rv-save" type="button">리뷰 저장</button>
         <ul class="reviews" id="rv-list"></ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="view-system" class="hidden">
+    <div class="cards sys">
+      <div class="cardx">
+        <h2>인생 철학 한 장 <span>내 말로 고쳐 쓰기</span></h2>
+        <p class="help-line" id="princ-lead"></p>
+        <ol class="princ" id="princ-list"></ol>
+        <div class="addrow"><input type="text" id="princ-add" placeholder="원칙 한 줄 추가"><button type="button" id="princ-add-btn">추가</button></div>
+      </div>
+      <div class="cardx">
+        <h2>주간 행복 체크 <span id="chk-week"></span></h2>
+        <p class="help-line">일요일에 1분. 0은 최악, 10은 최고. 숫자보다 추세를 본다.</p>
+        <div class="chk" id="chk-form"></div>
+        <div class="hero"><b id="chk-hero">–</b><span id="chk-hero-sub"></span></div>
+        <svg class="chart" id="chk-chart" viewBox="0 0 320 120" role="img" aria-label="최근 12주 행복 점수 추세"></svg>
+        <details class="tbl"><summary>표로 보기</summary><table id="chk-table"></table></details>
+      </div>
+      <div class="cardx">
+        <h2>시스템 리듬 <span>시스템을 돌리는 의식</span></h2>
+        <p class="help-line">매일·매주·매월 리듬은 "오늘 실천"에도 함께 뜬다. 분기·연간은 여기서만 체크.</p>
+        <ul class="rit" id="rit-list"></ul>
+        <div class="addrow"><input type="text" id="rit-add" placeholder="의식 추가"><select id="rit-add-fq"></select><button type="button" id="rit-add-btn">추가</button></div>
+      </div>
+      <div class="cardx routine" id="routine-card">
+        <h2>달리고 싶을 때 · 멈추고 싶을 때</h2>
+      </div>
+      <div class="cardx wide">
+        <h2>테마별 근거 있는 실천 제안 <span>누르면 그 칸의 실천 항목에 들어간다</span></h2>
+        <p class="help-line">조사 결과에서 고른 것. 근거 <b>강</b>은 여러 연구로 반복 확인, <b>중</b>은 일부 연구, <b>약</b>은 전문가 합의 수준.</p>
+        <div id="sugg-list"></div>
       </div>
     </div>
   </section>
@@ -368,6 +461,35 @@
     reviews: []
   };
 
+  // ---------- 시스템 지식 (조사 결과 요약) ----------
+  const RFREQ = {daily:'매일', weekly:'매주', monthly:'매월', quarterly:'분기', yearly:'연간'};
+  const KNOWLEDGE = {
+    principlesLead: '',
+    principles: [],
+    rituals: [],      // {text, freq}
+    checkin: [],      // {key, label, hint}
+    routines: {push:{lead:'', steps:[]}, stop:{lead:'', steps:[]}},
+    practices: []     // 테마 인덱스별 [{text, freq, cell, why, ev:'s'|'m'|'w', src}]
+  };
+  /*KNOWLEDGE_START*/
+  /*KNOWLEDGE_END*/
+
+  function defaultSystem(){
+    return {
+      principles: KNOWLEDGE.principles.slice(),
+      rituals: KNOWLEDGE.rituals.map(r => ({text:r.text, freq:r.freq, done:{}})),
+      checkins: []
+    };
+  }
+  function migrate(d){
+    if(!d.system || typeof d.system!=='object') d.system = defaultSystem();
+    if(!Array.isArray(d.system.principles)) d.system.principles = KNOWLEDGE.principles.slice();
+    if(!Array.isArray(d.system.rituals)) d.system.rituals = defaultSystem().rituals;
+    if(!Array.isArray(d.system.checkins)) d.system.checkins = [];
+    if(!Array.isArray(d.reviews)) d.reviews = [];
+    return d;
+  }
+
   // ---------- 상태 ----------
   let state = load();
   let ui = {view:'board', mode: (window.innerWidth < 720 ? 'focus' : 'full'), focus:'center', sel:null};
@@ -376,13 +498,21 @@
   function load(){
     try{
       const raw = localStorage.getItem(KEY);
-      if(raw){ const d = JSON.parse(raw); if(valid(d)) return d; localStorage.setItem(KEY+'.bak', raw); }
+      if(raw){ const d = JSON.parse(raw); if(valid(d)) return migrate(d); localStorage.setItem(KEY+'.bak', raw); }
     }catch(e){}
-    return clone(TEMPLATE);
+    return migrate(clone(TEMPLATE));
+  }
+  function validSystem(sy){
+    if(sy===undefined) return true;
+    if(!sy || typeof sy!=='object') return false;
+    if(sy.principles!==undefined && !(Array.isArray(sy.principles) && sy.principles.every(x=>typeof x==='string'))) return false;
+    if(sy.rituals!==undefined && !(Array.isArray(sy.rituals) && sy.rituals.every(r=>r && typeof r.text==='string' && (r.freq in RFREQ) && r.done && typeof r.done==='object'))) return false;
+    if(sy.checkins!==undefined && !(Array.isArray(sy.checkins) && sy.checkins.every(c=>c && typeof c.week==='string' && Array.isArray(c.s)))) return false;
+    return true;
   }
   function valid(d){
     return d && d.version===2 && typeof d.goal==='string' && Array.isArray(d.themes) && d.themes.length===8 &&
-      (d.reviews===undefined || Array.isArray(d.reviews)) &&
+      (d.reviews===undefined || Array.isArray(d.reviews)) && validSystem(d.system) &&
       d.themes.every(t => t && typeof t.title==='string' && Array.isArray(t.cells) && t.cells.length===8 &&
         t.cells.every(c => c && typeof c.title==='string' && Array.isArray(c.actions) &&
           c.actions.every(a => a && typeof a.text==='string' && (a.freq in FREQ) && a.done && typeof a.done==='object')));
@@ -406,11 +536,14 @@
     const w = Math.ceil((((x - y0)/86400000) + 1)/7);
     return x.getUTCFullYear()+'-W'+pad(w);
   }
+  function quarterKey(d){ return d.getFullYear()+'-Q'+(Math.floor(d.getMonth()/3)+1); }
   function keyFor(freq, d){
     d = d || new Date();
     if(freq==='daily') return dayKey(d);
     if(freq==='weekly') return weekKey(d);
     if(freq==='monthly') return monthKey(d);
+    if(freq==='quarterly') return quarterKey(d);
+    if(freq==='yearly') return String(d.getFullYear());
     return 'once';
   }
   function streak(action){ // 매일 항목의 연속 일수
@@ -441,8 +574,9 @@
     renderBoard();
     renderToday();
     renderReview();
+    renderSystem();
     document.querySelectorAll('.tab').forEach(t => t.setAttribute('aria-selected', String(t.dataset.view===ui.view)));
-    ['board','today','review'].forEach(v => document.getElementById('view-'+v).classList.toggle('hidden', v!==ui.view));
+    ['board','today','review','system'].forEach(v => document.getElementById('view-'+v).classList.toggle('hidden', v!==ui.view));
   }
 
   function renderGoal(){
@@ -608,6 +742,7 @@
   function renderToday(){
     const wrap = document.getElementById('today-cards'); wrap.innerHTML='';
     const acts = allActions();
+    (state.system.rituals||[]).forEach((r,ri)=> acts.push({a:r, t:'r', i:ri, ai:0, path:'시스템 리듬'}));
     const groups = [['daily','매일', dayKey(new Date())],['weekly','이번 주', weekKey(new Date())],['monthly','이번 달', monthKey(new Date())],['once','1회성', '']];
     groups.forEach(([freq,label,k])=>{
       const items = acts.filter(x=>x.a.freq===freq);
@@ -619,7 +754,7 @@
         const ul = el('ul',{class:'todo'});
         items.forEach(x=>{
           const key = keyFor(freq); const checked = !!x.a.done[key];
-          const cb = el('input',{type:'checkbox', id:'cb-'+x.t+'-'+x.i+'-'+x.ai, onchange:e=>{ if(e.target.checked) x.a.done[key]=true; else delete x.a.done[key]; save(); renderBoard(); renderToday(); renderReview(); }});
+          const cb = el('input',{type:'checkbox', id:'cb-'+x.t+'-'+x.i+'-'+x.ai, onchange:e=>{ if(e.target.checked) x.a.done[key]=true; else delete x.a.done[key]; save(); renderBoard(); renderToday(); renderReview(); renderSystem(); }});
           if(checked) cb.checked=true;
           const lab = el('label',{class:'tx'+(checked?' done':''), for:cb.id},[x.a.text || '(내용 없음)', el('span',{class:'pth', text:x.path})]);
           const li = el('li',{},[cb, lab]);
@@ -667,6 +802,123 @@
     save(); renderReview();
   };
 
+  // ---------- 시스템 탭 ----------
+  function renderSystem(){
+    const sy = state.system;
+    // 1) 원칙
+    document.getElementById('princ-lead').textContent = KNOWLEDGE.principlesLead;
+    const pl = document.getElementById('princ-list'); pl.innerHTML='';
+    if(!sy.principles.length) pl.appendChild(el('li',{class:'empty', text:'아직 원칙이 없다. 아래에 한 줄 추가.'}));
+    sy.principles.forEach((ptxt,i)=>{
+      const inp = el('input',{type:'text', value:ptxt, 'aria-label':'원칙 '+(i+1), oninput:e=>{ sy.principles[i]=e.target.value; save(); }});
+      const del = el('button',{type:'button',class:'del','aria-label':'삭제',text:'✕', onclick:()=>{ sy.principles.splice(i,1); save(); renderSystem(); }});
+      pl.appendChild(el('li',{},[inp,del]));
+    });
+    // 2) 행복 체크
+    const now = new Date(), wk = weekKey(now);
+    document.getElementById('chk-week').textContent = wk;
+    const form = document.getElementById('chk-form'); form.innerHTML='';
+    const cur = sy.checkins.find(c=>c.week===wk);
+    const vals = KNOWLEDGE.checkin.map((q,i)=> cur && typeof cur.s[i]==='number' ? cur.s[i] : 5);
+    KNOWLEDGE.checkin.forEach((q,i)=>{
+      const out = el('output',{text:String(vals[i])});
+      const rng = el('input',{type:'range', min:'0', max:'10', step:'1', value:String(vals[i]), id:'chk-'+q.key, oninput:e=>{ vals[i]=+e.target.value; out.textContent=e.target.value; }});
+      form.appendChild(el('div',{class:'q'},[ el('label',{for:'chk-'+q.key},[q.label, el('small',{text:q.hint})]), out ]));
+      form.appendChild(rng);
+    });
+    const note = el('input',{type:'text', placeholder:'이번 주를 한 줄로(선택)', value: cur? (cur.note||'') : ''});
+    const saveBtn = el('button',{type:'button',class:'btn', text: cur? '이번 주 체크 갱신' : '이번 주 체크 저장', onclick:()=>{
+      const entry = {week:wk, date:dayKey(new Date()), s:vals.slice(), note:note.value.trim()};
+      const idx = sy.checkins.findIndex(c=>c.week===wk);
+      if(idx>=0) sy.checkins[idx]=entry; else sy.checkins.push(entry);
+      sy.checkins.sort((a,b)=> a.week<b.week?-1:1);
+      save(); renderSystem();
+    }});
+    form.appendChild(el('div',{class:'row'},[note, saveBtn]));
+    renderCheckChart(sy.checkins, wk);
+    // 3) 리듬
+    const rl = document.getElementById('rit-list'); rl.innerHTML='';
+    if(!sy.rituals.length) rl.appendChild(el('li',{class:'empty', text:'의식이 없다. 아래에 추가.'}));
+    sy.rituals.forEach((r,i)=>{
+      const key = keyFor(r.freq); const checked = !!r.done[key];
+      const cb = el('input',{type:'checkbox', id:'rit-'+i, onchange:e=>{ if(e.target.checked) r.done[key]=true; else delete r.done[key]; save(); renderSystem(); renderToday(); }});
+      if(checked) cb.checked=true;
+      const lab = el('label',{class:'tx'+(checked?' done':''), for:'rit-'+i},[r.text, el('span',{class:'sub', text: RFREQ[r.freq]+' · '+key})]);
+      const del = el('button',{type:'button',class:'del','aria-label':'삭제',text:'✕', onclick:()=>{ sy.rituals.splice(i,1); save(); renderSystem(); renderToday(); }});
+      rl.appendChild(el('li',{},[cb, lab, el('span',{class:'fq', text:RFREQ[r.freq]}), del]));
+    });
+    const fqSel = document.getElementById('rit-add-fq');
+    if(!fqSel.options.length){ for(const k in RFREQ) fqSel.appendChild(el('option',{value:k,text:RFREQ[k]})); }
+    // 4) 루틴
+    const rc = document.getElementById('routine-card');
+    while(rc.children.length>1) rc.removeChild(rc.lastChild);
+    [['push','🏃 달리고 싶을 때'],['stop','🛑 멈추고 싶을 때']].forEach(([k,title])=>{
+      const r = KNOWLEDGE.routines[k];
+      rc.appendChild(el('h3',{text:title}));
+      if(r.lead) rc.appendChild(el('p',{class:'lead', text:r.lead}));
+      rc.appendChild(el('ol',{}, r.steps.map(st=>el('li',{text:st}))));
+    });
+    // 5) 테마별 제안
+    const sl = document.getElementById('sugg-list'); sl.innerHTML='';
+    state.themes.forEach((th,t)=>{
+      const list = KNOWLEDGE.practices[t] || [];
+      if(!list.length) return;
+      const added = list.filter(pr => hasAction(th, pr)).length;
+      const det = el('details',{class:'theme'});
+      det.appendChild(el('summary',{},[ el('span',{class:'sw', style:'background:var(--t'+t+');filter:saturate(2) brightness(.8)'}), th.title||('테마 '+(t+1)), el('span',{class:'n', text: added+'/'+list.length+' 추가됨'}) ]));
+      const ul = el('ul',{class:'sugg'});
+      list.forEach(pr=>{
+        const cell = th.cells[pr.cell] || th.cells[0];
+        const exists = hasAction(th, pr);
+        const tx = el('div',{class:'tx'},[
+          el('span',{class:'ev '+pr.ev, text: pr.ev==='s'?'강':pr.ev==='m'?'중':'약'}),
+          el('b',{text:pr.text}), ' ', el('span',{style:'color:var(--sub);font-size:12px', text:'· '+FREQ[pr.freq]+' · '+(cell.title||'칸')}),
+          el('span',{class:'why'},[pr.why, pr.src? ' ' : '', pr.src? el('a',{href:pr.src, target:'_blank', rel:'noopener', text:'출처'}) : null])
+        ]);
+        const btn = el('button',{type:'button',class:'add', text: exists? '✓ 추가됨' : '➕ 추가', onclick:()=>{ cell.actions.push(A(pr.text, pr.freq)); save(); renderBoard(); renderToday(); renderReview(); renderSystem(); }});
+        if(exists) btn.disabled=true;
+        ul.appendChild(el('li',{},[tx, btn]));
+      });
+      det.appendChild(ul); sl.appendChild(det);
+    });
+    if(!sl.children.length) sl.appendChild(el('div',{class:'empty', text:'제안이 아직 없다.'}));
+  }
+  function hasAction(th, pr){ return th.cells.some(c => c.actions.some(a => a.text===pr.text)); }
+  function renderCheckChart(checkins, wk){
+    const svg = document.getElementById('chk-chart'); while(svg.firstChild) svg.removeChild(svg.firstChild);
+    const NS='http://www.w3.org/2000/svg';
+    const n = KNOWLEDGE.checkin.length || 1;
+    const rows = checkins.slice(-12).map(c => ({week:c.week, avg: Math.round((c.s.reduce((x,y)=>x+(+y||0),0)/n)*10)/10, note:c.note||''}));
+    const hero = document.getElementById('chk-hero'), sub = document.getElementById('chk-hero-sub');
+    if(!rows.length){ hero.textContent='–'; sub.textContent='아직 체크 기록이 없다'; }
+    else{
+      const last = rows[rows.length-1]; hero.textContent = last.avg.toFixed(1);
+      const prev = rows.length>1 ? rows[rows.length-2].avg : null;
+      sub.textContent = last.week + (prev!==null ? (' · 지난주 대비 ' + (last.avg-prev>=0?'+':'') + (last.avg-prev).toFixed(1)) : ' · 첫 기록');
+    }
+    const W=320, H=120, padL=18, padR=6, padT=14, padB=18, iw=W-padL-padR, ih=H-padT-padB;
+    const mk=(t,a)=>{ const e=document.createElementNS(NS,t); for(const k in a) e.setAttribute(k,a[k]); return e; };
+    [0,5,10].forEach(v=>{ const y=padT+ih-(v/10)*ih; svg.appendChild(mk('line',{x1:padL,x2:W-padR,y1:y,y2:y,class:'grid'})); const t=mk('text',{x:padL-4,y:y+3.5,class:'lbl','text-anchor':'end'}); t.textContent=v; svg.appendChild(t); });
+    const slots=12, gap=4, bw=(iw-gap*(slots-1))/slots;
+    rows.forEach((r,i)=>{
+      const idx = slots-rows.length+i; const x = padL+idx*(bw+gap); const h = Math.max(2,(r.avg/10)*ih); const y = padT+ih-h;
+      const g = mk('g',{});
+      const rect = mk('rect',{x:x, y:y, width:bw, height:h, rx:3, class:'bar'+(r.week===wk?' this':'')});
+      const title = mk('title',{}); title.textContent = r.week+' · '+r.avg.toFixed(1)+(r.note?' · '+r.note:''); rect.appendChild(title);
+      g.appendChild(rect);
+      if(i===rows.length-1){ const t=mk('text',{x:x+bw/2,y:y-4,class:'val','text-anchor':'middle'}); t.textContent=r.avg.toFixed(1); g.appendChild(t); }
+      const wl = mk('text',{x:x+bw/2,y:H-5,class:'lbl','text-anchor':'middle'}); wl.textContent = r.week.slice(-3); g.appendChild(wl);
+      svg.appendChild(g);
+    });
+    const tb = document.getElementById('chk-table'); tb.innerHTML='';
+    checkins.slice().reverse().forEach(c=>{ const avg=(c.s.reduce((x,y)=>x+(+y||0),0)/n).toFixed(1); const tr=el('tr',{},[el('td',{text:c.week+(c.note?' · '+c.note:'')}), el('td',{text:avg})]); tb.appendChild(tr); });
+    if(!checkins.length) tb.appendChild(el('tr',{},[el('td',{text:'기록 없음'}), el('td',{text:'–'})]));
+  }
+  document.getElementById('princ-add-btn').onclick = () => { const i=$('#princ-add'); const v=i.value.trim(); if(!v) return; state.system.principles.push(v); i.value=''; save(); renderSystem(); };
+  $('#princ-add').addEventListener('keydown', e=>{ if(e.key==='Enter'){ e.preventDefault(); $('#princ-add-btn').click(); } });
+  document.getElementById('rit-add-btn').onclick = () => { const i=$('#rit-add'); const v=i.value.trim(); if(!v) return; state.system.rituals.push({text:v, freq:$('#rit-add-fq').value, done:{}}); i.value=''; save(); renderSystem(); renderToday(); };
+  $('#rit-add').addEventListener('keydown', e=>{ if(e.key==='Enter'){ e.preventDefault(); $('#rit-add-btn').click(); } });
+
   // ---------- 도구 ----------
   document.getElementById('btn-export').onclick = () => {
     const blob = new Blob([JSON.stringify(state,null,2)],{type:'application/json'});
@@ -683,7 +935,7 @@
         if(!valid(d)) throw new Error('형식이 다르다');
         if(!confirm('현재 데이터를 가져온 파일로 바꿀까? (되돌릴 수 없음)')) return;
         closePanel();
-        state = d; if(!state.reviews) state.reviews=[];
+        state = migrate(d);
         render(); save();
       }catch(err){ state = prev; render(); alert('가져오기 실패: 이 페이지에서 내보낸 JSON 파일만 읽을 수 있다.'); }
       finally{ e.target.value=''; }
@@ -693,7 +945,7 @@
   document.getElementById('btn-print').onclick = () => window.print();
   document.getElementById('btn-reset').onclick = () => {
     if(!confirm('모든 내용을 기본 템플릿(v2 개선안)으로 되돌릴까? 먼저 JSON 백업을 받아 두는 게 안전하다.')) return;
-    state = clone(TEMPLATE); save(); ui.sel=null; closePanel(); render();
+    state = migrate(clone(TEMPLATE)); save(); ui.sel=null; closePanel(); render();
   };
   document.querySelectorAll('.tab').forEach(t => t.onclick = () => { ui.view=t.dataset.view; render(); });
   document.getElementById('mode-full').onclick = () => { ui.mode='full'; render(); };
