@@ -170,7 +170,7 @@
   .field > label{font-size:11.5px; font-weight:800; color:var(--accent-deep); letter-spacing:.06em}
   .field input[type=text], .field textarea, .field select{width:100%; border:1px solid var(--line); border-radius:var(--r-s); padding:10px 12px; background:var(--card-2); transition:border-color .12s}
   .field input[type=text]:focus, .field textarea:focus, .field select:focus{border-color:var(--accent); background:var(--card); outline:none}
-  .field textarea{min-height:72px; resize:vertical}
+  .field textarea{min-height:72px; max-height:50vh; resize:vertical; field-sizing:content; line-height:1.55}
   .field .help{font-size:12px; color:var(--sub)}
   .acts{list-style:none; display:flex; flex-direction:column}
   .acts li{display:flex; gap:6px; align-items:center; padding:6px 0; border-top:1px solid var(--line-2)}
@@ -392,6 +392,7 @@
         <label for="file-import"><svg class="icon"><use href="#i-up"/></svg>백업 가져오기</label>
         <input id="file-import" type="file" accept="application/json,.json" class="vh">
         <button id="btn-print" type="button"><svg class="icon"><use href="#i-print"/></svg>인쇄 (A4 가로)</button>
+        <button id="btn-undo3" type="button" class="hidden"><svg class="icon"><use href="#i-back"/></svg>v3 적용 전으로 되돌리기</button>
         <button id="btn-reset" type="button" class="danger"><svg class="icon"><use href="#i-reset"/></svg>템플릿으로 초기화</button>
         <span class="saved" id="saved-label">브라우저에 자동 저장</span>
       </div>
@@ -408,8 +409,8 @@
     <div class="stats" id="goal-stats" aria-label="이번 주 요약"></div>
   </section>
   <div class="print-goal" id="print-goal"></div>
-  <div class="v3bar hidden" id="v3bar"><p><b>인생 만다라트 v3가 준비됐다.</b> 네 가지 소망(아이·손주, 건강, 경제, 몰입)에 맞춰 7칸을 새로 넣고 겹치는 칸을 합쳤다. 적용하면 8테마 64칸이 바뀌고 리뷰·행복 체크·원칙은 그대로 남는다. 먼저 JSON 백업을 받아 두면 안전하다.</p><button class="btn" id="v3-apply" type="button">v3 적용</button><button class="btn ghost" id="v3-skip" type="button">나중에</button></div>
-  <div class="wishes hidden" id="wishes" aria-label="네 가지 소망별 이번 주 실천율"></div>
+  <div class="v3bar hidden" id="v3bar"><p><b>인생 만다라트 v3가 준비됐다.</b> 네 가지 소망(아이·손주, 건강, 경제, 몰입)에 맞춰 7칸을 새로 넣고 겹치는 칸을 합쳤다. 적용하면 8테마 64칸이 바뀌고 리뷰·행복 체크·원칙은 그대로 남는다. 적용 뒤에도 더보기 메뉴의 'v3 적용 전으로 되돌리기'로 돌아갈 수 있다.</p><button class="btn" id="v3-apply" type="button">v3 적용</button><button class="btn ghost" id="v3-skip" type="button">나중에</button></div>
+  <div class="wishes hidden" id="wishes" aria-label="네 가지 소망과 바탕(관계)의 실천율: 매일·매주·이번 달 항목 기준"></div>
 
   <section id="view-board">
     <div class="viewbar">
@@ -529,8 +530,8 @@
         C('식사',[A('단백질 포함 아침 먹기','daily')]),
         C('운동',[A('주 3회 근력 운동','weekly')]),
         C('영양제·호르몬',[A('영양제 복용','daily'),A('호르몬·혈액 검사','once')],'원본: 영양제 + 호르몬 두 칸을 합침'),
-        C('정기 검진',[A('연 1회 종합검진 예약','once')],'원본: 루틴 검사. 검진 때 청력과 LDL도 본다. 교정 가능한 치매 위험 요인 14개 중 비중이 가장 크다(Lancet 2024, 합계 약 45%는 이론치).'),
-        C('금연·절주',[A('술자리 주 1회 이하, 표준잔 2잔 이하 · 담배는 0','weekly')],'v3 추가 · 그만둘 것. 하버드 성인발달연구(베일런트 「행복의 조건」): 50세 이전의 비흡연·알코올 남용 없음·운동·적정 체중·안정된 결혼·성숙한 대처가 80세의 건강한 행복을 예측했다. 몸에는 흡연이, 관계에는 알코올 남용이 특히 파괴적이었다. 술은 적을수록 좋다(WHO 2023).'),
+        C('정기 검진',[A('연 1회 종합검진 예약','once')],'원본: 루틴 검사. 검진 때 청력과 LDL도 본다. 두 요인이 각각 약 7%로, 교정 가능한 치매 위험 요인 14개 중 비중이 가장 크다(Lancet 2024. 14개 합계 약 45%는 인구 수준 이론치).'),
+        C('금연·절주',[A('술자리 주 1회 이하, 표준잔 2잔 이하 · 담배는 0','weekly')],'v3 추가 · 그만둘 것. 하버드 성인발달연구(베일런트 「행복의 조건」): 50세 이전의 비흡연·알코올 남용 없음·운동·적정 체중·안정된 결혼·성숙한 대처가 80세의 건강한 행복을 예측했다. 몸에는 흡연이, 관계에는 알코올 남용이 특히 파괴적이었다. 술은 적을수록 좋다(WHO 2023). 끊기 어렵거나 금단 증상이 있으면 의료기관·금연상담과 상의.'),
         C('목소리·패션',[A('발성·호흡 연습 5분','daily')],'원본: 목소리 + 패션 두 칸을 합침'),
         C('섹시(체형·자세)',[A('거울 앞 자세 점검','daily')]),
       ]},
@@ -540,7 +541,7 @@
         C('역사·위인·집단',[A('위인전·역사 월 1권','monthly')],'원본 "인간"의 역사·위인·집단특성'),
         C('우주·생물',[],'원본 "인간"의 우주·생물'),
         C('언어·예술',[],'원본 "인간"의 언어·예술'),
-        C('나를 아는 목록',[A('좋아하는 것 / 싫어하는 것 / 영혼을 울리는 것 / 불필요한 것 목록 갱신','monthly'),A('사는 보람 3가지 적고 분기마다 고치기','monthly')],'원본: 내가 좋아하는 것, 내가 싫어하는 것, 영혼을 울리는 것, 내게 불필요한 것들. 사는 보람(이키가이)이 없다고 답한 사람은 7년간 사망 위험이 1.5배였다(Sone 2008, 일본 4만 3천 명, 관찰 연구).'),
+        C('나를 아는 목록',[A('좋아하는 것 / 싫어하는 것 / 영혼을 울리는 것 / 불필요한 것 목록 갱신','monthly'),A('사는 보람 3가지 적기(매월 훑고 분기마다 고치기)','monthly')],'원본: 내가 좋아하는 것, 내가 싫어하는 것, 영혼을 울리는 것, 내게 불필요한 것들. 사는 보람(이키가이)이 없다고 답한 사람은 7년간 사망 위험이 1.5배였다(Sone 2008, 일본 4만 3천 명, 관찰 연구).'),
         C('달리고 싶을 때 루틴',[]),
         C('멈추고 싶을 때 루틴',[]),
       ]},
@@ -548,7 +549,7 @@
         C('신발 사업',[]),
         C('메디쏠라',[]),
         C('중개·인테리어',[],'원본: 중개 + 인테리어 두 칸을 합침'),
-        C('노후·연금',[A('노란우산·연금저축 자동이체 점검','monthly'),A('충분함의 숫자 정하기((연 생활비−예상 연금)×25~33, 어림)','once')],'v3 추가 · 손주 볼 때까지 자녀에게 짐이 되지 않는 것이 기준. 순서는 완충자금 6~12개월(자영업자 기준의 설계 판단) → 연금 → 투자. ×25는 미국 자료·30년 인출 기준의 4% 룰(Bengen 1994)이라 한국과 더 긴 기간에는 ×30 이상으로 보수적으로 잡는다. 한국 66세 이상 빈곤율은 약 40%로 OECD 최고. 세제 한도는 2026 기준 국세청에서 재확인.'),
+        C('노후·연금',[A('노란우산·연금저축 자동이체 점검','monthly'),A('충분함의 숫자 정하기(계산식은 메모)','once')],'v3 추가 · 손주 볼 때까지 자녀에게 짐이 되지 않는 것이 기준. 순서는 완충자금 6~12개월(자영업자 기준의 설계 판단) → 연금 → 투자. 충분함의 숫자 = (연 생활비−예상 연금)×25~33(어림). ×25는 미국 자료·30년 인출 기준의 4% 룰(Bengen 1994)이라 한국과 더 긴 기간에는 ×30 이상으로 보수적으로 잡는다. 한국 66세 이상 빈곤율은 약 40%로 OECD 최고. 세제 한도는 2026 기준 국세청에서 재확인.'),
         C('차별화',[]),
         C('재테크',[A('월 저축·투자 점검','monthly')]),
         C('금융·샤홍후 공부',[A('금융 공부 30분','weekly')],'원본: 금융공부 + 샤홍후 공부 두 칸을 합침'),
@@ -559,7 +560,7 @@
         C('사랑 표현',[A('고맙다는 말 1번','daily')]),
         C('깜짝 선물',[A('깜짝 선물·이벤트','monthly')]),
         C('여행',[A('여행 계획 하나 잡기','monthly')]),
-        C('출산·육아 팀',[A('[출산 전후] 주 1회 육아·집안일 분담 회의 20분','weekly')],'v3 추가 · 첫아이 출산 뒤 부부 만족도가 급락하고 최소 4년간 회복되지 않았다(Doss 2009, 어머니 d=−0.71·아버지 d=−0.45). 아이를 잘 키우는 출발점은 부부 팀. 지금 단계에 맞게 고쳐 쓰기.'),
+        C('출산·육아 팀',[A('[출산 전후] 주 1회 육아·집안일 분담 회의 20분','weekly')],'v3 추가 · 첫아이 출산 뒤 부부 만족도가 급락했고 추적 기간(출산 후 약 4년) 동안 회복되지 않았다(Doss 2009, 어머니 d=−0.71·아버지 d=−0.45, 관찰 연구). 아이를 잘 키우는 출발점은 부부 팀. 지금 단계에 맞게 고쳐 쓰기.'),
         C('함께 운동·사우나',[A('함께 수영·러닝 또는 사우나','weekly')],'원본: 사우나 + 수영 + 러닝을 합침'),
         C('건강 체크',[A('서로 건강 상태 묻기','weekly')]),
         C('선남선녀',[]),
@@ -568,7 +569,7 @@
         C('리더십',[]),
         C('친구',[A('친구에게 먼저 연락 1명','weekly')]),
         C('가족',[A('부모님 안부 전화','weekly')]),
-        C('베풂·멘토',[A('월 1회 후배·지인 1명 돕기(소개·조언·식사)','monthly')],'v3 추가 · 하버드 성인발달연구: 50세에 관계 만족이 가장 높았던 사람이 80세에 가장 건강했다(Waldinger). 베일런트는 다음 세대를 돌보는 생산성(generativity)을 성숙한 노년의 과제로 봤다.'),
+        C('베풂·멘토',[A('월 1회 후배·지인 1명 돕기(소개·조언·식사)','monthly')],'v3 추가 · 하버드 성인발달연구: 50세에 관계 만족이 가장 높았던 사람이 80세에 가장 건강했다(Waldinger). 베일런트는 다음 세대를 돌보는 생성감(generativity)을 중년의 과제이자 노년의 기쁨과 이어지는 것으로 봤다.'),
         C('일·이익 관계',[],'원본: 일사람 + 이익관계 두 칸을 합침'),
         C('상류 집단',[]),
         C('새로운 집단',[A('새 모임·커뮤니티 1곳 참여','monthly')]),
@@ -576,7 +577,7 @@
       ]},
       {title:'민민', note:'', cells:[
         C('유전 건강·정신',[A('영양제·건강 관리','daily')],'원본: 유전건강 + 유전정신 + 영양제'),
-        C('손주까지',[A('[출생 후] 아이와 단둘이 30분, 주 3회','weekly'),A('가족 이야기·전통 하나 만들기(분기 1회)','monthly')],'v3 추가 · 손주를 보는 길은 성인이 된 자녀와 가까운 부모가 되는 것. 아버지의 능동적·정기적 관여가 아이의 장기 발달과 이어진다(Sarkadi 2008, 종단 24편 중 22편에서 긍정 효과, 관찰 연구). 첫째아 출산 평균 연령이 어머니 33세·아버지 35세 안팎이라 30년 넘는 설계다. 평균대로면 첫 손주는 68~71세에 보는데 남성의 유병기간 제외 기대수명은 64.6세(2024 생명표)라, 건강과 노후 현금흐름이 선행 조건이다. 가족 이야기는 답을 가르치는 게 아니라 함께 나누는 과정이 핵심(Duke). 30분·주 3회는 연구 수치가 아닌 출발점.'),
+        C('손주까지',[A('[출생 후] 아이와 단둘이 30분, 주 3회','weekly'),A('가족 이야기·전통 만들기(매월 점검, 분기 1개)','monthly')],'v3 추가 · 손주를 보는 길은 성인이 된 자녀와 가까운 부모가 되는 것. 아버지의 능동적·정기적 관여가 아이의 장기 발달과 이어진다(Sarkadi 2008, 종단 24편 중 22편에서 긍정 효과, 관찰 연구). 첫째아 출산 평균 연령이 어머니 33세·아버지 35세 안팎이라 30년 넘는 설계다. 평균대로면 첫 손주는 68~71세에 보는데 남성의 유병기간 제외 기대수명은 64.6세(2024 생명표)라, 건강과 노후 현금흐름이 선행 조건이다. 가족 이야기는 답을 가르치는 게 아니라 함께 나누는 과정이 핵심(Duke). 30분·주 3회는 연구 수치가 아닌 출발점.'),
         C('태교',[]),
         C('인생 교육',[]),
         C('경제 교육',[]),
@@ -600,7 +601,7 @@
         C('기타 프로그램',[]),
         C('내 생산성 루틴',[A('아침 AI 루틴 점검','daily')]),
         C('AI × 신발·메디쏠라',[],'원본: AI×신발 + AI×메디쏠라 두 칸을 합침'),
-        C('딥워크 몰입',[A('딥워크 90분 블록 주 3회(알림·폰 격리)','weekly')],'v3 추가 · 한 번에 하나, 방해 차단(중단된 일은 원래 일로 돌아오기까지 평균 23~25분, Gloria Mark의 관찰 연구). 일 몰입은 일중독과 다르다(Schaufeli 2008). 가족 저녁이라는 상한선을 먼저 정하고 그 안에서 몰입한다.'),
+        C('딥워크 몰입',[A('딥워크 90분 블록 주 3회(알림·폰 격리)','weekly')],'v3 추가 · 한 번에 하나, 방해 차단(중단된 일은 원래 일로 돌아오기까지 평균 23~25분, Gloria Mark의 관찰 연구). 일 몰입은 일중독과 다르다(Schaufeli 2008). 90분은 관행일 뿐 근거 있는 숫자가 아니니 조정한다. 가족 저녁이라는 상한선을 먼저 정하고 그 안에서 몰입한다.'),
         C('AI × 골프',[]),
         C('AI × 가족·민주',[],'원본: 민주 + 가족 두 칸을 합침'),
       ]},
@@ -700,7 +701,7 @@ KNOWLEDGE.practices = [
   ],
   [
     {text:'매월 1일 기준 월급 정액 이체, 비상금 생활비 6개월→12개월 적립', freq:'monthly', cell:5, why:'자영업자는 평균 월수입을 기준 월급으로 먼저 옮기라(토스·금감원); 폐업자 68.5%가 평균 8,531만 원 부채(2025 중기부·국세청)', ev:'m', src:'https://www.tossbank.com/articles/split-bankbook'},
-    {text:'세금통장 적립 후 노란우산 50만→연금 900만→ISA 순 자동이체', freq:'monthly', cell:5, why:'노란우산 소득공제 최대 600만(2026 한도 연 1,800만); 연금저축+IRP 900만 세액공제 16.5%=148.5만 환급; 연금 내 ETF 과세이연', ev:'m', src:'https://taxly.kr/post/1721'},
+    {text:'세금통장 적립 후 노란우산 50만→연금 900만→ISA 순 자동이체', freq:'monthly', cell:3, v3:true, why:'노란우산 소득공제 최대 600만(2026 한도 연 1,800만); 연금저축+IRP 900만 세액공제 16.5%=148.5만 환급; 연금 내 ETF 과세이연', ev:'m', src:'https://taxly.kr/post/1721'},
     {text:'부부 공동계좌 전면 합산(용돈만 각자) + 월 1회 민주 리뷰 3지표', freq:'monthly', cell:7, why:'신혼 230쌍 2년 무작위 실험: 공동계좌만 관계 만족 하락 없음, 부분 합산은 효과 없음(Olson et al. 2023 JCR)', ev:'m', src:'https://insight.kellogg.northwestern.edu/article/key-to-happy-marriage-joint-bank-account'},
     {text:'컴플라이언스 체크리스트(14일 숙고·서면 예상매출·특약) 모든 가맹 계약에 첨부', freq:'once', cell:4, why:'경기도 2026-08 경고: 정보공개서 14일·서면 예상매출 누락이 분쟁 핵심; 가맹사업법 개정 2026-12-31 시행(점주단체 협의 의무)', ev:'w', src:'https://www.sidae.com/article/2026080507120572196'},
     {text:'양면 보상 추천 프로그램 + 계약 완료 30일 후 후기·소개 요청 표준화', freq:'monthly', cell:2, why:'추천 유입 고객은 약 16% 더 수익성·25% 더 가치(Schmitt et al.); 피추천자 혜택형이 1.41~1.79배 전환(Gershon 2020); 지인 추천 신뢰 88%', ev:'m', src:'https://en.wikipedia.org/wiki/Referral_marketing'},
@@ -709,7 +710,7 @@ KNOWLEDGE.practices = [
   ],
   [
     {text:'퇴근 후 20분 스트레스 완화 대화(조언 금지) + 식사·취침 전 폰 격리 50분', freq:'daily', cell:0, why:'한국 기혼여성 결혼만족 1위 요인은 대화 증감(여성가족패널, 남국현 2022); 파트너 phubbing은 관계만족 r=−0.22·갈등 +0.57(메타 52편)', ev:'m', src:'https://pmc.ncbi.nlm.nih.gov/articles/PMC12106345'},
-    {text:'[출산 후 24개월] 아기 재운 뒤 10분×2 대화 + 주간 회의에 육아 분담 1문항', freq:'daily', cell:0, why:'첫 아이 출산 시 만족 급락(아버지 d=−0.45·어머니 −0.71, Doss 2009 8년 추적)이 둘째 해까지 지속(Bogdan 2022 메타 14.5만 명)', ev:'m', src:'https://pmc.ncbi.nlm.nih.gov/articles/PMC2702669'},
+    {text:'[출산 후 24개월] 아기 재운 뒤 10분×2 대화 + 주간 회의에 육아 분담 1문항', freq:'daily', cell:4, v3:true, why:'첫 아이 출산 시 만족 급락(아버지 d=−0.45·어머니 −0.71, Doss 2009 8년 추적)이 둘째 해까지 지속(Bogdan 2022 메타 14.5만 명)', ev:'m', src:'https://pmc.ncbi.nlm.nih.gov/articles/PMC2702669'},
     {text:'매일 구체 감사 1문장(행동+의미) + 주 1회 7칸 식단 비는 칸 채우기', freq:'daily', cell:1, why:'사랑의 언어 매칭 효과 근거 없음, 어떤 표현이든 많이 받을수록 행복(Impett 2024 리뷰); 감사는 관계 유지 예측(Gordon 2012)', ev:'s', src:'https://www.utoronto.ca/news/little-evidence-linking-five-love-languages-healthy-relationships-researchers-say'},
     {text:'월 1회 경험 쿠폰 서프라이즈(새 클래스·공연·식당), 물건 대신 경험', freq:'monthly', cell:2, why:'실제 선물 교환 실험: 경험 선물이 물질 선물보다 관계 강화, 기제는 소비 시 감정 강도(Chan & Mogilner 2017 JCR)', ev:'m', src:'https://academic.oup.com/jcr/article/43/6/913/2939516'},
     {text:'분기 1박 2일 처음 가는 곳 + 월 1회 반나절 마이크로 어드벤처(폰·업무 차단)', freq:'monthly', cell:3, why:'새롭고 흥분되는 활동을 함께 한 커플만 관계만족 상승, 즐겁기만 한 활동은 무효(Aron 2000 실험); 여행 리뷰는 이혼 감소 가능성(Durko 2013)', ev:'m', src:'https://ggia.berkeley.edu/practice/practice_as_pdf/exciting_activities_for_couples'},
@@ -741,7 +742,7 @@ KNOWLEDGE.practices = [
     {text:'스윙 생각은 1개만, 몸이 아닌 클럽·타깃 효과(외적 초점)로 표현', freq:'weekly', cell:5, why:'외적 주의초점이 초보·숙련자 모두 샷 정확도↑(Wulf & Su 2007); 단 저숙련자는 내적 초점이 더 일관됐다는 상충 결과(Perkins-Ceccato 2003)', ev:'m', src:'https://pubmed.ncbi.nlm.nih.gov/17941543/'},
     {text:'150야드 클럽의 남은 거리 중앙값 추적 + 랜덤 연습(클럽·거리 매 샷 교대)', freq:'weekly', cell:7, why:'80 vs 90타 격차 최대 원인은 100야드 밖 샷(퍼팅 15% vs 65%, Broadie); 랜덤 연습은 연습 성적↓ 파지↑(맥락간섭, Fazeli 2019)', ev:'m', src:'https://content.schwab.com/web/retail/public/corporatesponsorships/challengers-video-mark-broadie.html'},
     {text:'라운드 전 DECADE 체크: 더블보기·3퍼트 금지, 9번 이하로 보기 금지', freq:'weekly', cell:7, why:'Fawcett 5규칙(파5 6타·더블보기·3퍼트·9번 이하 보기·쉬운 세이브 실패 금지); 3퍼트는 최대 비강제 오류(대중 매체, 독립 검증 없음)', ev:'w', src:'https://golf.com/instruction/5-golden-scoring-rules-scott-fawcett/'},
-    {text:'필드는 가능한 홀 도보(18홀≈11,948보) + 주 1회 15분 영상 리뷰', freq:'weekly', cell:6, why:'스웨덴 골퍼 30만 명 표준화 사망비 0.60(Farahmand 2009, 관찰); 18홀 도보 평균 11,948보(Kobriger 2006); 자기통제 영상 피드백 전이 효과(Post)', ev:'s', src:'https://doi.org/10.1111/j.1600-0838.2008.00814.x'}
+    {text:'필드는 가능한 홀 도보(18홀≈11,948보) + 주 1회 15분 영상 리뷰', freq:'weekly', cell:1, v3:true, why:'스웨덴 골퍼 30만 명 표준화 사망비 0.60(Farahmand 2009, 관찰); 18홀 도보 평균 11,948보(Kobriger 2006); 자기통제 영상 피드백 전이 효과(Post)', ev:'s', src:'https://doi.org/10.1111/j.1600-0838.2008.00814.x'}
   ],
   [
     {text:'Projects 3개 + 견적서 Skill + Routines 2개(초안·발송 금지)', freq:'once', cell:0, why:'경계 안 과업(초안·글쓰기)은 시간 −37%·품질 +0.45 SD(Noy & Zhang 444명 RCT); Routines는 승인 없이 자율 실행되므로 쓰기 권한 제한', ev:'s', src:'https://economics.mit.edu/sites/default/files/inline-files/Noy_Zhang_1.pdf'},
@@ -754,8 +755,8 @@ KNOWLEDGE.practices = [
   ]
 ];
   /*KNOWLEDGE_END*/
-  const V3_REMAP = {0:{5:6}, 2:{3:2}, 3:{4:5}, 4:{3:4}, 5:{1:0}, 6:{1:0}, 7:{5:4}};   // v3에서 합친 칸으로 실천 제안을 옮긴다
-  KNOWLEDGE.practices.forEach((list,t)=> list.forEach(pr=>{ const m=V3_REMAP[t]; if(m && m[pr.cell]!==undefined) pr.cell=m[pr.cell]; }));
+  const V3_REMAP = {0:{5:6}, 2:{3:2}, 3:{4:5}, 4:{3:4}, 6:{1:0}, 7:{5:4}};   // v3에서 합친 칸으로 실천 제안을 옮긴다
+  KNOWLEDGE.practices.forEach((list,t)=> list.forEach(pr=>{ const m=V3_REMAP[t]; if(!pr.v3 && m && m[pr.cell]!==undefined) pr.cell=m[pr.cell]; }));
   const WISHES = [ {name:'아이·손주', th:[3,5]}, {name:'건강', th:[0,1]}, {name:'경제', th:[2,7]}, {name:'몰입', th:[6,7]}, {name:'바탕 · 관계', th:[4]} ];
 
   function defaultSystem(){
@@ -887,7 +888,7 @@ KNOWLEDGE.practices = [
     const now=new Date(), wk=weekKey(now); const monday=new Date(now); monday.setDate(monday.getDate()-((monday.getDay()+6)%7));
     const days=[]; for(let d=0;d<7;d++){ const x=new Date(monday); x.setDate(monday.getDate()+d); if(x<=now) days.push(dayKey(x)); }
     let exp=0, done=0;
-    th.cells.forEach(c=>c.actions.forEach(a=>{ if(a.freq==='daily'){ exp+=days.length; days.forEach(k=>{ if(a.done[k]) done++; }); } else if(a.freq==='weekly'){ exp+=1; if(a.done[wk]) done++; } }));
+    th.cells.forEach(c=>c.actions.forEach(a=>{ if(a.freq==='daily'){ exp+=days.length; days.forEach(k=>{ if(a.done[k]) done++; }); } else if(a.freq==='weekly'){ exp+=1; if(a.done[wk]) done++; } else if(a.freq==='monthly'){ exp+=1; if(a.done[monthKey(now)]) done++; } }));
     return {exp, done};
   }
   function renderWishes(){
@@ -1033,7 +1034,7 @@ KNOWLEDGE.practices = [
     ui.sel={kind:'theme',t};
     const th = state.themes[t];
     const inp = el('input',{type:'text', value:th.title, oninput:onInput(v=>th.title=v)});
-    const note = el('textarea',{oninput:onInput(v=>th.note=v)}); note.value=th.note||'';
+    const note = el('textarea',{oninput:onInput(v=>th.note=v)}); note.value=th.note||''; requestAnimationFrame(()=>autoGrow(note));
     const list = el('ul',{class:'acts'});
     th.cells.forEach((c,i)=>{
       const s=cellStats(c);
@@ -1052,7 +1053,7 @@ KNOWLEDGE.practices = [
     const title = el('input',{type:'text', value:cell.title, placeholder:'짧은 키워드', oninput:onInput(v=>cell.title=v)});
     const status = el('select',{onchange:onInput(v=>cell.status=v)});
     [['todo','미착수'],['doing','진행 중'],['done','완료']].forEach(([v,l])=>{ const o=el('option',{value:v,text:l}); if(cell.status===v) o.selected=true; status.appendChild(o); });
-    const note = el('textarea',{placeholder:'왜 이 칸이 중요한지, 기준, 참고', oninput:onInput(v=>cell.note=v)}); note.value=cell.note||'';
+    const note = el('textarea',{placeholder:'왜 이 칸이 중요한지, 기준, 참고', oninput:onInput(v=>cell.note=v)}); note.value=cell.note||''; requestAnimationFrame(()=>autoGrow(note));
 
     const list = el('ul',{class:'acts'});
     function drawActs(){
@@ -1325,7 +1326,14 @@ KNOWLEDGE.practices = [
     try{ localStorage.setItem(KEY+'.pre3', JSON.stringify(state)); }catch(e){}
     const done={}; state.themes.forEach(th=>th.cells.forEach(c=>c.actions.forEach(a=>{ done[a.text]=a.done; })));
     const t=clone(TEMPLATE); t.themes.forEach(th=>th.cells.forEach(c=>c.actions.forEach(a=>{ if(done[a.text]) a.done=done[a.text]; })));
-    state.themes=t.themes; if(!state.goal.trim()) state.goal=t.goal; state.tpl=3; closePanel(); save(); render();
+    state.themes=t.themes; if(!state.goal.trim()) state.goal=t.goal; state.tpl=3; closePanel(); save(); undo3.classList.remove('hidden'); render();
+  };
+  const undo3 = document.getElementById('btn-undo3');
+  function hasPre3(){ try{ return !!localStorage.getItem(KEY+'.pre3'); }catch(e){ return false; } }
+  undo3.classList.toggle('hidden', !hasPre3());
+  undo3.onclick = () => {
+    if(!confirm('v3 적용 직전 상태로 되돌릴까? 그 뒤에 한 체크와 수정은 사라진다.')) return;
+    try{ const d=JSON.parse(localStorage.getItem(KEY+'.pre3')); if(!valid(d)) throw 0; closePanel(); state=migrate(d); localStorage.removeItem(KEY+'.pre3'); save(); undo3.classList.add('hidden'); render(); }catch(e){ alert('되돌릴 백업을 읽지 못했다.'); }
   };
   document.getElementById('v3-skip').onclick = () => { ui.v3skip=true; renderGoal(); };
   render();
