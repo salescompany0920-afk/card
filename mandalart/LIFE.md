@@ -12,13 +12,13 @@
 
 - **아이·손주**: 한국 평균대로면 첫 손주는 68–71세에 오는데, 남성의 유병기간 제외 기대수명은 64.6년이다([경향신문 2025-12-03](https://www.khan.co.kr/article/202512031200001), 계산은 [손주타임라인.md](../research_notes/인생%20만다라트%20v3/손주타임라인.md)의 산술). 목표는 "80세 생존"이 아니라 "75세에 아이를 안아 올리고 같이 걸을 수 있는 몸"이다.
 - 손주로 가는 길은 네 가지로 좁혀진다: 70대까지의 기능적 건강, 성인이 된 자녀와의 관계, 자녀 배우자와의 관계, 자녀에게 짐이 되지 않는 노후 재정. 자녀가 결혼·출산을 할지는 부모가 통제할 수 없다([손주타임라인.md](../research_notes/인생%20만다라트%20v3/손주타임라인.md) 0절).
-- **건강**: 마감일은 50세다. 금연, 술 문제 없음, 운동, 정상 체중, 안정된 결혼, 성숙한 대처 중 5~6개를 50세에 갖춘 106명은 절반이 80세에 건강하고 행복했고, 1~3개인 66명 중에는 0명이었다([Harvard Magazine 2001](https://www.harvardmagazine.com/2001/03/the-talent-for-aging-wel-html), [확인], 강도 중).
-- 검진에서는 LDL·혈압·혈당·청력을 본다. 치매 위험 요인 14개 중 10개가 중년의 요인이다([Lancet 2024 보도자료](https://www.eurekalert.org/news-releases/1052982), 강).
-- **경제**: 어느 종단 연구에서도 부·명성이 좋은 노년의 독립 조건으로 나오지 않았다([종단연구.md](../research_notes/인생%20만다라트%20v3/종단연구.md) 10절의 종합). 대신 한국 66세 이상의 상대적 빈곤율이 40%다([OECD](https://www.oecd.org/en/publications/pensions-at-a-glance-2025-country-notes_8a53ef12-en/korea-republic-of_5cd52913-en.html), 강). 기준은 "최대 자산"이 아니라 "내 노후 현금흐름이 먼저, 남는 것만 자녀 지원"이다.
-- **몰입**: 몰입 점수를 재지 말고 조건 3개(도전–기술 균형, 분명한 근접 목표, 즉각 피드백)가 갖춰졌는지를 본다([Abuhamdeh 2020](https://www.frontiersin.org/articles/10.3389/fpsyg.2020.00158/full), [확인], 강도 중).
+- **건강**: 기준 시점은 50세다(그 뒤의 변화가 소용없다는 뜻은 아니다). 금연, 적은 음주(논문 변수는 '알코올 남용 없음'), 운동, 정상 체중, 안정된 결혼, 성숙한 대처 중 5~6개를 50세에 갖춘 106명은 절반이 80세에 건강하고 행복했고, 1~3개인 66명 중에는 0명이었다([Harvard Magazine 2001](https://www.harvardmagazine.com/2001/03/the-talent-for-aging-wel-html), [확인], 강도 중).
+- 검진에서는 LDL·혈압·혈당·청력을 본다. 치매 위험 요인 14개 중 10개가 중년의 요인이다([Lancet 2024 보도자료](https://www.eurekalert.org/news-releases/1052982), 강. 단계 배정 일부는 2차 인포그래픽 기준).
+- **경제**: 이번에 본 종단 연구들에서는 부·명성 자체가 좋은 노년의 독립 조건으로 보고되지 않았다(경력 성공·교육은 연관이 있었다)([종단연구.md](../research_notes/인생%20만다라트%20v3/종단연구.md) 10절의 종합). 대신 한국 66세 이상의 상대적 빈곤율이 40%다([OECD](https://www.oecd.org/en/publications/pensions-at-a-glance-2025-country-notes_8a53ef12-en/korea-republic-of_5cd52913-en.html), 강). 기준은 "최대 자산"이 아니라 "내 노후 현금흐름이 먼저, 남는 것만 자녀 지원"이다.
+- **몰입**: 몰입 점수를 재지 말고 조건 3개(도전–기술 균형, 분명한 근접 목표, 즉각 피드백)가 갖춰졌는지를 본다([Abuhamdeh 2020](https://www.frontiersin.org/articles/10.3389/fpsyg.2020.00158/full), [2차], 강도 중).
 - "시간 가는 줄 모르고 일했다"만으로는 몰입인지 일중독인지 알 수 없다. 가르는 기준은 강박성과 결과다([Schaufeli 2008](https://research-portal.uu.nl/en/publications/workaholism-burnout-and-work-engagement-three-of-a-kind-or-three-/), [2차], 중).
 - 딥워크 90분, "집중 회복 23분", 골프 "사망률 40% 감소"는 방향만 참고하고 숫자는 믿지 않는다(5절).
-- **네 소원의 바탕**: 여러 연구에서 가장 반복된 조건은 가까운 관계, 특히 배우자다. 50세의 관계 만족도가 80세 건강을 콜레스테롤보다 잘 예측했다([Harvard Gazette 2017](https://news.harvard.edu/gazette/story/2017/04/over-nearly-80-years-harvard-study-has-been-showing-how-to-live-a-healthy-and-happy-life/)).
+- **네 소망의 바탕**: 여러 연구에서 가장 반복된 조건은 가까운 관계, 특히 배우자다. 50세의 관계 만족도가 80세 건강을 콜레스테롤보다 잘 예측했다([Harvard Gazette 2017](https://news.harvard.edu/gazette/story/2017/04/over-nearly-80-years-harvard-study-has-been-showing-how-to-live-a-healthy-and-happy-life/)). 이 코호트에서 50세 콜레스테롤이 80세 건강을 예측하지 못했다는 뜻이지 LDL 관리가 필요 없다는 뜻이 아니다(위 검진 항목 참조).
 - 일에 성공한 인물들이 가장 자주 실패한 항목이 "손주까지 화목"이었다. 일 몰입 칸이 민주·민민 칸을 잠식하지 않게 하는 것이 사례가 주는 가장 실용적인 경고다([인물사례.md](../research_notes/인생%20만다라트%20v3/인물사례.md) 5절, 일화).
 
 ---
@@ -29,7 +29,7 @@
 
 | # | 조건 | 핵심 숫자 | 출처 | 근거 강도 | 차트에서 담는 곳 |
 |---|---|---|---|---|---|
-| 1 | 따뜻하고 안정된 가까운 관계(특히 배우자)를 50세까지 지켰다 | 50세 관계 만족도가 80세 건강을 콜레스테롤보다 잘 예측. 사회적 관계가 강하면 생존 오즈비 1.50(148개 연구·308,849명) | [Harvard Gazette 2017](https://news.harvard.edu/gazette/story/2017/04/over-nearly-80-years-harvard-study-has-been-showing-how-to-live-a-healthy-and-happy-life/), [Holt-Lunstad 2010](https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.1000316) | 중~강 (가장 반복됨) | 민주 테마 전체(소통·사랑 표현·출산·육아 팀), 관계 › 친구·가족 |
+| 1 | 따뜻하고 안정된 가까운 관계(특히 배우자)를 50세까지 지켰다 | 50세 관계 만족도가 80세 건강을 콜레스테롤보다 잘 예측. 이 코호트에서 50세 콜레스테롤이 80세 건강을 예측하지 못했다는 뜻이지 LDL 관리가 필요 없다는 뜻이 아니다(위 검진 항목 참조). 사회적 관계가 강하면 생존 오즈비 1.50(148개 연구·308,849명) | [Harvard Gazette 2017](https://news.harvard.edu/gazette/story/2017/04/over-nearly-80-years-harvard-study-has-been-showing-how-to-live-a-healthy-and-happy-life/), [Holt-Lunstad 2010](https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.1000316) | 중~강 (가장 반복됨) | 민주 테마 전체(소통·사랑 표현·출산·육아 팀), 관계 › 친구·가족 |
 | 2 | 술과 담배로 삶을 망가뜨리지 않았다 | "건강과 행복을 둘 다 파괴하는 것은 알코올 남용뿐" [확인]. Grant Study 이혼의 57%에 알코올중독 관여 [2차]. 치매 기여분 흡연 2%·과도한 음주 1% | [Harvard Magazine 2001](https://www.harvardmagazine.com/2001/03/the-talent-for-aging-wel-html), [WebMD](https://www.webmd.com/men/features/emotionally-healthy-man), [BrightFocus](https://www.brightfocus.org/news/14-lifestyle-changes-that-could-reduce-your-dementia-risk/) | 강 | 건강 › 금연·절주 (v3 추가) |
 | 3 | 몸을 계속 움직였고 체중과 혈관 수치를 중년부터 관리했다 | 수정 가능한 치매 위험 요인 14개의 합계 45.3%(이론적 상한). 그중 높은 LDL 7%(약 40세부터), 청력 손실 7% [확인] | [Lancet 2024](https://pubmed.ncbi.nlm.nih.gov/39096926/), [EurekAlert](https://www.eurekalert.org/news-releases/1052982) | 강 | 건강 › 운동·식사·정기 검진 |
 | 4 | 어려움에 성숙하게 대처했다(회피·술 대신 유머·승화·이타) | 50세 이전 happy-well 남성의 거의 2/3가 성숙한 방어를 썼고 sad-sick은 1/10 [확인]. 우울증은 통제 가능 요인을 다 통제해도 남는 유일한 요인 [확인] | [Harvard Gazette 2001](https://news.harvard.edu/gazette/story/2001/06/how-to-be-happy-and-well-rather-than-sad-and-sick), [Vaillant & Mukamal 2001](https://pubmed.ncbi.nlm.nih.gov/11384887/) | 중 | 정신·배움 › 달리고 싶을 때 루틴·멈추고 싶을 때 루틴(둘 다 실천 항목이 비어 있음) |
@@ -40,7 +40,7 @@
 
 **숫자를 읽을 때 주의할 것**
 
-- 5~6개를 갖춰도 **절반만** happy-well이었다. 필요조건에 가깝지 충분조건이 아니다. 106명·66명은 하버드 코호트의 6요인 판본 숫자다([Harvard Magazine 2001](https://www.harvardmagazine.com/2001/03/the-talent-for-aging-wel-html), [확인]). 흔히 말하는 "7가지 조건"은 교육을 더한 판본이다([Harvard Gazette 2001](https://news.harvard.edu/gazette/story/2001/06/how-to-be-happy-and-well-rather-than-sad-and-sick), [확인]).
+- 5~6개를 갖춰도 **절반만** happy-well이었다. 필요조건에 가깝지 충분조건이 아니다. 106명·66명은 하버드 코호트의 6요인 판본 숫자다([Harvard Magazine 2001](https://www.harvardmagazine.com/2001/03/the-talent-for-aging-wel-html), [확인]). 흔히 말하는 "7가지 조건"은 교육을 더한 판본이다([Vaillant & Mukamal 2001 초록](https://pubmed.ncbi.nlm.nih.gov/11384887/), [Harvard Gazette 2001](https://news.harvard.edu/gazette/story/2001/06/how-to-be-happy-and-well-rather-than-sad-and-sick), [확인]).
 - 예측 변수는 "음주"가 아니라 알코올 **남용**이다([종단연구.md](../research_notes/인생%20만다라트%20v3/종단연구.md) 1-3절).
 - Sone의 1.5는 "이키가이가 있으면 50% 덜 죽는다"가 아니라 "없는 사람의 사망 위험이 1.5배"다. 암 사망은 유의한 차이가 없었다([Sone 2008](https://pubmed.ncbi.nlm.nih.gov/18596247/), [확인]). 목적감을 높이는 개입이 수명을 늘린다는 무작위 시험은 없다([종단연구.md](../research_notes/인생%20만다라트%20v3/종단연구.md) 4절).
 - 치매 45.3%는 14개 요인을 전부 없앴을 때의 인구 수준 이론치다. 저자들도 요인이 치매를 일으킨다고 "가정"했고 개인이 치매를 피한다는 보장이 아니라고 밝혔다([저자 수락본 PDF](https://discovery.ucl.ac.uk/id/eprint/10196488/1/Livingston_Lancet%20Commission%20accepted%20version.pdf), [확인]).
@@ -65,14 +65,14 @@
 
 내 아이가 지금의 평균 나이(아들 35.4세, 딸 33.2세)에 첫 아이를 낳는다고 가정하면 아래와 같다. 통계가 아니라 [손주타임라인.md](../research_notes/인생%20만다라트%20v3/손주타임라인.md) 1-2절의 산술이다.
 
-| 내가 첫 아이를 얻는 나이 | 첫 손주 때 내 나이 | 손주 초등 입학(+7년) | 건강수명 64.6세 대비 | 81.9세까지 겹치는 기간 |
+| 내가 첫 아이를 얻는 나이 | 첫 손주 때 내 나이 | 손주 초등 입학(+7년) | 건강수명 64.6세 대비 | 40세 남성 기대수명 81.9세(40+41.9)까지 겹치는 기간 |
 |---|---|---|---|---|
 | 33세 | 66–68세 | 73–75세 | 2–4년 초과 | 약 14–16년 |
 | 35.4세(평균) | 68.6–70.8세 | 76–78세 | 4–6년 초과 | 약 11–13년 |
 | 38세 | 71–73세 | 78–80세 | 7–9년 초과 | 약 9–11년 |
 | 42세 | 75–77세 | 82–84세 | 11–13년 초과 | 약 5–7년 |
 
-- 평균 일정에서도 손주는 건강수명 뒤에 태어난다. 초산 연령은 2015→2025 사이 모 +2.0세, 부 +1.7세 올랐고, 추세가 이어지면 2–4년 더 늦어진다(노트의 추정).
+- 평균 일정에서도 손주는 건강수명 뒤에 태어난다. 초산 연령은 2015→2025 사이 모 +2.0세, 부 +1.7세 올랐다. 추세가 이어지면 표의 숫자는 더 늦어진다(노트는 2–4년으로 추정했으나 기간 가정이 없다. 같은 속도가 30년 이어진다고 단순 외삽하면 5–6년).
 - 64.6년은 아픈 기간 전체를 빼는 엄격한 지표라 "64.6세부터 손주를 못 돌본다"는 뜻이 아니다. 같은 생명표의 주관적 건강평가 기대수명은 73.8년으로 보도됐다(성별 구분 미확인, [뉴시스 2025-12-03](https://www.newsis.com/view/NISX20251203_0003426271)).
 - 남성이 80세까지 생존할 확률은 64.4%다([뉴시스 2025-12-03](https://www.newsis.com/view/NISX20251203_0003426271)).
 - 평생 손주가 없을 확률을 직접 집계한 한국 통계는 찾지 못했다([미검증]). 확보한 조각은 1975년생 여성의 평생 무자녀 비율 12.9%([OECD 한국 자료](https://search.oecd.org/korea/918d8db3-Korea-kr.pdf), [2차])와 무자녀 25–49세의 출산 의향 41.8%([머니투데이 2026-05-07](https://www.mt.co.kr/policy/2026/05/07/2026050714275393656))뿐이고, 의향은 실현 확률이 아니다.
@@ -91,12 +91,12 @@
 표 뒤에 있는 근거는 다음과 같다.
 
 - **이혼과 아버지**: 네덜란드 조사(N=4,641)에서 이혼한 아버지의 12%가 자녀와 접촉이 없었고 6%는 두 달에 한 번 미만이었다(합계 18%). 결혼을 유지한 아버지는 두 범주 합계 1.5%였다. 횡단 자료다([Kalmijn 2023](https://www.demographic-research.org/articles/volume/48/21), 중).
-- **부부 갈등**: 이혼 전 부부 갈등은 성인기 아버지와의 친밀도를 −0.28 낮췄고, 그 효과의 62%가 이혼 후 아버지의 관여와 접촉 빈도를 거쳤다([Spaan 2022](https://pmc.ncbi.nlm.nih.gov/articles/PMC9727034), 중). 한국에서 황혼이혼 후 아버지–자녀 접촉을 추적한 연구는 찾지 못했다.
-- **가벼운 돌봄과 고강도 돌봄은 다른 것**: 독일 70–103세 500여 명 연구에서 가끔 손주를 돌본 조부모는 사망 위험이 37% 낮았지만 주양육 조부모는 분석에서 빠졌고, 저자도 강도 높은 돌봄은 건강을 해친다고 밝혔다([idw 보도자료](https://idw-online.de/en/news665687), 중). 한국의 주 15시간 이상 돌봄 조부모 1,063명 조사에서는 주 26.83시간을 돌봤고 46.8%가 "그만두고 싶다"고 답했다([헤럴드경제 2026-05-07](https://www.heraldk.com/article/2026050723100059699), 고강도 돌봄자 한정 표본).
+- **부부 갈등**: 부모가 이혼한 성인 자녀 1,948명 조사에서, 이혼 전 부부 갈등이 컸던 경우 성인기 아버지와의 친밀도(1–5점)가 0.28점 낮았고(SD의 약 22%), 그 연관의 62%는 이혼 후 아버지의 관여와 접촉 빈도로 설명됐다(관찰 연구)([Spaan 2022](https://pmc.ncbi.nlm.nih.gov/articles/PMC9727034), 중). 한국에서 황혼이혼 후 아버지–자녀 접촉을 추적한 연구는 찾지 못했다.
+- **가벼운 돌봄과 고강도 돌봄은 다른 것**: 독일 70–103세 500여 명 연구에서 가끔 손주를 돌본 조부모는 사망 위험이 37% 낮았다([초록](https://pure.psu.edu/en/publications/caregiving-within-and-beyond-the-family-is-associated-with-lower-/), [2차], 중). 주양육 조부모는 분석에서 빠졌다([idw 보도자료](https://idw-online.de/en/news665687)). 저자도 강도 높은 돌봄은 건강을 해친다고 밝혔다. 한국의 주 15시간 이상 돌봄 조부모 1,063명 조사에서는 주 26.83시간을 돌봤고 46.8%가 "그만두고 싶다"고 답했다([헤럴드경제 2026-05-07](https://www.heraldk.com/article/2026050723100059699), 고강도 돌봄자 한정 표본).
 - **횟수보다 질**: 조부모와 성인 손주 모두 정서적 친밀이 높을수록 우울 증상이 적었고, 접촉 빈도는 오히려 증상 증가와 연관됐다. 조부모는 도움을 받기만 할 때 증상이 가장 많았다([Moorman & Stokes 2016](https://pubmed.ncbi.nlm.nih.gov/24906517/), 중).
 - **자녀 배우자**: 외가 쪽이 손주와 더 가까운 이유는 조부모와 성인 자녀 사이 관계의 질 차이에서 나오고, 친가도 관계가 좋으면 가까워진다([Chan & Elder 2000](https://gerontologist.gerontologyjournals.org/cgi/content/abstract/40/2/179)). 조부모가 자녀의 배우자와 맺는 관계가 더 결정적이라는 보고는 2차 인용으로만 확인했고 이후 문헌은 결과가 엇갈린다([PMC3041964](https://pmc.ncbi.nlm.nih.gov/articles/PMC3041964), [2차], 약). 한국 연구는 찾지 못했다.
 - **돈**: 한국 66세 이상의 상대적 빈곤율은 40%로 OECD 최고다([OECD](https://www.oecd.org/en/publications/pensions-at-a-glance-2025-country-notes_8a53ef12-en/korea-republic-of_5cd52913-en.html), 강). 부모 노후를 "부모 스스로 해결"해야 한다는 응답이 19.0%로 2년 전보다 2.6%p 늘었다([세계일보 2026-11-18](https://www.segye.com/newsView/20261118513489)). 노후 소득이 비면 자녀의 결혼·출산 여력을 깎는다는 것은 노트의 해석이다.
-- **증여 공제**: 혼인·출산 증여재산공제는 혼인신고일 전후 2년 이내 또는 출생일부터 2년 이내에 직계존속에게 받은 증여 1억 원을 추가 공제한다(혼인과 출산을 합쳐 1인당 평생 1억 원). 일반공제 5천만 원과 합치면 1인 1억 5천만 원이다([korea.legal 조문](https://korea.legal/wiki/%ec%83%81%ec%86%8d%ec%84%b8-%eb%b0%8f-%ec%a6%9d%ec%97%ac%ec%84%b8%eb%b2%95-%ec%a0%9c53%ec%a1%b0%ec%9d%982/), [토스피드 2024-04-23](https://toss.im/tossfeed/article/inheritance-and-gift-tax-01), 강). 국가법령정보센터 현행 조문과 직접 대조하지 못했으니 실행 전에 국세청·세무사 확인이 필요하다. "생전 증여가 상속보다 자녀에게 낫다"를 직접 검증한 연구는 찾지 못했다(약).
+- **증여 공제**: 혼인·출산 증여재산공제는 혼인신고일 전후 2년 이내 또는 출생일부터 2년 이내에 직계존속에게 받은 증여 1억 원을 추가 공제한다(혼인과 출산을 합쳐 1인당 평생 1억 원). 일반공제 5천만 원과 합치면 1인 1억 5천만 원이다. 직계존속 전체 합산이라 부모와 조부모가 각각 1억은 안 되고, 증여 후 2년 안에 혼인하지 않으면 수정신고와 이자상당액 납부 대상이다. 실행 전 세무사 확인([korea.legal 조문](https://korea.legal/wiki/%ec%83%81%ec%86%8d%ec%84%b8-%eb%b0%8f-%ec%a6%9d%ec%97%ac%ec%84%b8%eb%b2%95-%ec%a0%9c53%ec%a1%b0%ec%9d%982/), [토스피드 2024-04-23](https://toss.im/tossfeed/article/inheritance-and-gift-tax-01), 강). 국가법령정보센터 현행 조문과 직접 대조하지 못했으니 실행 전에 국세청·세무사 확인이 필요하다. "생전 증여가 상속보다 자녀에게 낫다"를 직접 검증한 연구는 찾지 못했다(약).
 
 ### 3-3. 영향을 줄 수 있는 것과 통제할 수 없는 것
 
@@ -124,19 +124,19 @@
 | 히노하라 시게아키 | 1911–2017 | 은퇴하지 말 것, 아는 것을 나눌 것 [확인, 2차 전재] ([CNBC 2020-08-26](https://www.cnbc.com/2020/08/26/japanese-doctor-lived-to-105-spartan-diet-retirement-views-rare-longevity-tips.html)) | 계단 두 칸씩, 소식, 5년 뒤까지 적힌 수첩, 가르치기 | 하루 18시간·주 7일 노동, 불규칙한 식사·수면. 가족 기록은 [미검증] |
 | 송해 | 1927–2022 | BMW(버스·지하철·걷기) [2차] ([코메디닷컴](https://kormedi.com/1281428/)) | 지하철 출퇴근과 계단 오르내리기 [2차] | 외아들을 교통사고로 잃음 [확인] ([텐아시아 2014-09-22](https://www.tenasia.co.kr/article/2014092292044)). 61세에 맡은 프로그램이 대표작 |
 | 지미·로잘린 카터 | 1924–2024 / 1927–2023 | "The best thing I ever did was marrying Rosalynn." [확인] ([AJC 2021-07-04](https://ajc.com/news/jimmy-and-rosalynn-carter-talk-about-what-75-years-of-love-accomplishes/CG6MQG3NFRCO3EZQVUH2GTUH74)) | 매일 밤 서로 용서하고 잠들기, 새 취미를 같이 배우기, 서로에게 공간 주기 [확인] | 재선 실패 뒤 빚 100만 달러 이상 [2차] ([CNBC 2019-07-17](https://www.cnbc.com/2019/07/17/when-jimmy-carter-left-office-his-peanut-business-was-deep-in-debt.html)). 화목한 노년은 큰 실패 뒤에 지어졌다 |
-| 찰리 멍거 | 1924–2023 | 낮은 기대, 질투·원망 없음, 수입보다 덜 쓰기 [확인] ([CNBC 2019-02-21](https://www.cnbc.com/2019/02/21/95-year-old-billionaire-charlie-munger-says-the-secret-to-a-long-and-happy-life-is-so-simple.html)) | 평생 독서, 믿을 만한 사람하고만 거래 [확인] | 이혼, 9세 아들을 백혈병으로 잃음, 왼쪽 눈 실명 [확인] ([Wikipedia](https://en.wikipedia.org/wiki/Charlie_Munger)). 억만장자의 "검소"는 조건이 다르다 |
+| 찰리 멍거 | 1924–2023 | 낮은 기대 [확인] ([2021-02 Daily Journal 주총, Yahoo Finance](https://ca.finance.yahoo.com/news/charlie-munger-rule-happy-life-141605326.html)), 질투·원망 없음, 수입보다 덜 쓰기 [확인] ([CNBC 2019-02-21](https://www.cnbc.com/2019/02/21/95-year-old-billionaire-charlie-munger-says-the-secret-to-a-long-and-happy-life-is-so-simple.html)) | 평생 독서, 믿을 만한 사람하고만 거래 [확인] | 이혼, 9세 아들을 백혈병으로 잃음, 왼쪽 눈 실명 [확인] ([Wikipedia](https://en.wikipedia.org/wiki/Charlie_Munger)). 억만장자의 "검소"는 조건이 다르다 |
 | 워런 버핏 | 1930~ | "If people whom you want to have love you love you, you're a success." [확인] ([Fortune 2013](https://fortune.com/2013/05/07/how-warren-buffett-learned-the-meaning-of-success/)) | 부고에 쓰이고 싶은 말을 정하고 거꾸로 살기, 평생 친구 유지, 한 집·한 사무실 [확인] ([2025-11-10 서한](https://www.berkshirehathaway.com/news/nov1025.pdf)) | 가정 운영의 모범으로 쓰기엔 근거가 약하다. 본인도 장수를 의사와 운 덕이라고 설명 |
 | 프레드 로저스 | 1928–2003 | 명예·상이 아니라 남을 돕는 것 [확인] ([Dartmouth 2002](https://home.dartmouth.edu/news/2002/06/2002-commencement-address-fred-rogers-50)) | 거의 매일 아침 수영, 일정한 기상·취침, 금주·금연, 체중 유지 [확인] ([Wikipedia](https://en.wikipedia.org/wiki/Fred_Rogers)) | 74세에 위암으로 사망. 습관은 확률을 바꿀 뿐 보장하지 않는다 |
 | 벤저민 프랭클린 | 1706–1790 | 절제·근면·검약의 13덕목이라는 "little artifice" [확인] ([자서전 page 41](https://www.ushistory.org/franklin/autobiography/page41.htm)) | 아침 질문 "What good Shall I do this Day?", 저녁 질문, 한 주에 덕목 하나 [확인] ([page 40](https://www.ushistory.org/franklin/autobiography/page40.htm)) | 아들과 절연 [2차] ([National Geographic](https://www.nationalgeographic.com/history/article/ben-franklin-son-feud-american-revolution)). 일·배움·돈의 본보기이지 가정의 본보기는 아니다 |
 | 이어령 | 1933–2022 | "마이 라이프는 기프트였다" [2차, 출판사 소개] | 죽기 직전까지 매주 대담·집필 [2차] | 딸을 먼저 보냈고 말년은 암 투병 [확인] ([위키백과](https://ko.wikipedia.org/wiki/이어령)). 건강·장수 사례가 아니다 |
-| 박완서 | 1931–2011 | 40세 등단, 무너진 뒤에도 글로 다시 섬 [확인] ([서울신문 2022-03-07](https://m.seoul.co.kr/news/2022/03/07/20220307024013)) | 젊은 작가의 작품을 계속 읽고 후배들과 어울림 [확인] | 1988년에 남편과 아들을 잃음 [확인] |
+| 박완서 | 1931–2011 | (본인 발언 아님) 40세 등단, 무너진 뒤에도 글로 다시 섬 [확인] ([서울신문 2022-03-07](https://m.seoul.co.kr/news/2022/03/07/20220307024013)) | 젊은 작가의 작품을 계속 읽고 후배들과 어울림 [확인] | 1988년에 남편과 아들을 잃음 [확인] |
 | 유일한 | 1895–1971 | "아들은 대학까지 졸업시켰으니 앞으로는 자립해서 살아가거라." [확인] ([이투데이 2015-02-16](https://www.etoday.co.kr/news/view/1075430)) | 자식에게 회사·재산이 아니라 교육과 자립을 남긴다 | 76세 사망. 가족 화목의 근거 자료는 없다. 돈 원칙 사례로만 쓴다 |
 
 **연구로도 지지되는 교훈** ([인물사례.md](../research_notes/인생%20만다라트%20v3/인물사례.md) 4절)
 
 - 배우자를 인생 최고의 결정으로 대한다, 오래가는 친구를 둔다 — 관계 연구([Harvard Gazette 2017](https://news.harvard.edu/gazette/story/2017/04/over-nearly-80-years-harvard-study-has-been-showing-how-to-live-a-healthy-and-happy-life/), [Holt-Lunstad 2010](https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.1000316)).
 - 걷기·계단·수영 같은 저강도 운동, 체중 유지, 금연·절주 — Vaillant의 예측 요인([Harvard Gazette 2001](https://news.harvard.edu/gazette/story/2001/06/how-to-be-happy-and-well-rather-than-sad-and-sick)).
-- 아는 것을 나눈다, 일을 멈추지 않는다 — 삶의 목적 최저군의 전체 사망 HR 2.43(50세 초과 6,985명, [Alimujiang 2019](https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2734064)). 단 "늦게 은퇴하면 오래 산다"는 5절에서 보듯 건강을 보정하면 약해진다.
+- 아는 것을 나눈다, 일을 멈추지 않는다 — 삶의 목적 최저군의 전체 사망 HR 2.43(50세 초과 6,985명, [Alimujiang 2019](https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2734064))(추적 4년, 역인과 가능). 단 "늦게 은퇴하면 오래 산다"는 5절에서 보듯 건강을 보정하면 약해진다.
 - 돈: "돈은 상관없다"는 부자들의 말은 연구와 완전히 일치하지 않는다. 대다수는 소득이 늘수록 행복도 계속 올랐다([Killingsworth 외 2023 초록](https://ui.adsabs.harvard.edu/abs/2023PNAS..12008661K), 원문 접근 실패로 초록·2차 요약 기준).
 - 덕목 수첩, 아침·저녁 질문, 낮은 기대, 5년 수첩, 한 도시에 오래 살기, 감사 1분은 **일화로만** 취급한다. 이번 조사에서 연구 근거를 대조하지 않았다.
 
@@ -164,7 +164,7 @@
 |---|---|---|---|
 | 몰입의 조건 3개 | 도전–기술 균형, 분명한 근접 목표, 즉각 피드백. 28개 연구 메타분석에서 균형과 몰입의 관계는 "중간"이고 일·교육 맥락에서는 더 약하다 [2차] | [Abuhamdeh 2020](https://www.frontiersin.org/articles/10.3389/fpsyg.2020.00158/full), [Fong 2015 초록](https://instituteofcoaching.org/resources/challenge%E2%80%93skill-balance-and-antecedents-flow-meta-analytic-investigation) | 중 |
 | 몰입과 웰빙 | r = .36 (95% CI .31–.41), 77편. 저자가 인과 결론 불가라고 명시 [확인] | [Sweeny 2026](https://escholarship.org/uc/item/7jg0d5xq) | 중 |
-| 측정의 문제 | 실증 연구 42편이 몰입을 24가지 방식으로 정의했다. 점수를 재지 말고 조건이 갖춰졌는지 본다 [확인] | [Abuhamdeh 2020](https://www.frontiersin.org/articles/10.3389/fpsyg.2020.00158/full) | 중 |
+| 측정의 문제 | 실증 연구 42편이 몰입을 24가지 방식으로 정의했다. 점수를 재지 말고 조건이 갖춰졌는지 본다 (뒤 문장은 이 문서의 해석) [확인] | [Abuhamdeh 2020](https://www.frontiersin.org/articles/10.3389/fpsyg.2020.00158/full) | 중 |
 | 취미와 노년 | 65세 이상 93,263명·16개국. 취미 보유는 우울 증상 −0.10, 행복 +0.09, 삶의 만족 +0.10과 연관. 방향은 일관되지만 크기는 작고 한국은 포함되지 않았다 [확인] | [Mak 2023](https://pmc.ncbi.nlm.nih.gov/articles/PMC10504079/) | 중 |
 | 진지한 여가 | 꾸준함, 경력 사다리, 기술 습득 노력, 지속적 이익, 사회적 세계, 정체성의 6가지 특성. 건강 효과를 검증한 결과가 아니라 점검용 개념 틀이다 [2차] | [EBSCO Research Starters](https://www.ebsco.com/research-starters/sports-and-leisure/serious-leisure) | 약 (개념 틀) |
 | 일 몰입과 일중독 | 관리자 587명에서 일중독·번아웃·일 몰입은 서로 구분되는 세 가지였다. 흡수는 양쪽에 다 걸린다. 횡단 연구 [2차] | [Schaufeli 2008](https://research-portal.uu.nl/en/publications/workaholism-burnout-and-work-engagement-three-of-a-kind-or-three-/) | 중 |
@@ -218,7 +218,7 @@
 
 ## 6. v3에서 바뀐 것
 
-중심 목표는 "아이를 잘 키워 손주를 안는 날까지, 건강하고 넉넉하게, 몰입하며 산다"이고, 네 소원은 테마 두 개씩에 걸린다: 아이·손주 = 민주 + 민민, 건강 = 건강 + 정신·배움, 경제 = 경제 + 일 몰입·AI, 몰입 = 골프 + 일 몰입·AI, 바탕 = 관계.
+중심 목표는 "아이를 잘 키워 손주를 안는 날까지, 건강하고 넉넉하게, 몰입하며 산다"이고, 네 소망은 테마 두 개씩에 걸리고, 바탕(관계)은 한 테마다: 아이·손주 = 민주 + 민민, 건강 = 건강 + 정신·배움, 경제 = 경제 + 일 몰입·AI, 몰입 = 골프 + 일 몰입·AI, 바탕 = 관계.
 
 ### 6-1. 새로 넣은 7칸
 
@@ -226,8 +226,8 @@
 |---|---|---|---|
 | 건강 › 금연·절주 | 술자리 주 1회 이하, 표준잔 2잔 이하 · 담배는 0 | 건강과 행복을 둘 다 파괴하는 것은 알코올 남용뿐이었다. 그만둘 것을 칸으로 만들었다 | [Harvard Magazine 2001](https://www.harvardmagazine.com/2001/03/the-talent-for-aging-wel-html) [확인] |
 | 경제 › 노후·연금 | 노란우산·연금저축 자동이체 점검 / 충분함의 숫자 정하기 | 손주를 볼 때까지 자녀에게 짐이 되지 않는 것이 기준이다. 66세 이상 빈곤율 40% | [OECD](https://www.oecd.org/en/publications/pensions-at-a-glance-2025-country-notes_8a53ef12-en/korea-republic-of_5cd52913-en.html) |
-| 민주 › 출산·육아 팀 | [출산 전후] 주 1회 육아·집안일 분담 회의 20분 | 아이를 잘 키우는 출발점은 부부 팀이다. 부부 갈등은 수십 년 뒤 아버지–자녀 친밀도를 깎는다(−0.28) | [Spaan 2022](https://pmc.ncbi.nlm.nih.gov/articles/PMC9727034) |
-| 관계 › 베풂·멘토 | 월 1회 후배·지인 1명 돕기(소개·조언·식사) | 다음 세대를 돌보는 것(생성감)이 성숙한 노년의 과제이고, 주는 역할을 유지한 조부모가 우울이 적었다 | [Keeper of the Meaning](https://en.wikipedia.org/wiki/Keeper_of_the_Meaning) [2차], [Moorman & Stokes 2016](https://pubmed.ncbi.nlm.nih.gov/24906517/) |
+| 민주 › 출산·육아 팀 | [출산 전후] 주 1회 육아·집안일 분담 회의 20분 | 아이를 잘 키우는 출발점은 부부 팀이다. 이혼 가정 표본에서 부부 갈등이 클수록 성인기 아버지–자녀 친밀도가 낮았다(1–5점 척도 −0.28, 관찰 연구). | 차트 메모의 근거: Doss 2009(노트 밖) / 이 문서가 덧붙인 근거: [Spaan 2022](https://pmc.ncbi.nlm.nih.gov/articles/PMC9727034) |
+| 관계 › 베풂·멘토 | 월 1회 후배·지인 1명 돕기(소개·조언·식사) | 다음 세대를 돌보는 것(생성감)이 성숙한 노년의 과제이고, 주는 역할을 유지한 조부모가 우울이 적었다 | 차트 메모: Waldinger·Vaillant([Keeper of the Meaning](https://en.wikipedia.org/wiki/Keeper_of_the_Meaning) [2차]) / 덧붙임: [Moorman & Stokes 2016](https://pubmed.ncbi.nlm.nih.gov/24906517/) |
 | 민민 › 손주까지 | [출생 후] 아이와 단둘이 30분, 주 3회 / 가족 이야기·전통 하나 만들기(분기 1회) | 평균대로면 첫 손주는 68–71세, 남성 유병기간 제외 기대수명은 64.6년. 30년 넘는 설계라 자녀와의 관계·건강·현금흐름이 선행 조건이다 | [경향신문 2025-12-03](https://www.khan.co.kr/article/202512031200001), [Duke 2013](https://www.huffpost.com/entry/the-stories-that-bind-us_b_2918975) |
 | 골프 › 평생 취미 | 월 1회 가족·친구와 걷는 라운드나 연습 | 취미가 있는 65세 이상이 행복·삶의 만족이 조금 높았다(효과는 작음). 골프 사망률 수치는 인과가 불확실하다 | [Mak 2023](https://pmc.ncbi.nlm.nih.gov/articles/PMC10504079/) [확인], [Farahmand 2009](https://pubmed.ncbi.nlm.nih.gov/18510595/) [2차] |
 | 일 몰입·AI › 딥워크 몰입 | 딥워크 90분 블록 주 3회(알림·폰 격리) | 중단된 일로 돌아오기까지 평균 23~25분이 걸렸다. 일 몰입은 일중독과 다르므로 가족 저녁이라는 상한선을 먼저 정한다 | [CHI 2005](https://ics.uci.edu/~gmark/CHI2005.pdf) [확인], [Schaufeli 2008](https://research-portal.uu.nl/en/publications/workaholism-burnout-and-work-engagement-three-of-a-kind-or-three-/) [2차] |
@@ -236,6 +236,7 @@
 
 - 민주 › 출산·육아 팀의 Doss 2009(출산 뒤 부부 만족도 하락 수치)
 - 건강 › 금연·절주의 WHO 2023("술은 적을수록 좋다")
+- 금연·절주 칸의 '몸에는 흡연이 특히 파괴적'은 Harvard Magazine 2001 원문(the single most important choice was to avoid heavy smoking)으로 검수 때 확인.
 - 경제 › 노후·연금의 Bengen 1994(4% 룰과 생활비 배수), 완충자금 개월 수
 - 민민 › 손주까지의 Sarkadi 2008 세부 수치(연구 자체는 [손주타임라인.md](../research_notes/인생%20만다라트%20v3/손주타임라인.md)가 다른 노트를 참조만 함)
 
@@ -300,7 +301,7 @@
 - Lancet 2024: 요인별 생애 단계 배정 일부와 비만 1% 라벨은 2차 인포그래픽 기준이라 원 그림 대조가 필요하다.
 - 블루존 비판(Newman) 원문과 반박문 원문 미열람. 박상철 교수 연구는 1차 논문이 아니라 인터뷰·기사 기준이다.
 - Hilbrand 2017, Morrison & Roese 2011은 검색 요약만 확인했다. Bronnie Ware의 "다섯 가지 후회"는 연구가 아니라 일화다.
-- 몰입(flow)과 수명·노년 행복을 직접 잇는 종단 연구는 찾지 못했다. 몰입 소원의 근거는 "목적·이키가이"와 "일 관여" 연구로 대신한 것이다.
+- 몰입(flow)과 수명·노년 행복을 직접 잇는 종단 연구는 찾지 못했다. 몰입 소망의 근거는 "목적·이키가이"와 "일 관여" 연구로 대신한 것이다.
 - 자녀 유무·자녀 수와 노년 행복의 관계, 한국인 종단 코호트의 행복·후회 자료는 조사하지 못했다.
 
 ### 8-3. 손주 타임라인
